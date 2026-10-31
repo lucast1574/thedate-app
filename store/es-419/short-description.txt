@@ -1,0 +1,1 @@
+Consulta quién confirmó y quién reservó cada regalo de tu evento.

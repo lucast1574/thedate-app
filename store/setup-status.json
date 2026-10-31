@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-31",
+  "publicationAllowed": false,
+  "firebaseAndroidRegistered": true,
+  "debugSha1VerifiedInDownloadedOAuthConfig": true,
+  "uploadSha1VerifiedInDownloadedOAuthConfig": true,
+  "webOAuthAudienceMatchesExistingBackend": true,
+  "playAppSigningSha1": "pending until a later Google Play setup; do not publish now",
+  "aabGenerated": false,
+  "googlePlayUpload": false
+}
