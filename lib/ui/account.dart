@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../app_config.dart';
 import '../state/app_model.dart';
+import 'profile_editor.dart';
 import 'widgets/app_icon.dart';
 import 'widgets/common.dart';
+import 'widgets/brand.dart';
+import 'widgets/account_avatar.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key, required this.model});
@@ -92,77 +95,178 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text('Tu cuenta', style: Theme.of(context).textTheme.headlineLarge),
-      const SizedBox(height: 24),
-      Text(model.account!.name, style: Theme.of(context).textTheme.titleLarge),
       const SizedBox(height: 8),
-      Text(model.account!.email),
-      const SizedBox(height: 32),
-      const Text(
-        'TU EVENTO',
-        style: TextStyle(
-          fontSize: 11,
-          fontWeight: FontWeight.w600,
-          letterSpacing: 1.5,
+      Text(
+        wedding ? 'Vuestra cuenta' : 'Tu cuenta',
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
+      const SizedBox(height: 22),
+      Row(
+        children: [
+          AccountAvatar(
+            account: model.account!,
+            token: model.repository.api.token,
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  model.account!.name,
+                  style: wedding
+                      ? TextStyle(
+                          fontFamily: AppConfig.headingFont,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                        )
+                      : Theme.of(context).textTheme.titleMedium,
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  model.account!.email,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          IconButton(
+            tooltip: 'Editar perfil',
+            onPressed: model.busy
+                ? null
+                : () => showProfileEditor(context, model),
+            style: IconButton.styleFrom(
+              backgroundColor: AppConfig.soft.withValues(alpha: .6),
+              foregroundColor: AppConfig.accent,
+            ),
+            icon: const AppIcon(Symbol.edit, size: 19),
+          ),
+        ],
+      ),
+      const SizedBox(height: 24),
+      if (wedding) ...[const Divider(), const SizedBox(height: 16)],
+      Container(
+        padding: EdgeInsets.all(wedding ? 0 : 14),
+        decoration: BoxDecoration(
+          color: wedding
+              ? Colors.transparent
+              : Theme.of(context).colorScheme.surfaceContainerLowest,
+          borderRadius: BorderRadius.circular(18),
+          border: wedding
+              ? null
+              : Border.all(color: Theme.of(context).dividerColor),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              wedding ? 'VUESTRA CELEBRACIÓN' : 'Tu celebración',
+              style: wedding
+                  ? Theme.of(context).textTheme.bodySmall
+                  : Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 10),
+            EventPicker(model: model),
+          ],
         ),
       ),
-      const SizedBox(height: 8),
-      ListTile(
-        contentPadding: EdgeInsets.zero,
-        leading: const AppIcon(Symbol.calendar),
-        title: Text(model.event?.title ?? 'Sin evento activo'),
-        subtitle: model.events.length > 1
-            ? Text('${model.events.length} eventos · Cambiar evento')
-            : null,
-        trailing: model.events.length > 1
-            ? const AppIcon(Symbol.chevron)
-            : null,
-        onTap: model.events.length > 1 && !model.busy
-            ? () => selectEvent(context)
-            : null,
-      ),
-      const SizedBox(height: 24),
-      const Divider(),
-      const SizedBox(height: 16),
-      AccountLink(
-        icon: Symbol.mail,
-        title: 'Escribir a soporte',
-        onTap: () => open(
-          context,
-          'mailto:${AppConfig.support}?subject=${Uri.encodeComponent('Ayuda con ${AppConfig.name}')}',
+      const SizedBox(height: 18),
+      if (wedding) ...[const Divider(), const SizedBox(height: 8)],
+      Material(
+        color: wedding
+            ? Colors.transparent
+            : Theme.of(context).colorScheme.surfaceContainerLowest,
+        borderRadius: BorderRadius.circular(18),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: wedding ? 0 : 16),
+          child: Column(
+            children: [
+              if (model.notifications != null) ...[
+                AccountLink(
+                  icon: Symbol.bell,
+                  title: model.notificationsBusy
+                      ? 'Activando notificaciones…'
+                      : 'Activar notificaciones',
+                  onTap: model.notificationsBusy
+                      ? null
+                      : () => model.syncNotifications(requestPermission: true),
+                ),
+                if (model.notificationStatus != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Text(
+                      model.notificationStatus!,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                const Divider(),
+              ],
+              AccountLink(
+                icon: Symbol.help,
+                title: 'Ayuda y soporte',
+                onTap: () => open(
+                  context,
+                  'mailto:${AppConfig.support}?subject=${Uri.encodeComponent('Ayuda con ${AppConfig.name}')}',
+                ),
+              ),
+              const Divider(),
+              AccountLink(
+                icon: Symbol.lock,
+                title: 'Privacidad',
+                onTap: () => open(context, '${AppConfig.website}/privacidad'),
+              ),
+              const Divider(),
+              AccountLink(
+                icon: Symbol.file,
+                title: 'Términos y condiciones',
+                onTap: () => open(context, '${AppConfig.website}/terminos'),
+              ),
+              const Divider(),
+              AccountLink(
+                icon: Symbol.trash,
+                title: 'Solicitar eliminación de cuenta',
+                onTap: model.busy || model.deletionRequested
+                    ? null
+                    : () => deletion(context),
+              ),
+            ],
+          ),
         ),
-      ),
-      AccountLink(
-        icon: Symbol.shield,
-        title: 'Privacidad',
-        onTap: () => open(context, '${AppConfig.website}/privacidad'),
-      ),
-      AccountLink(
-        icon: Symbol.file,
-        title: 'Términos y condiciones',
-        onTap: () => open(context, '${AppConfig.website}/terminos'),
-      ),
-      AccountLink(
-        icon: Symbol.user,
-        title: 'Eliminar mi cuenta',
-        onTap: model.busy || model.deletionRequested
-            ? null
-            : () => deletion(context),
       ),
       if (model.deletionRequested)
         const Notice(
           'Solicitud enviada. Te contactaremos en el correo de tu cuenta para continuar.',
         ),
-      const SizedBox(height: 24),
-      const Divider(),
-      const SizedBox(height: 16),
-      AccountLink(
-        icon: Symbol.logout,
-        title: 'Cerrar sesión',
-        onTap: model.busy ? null : model.logout,
+      const SizedBox(height: 20),
+      if (wedding) const Divider(),
+      SizedBox(
+        width: double.infinity,
+        child: FilledButton.icon(
+          onPressed: model.busy ? null : model.logout,
+          style: FilledButton.styleFrom(
+            backgroundColor: const Color(0xFFC94850).withValues(alpha: .07),
+            foregroundColor: const Color(0xFFC94850),
+            minimumSize: const Size(48, 52),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(wedding ? 12 : 16),
+            ),
+          ),
+          icon: const AppIcon(
+            Symbol.logout,
+            color: Color(0xFFC94850),
+            size: 20,
+          ),
+          label: const Text('Cerrar sesión'),
+        ),
       ),
-      const SizedBox(height: 32),
-      const Text('LUCASTUDIOS · 1.0.0', style: TextStyle(fontSize: 12)),
+      const SizedBox(height: 12),
+      Center(
+        child: Text(
+          '${AppConfig.name} · Versión 1.0.0',
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+      ),
     ],
   );
 }
@@ -180,9 +284,26 @@ class AccountLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ListTile(
     contentPadding: EdgeInsets.zero,
-    leading: AppIcon(icon),
-    title: Text(title),
-    trailing: const AppIcon(Symbol.chevron, size: 18),
+    minLeadingWidth: 24,
+    horizontalTitleGap: 12,
+    minVerticalPadding: 10,
+    leading: AppIcon(
+      icon,
+      color: icon == Symbol.logout
+          ? const Color(0xFFC94850)
+          : wedding
+          ? AppConfig.accent
+          : Theme.of(context).colorScheme.onSurfaceVariant,
+    ),
+    title: Text(
+      title,
+      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+        color: icon == Symbol.logout ? const Color(0xFFC94850) : null,
+      ),
+    ),
+    trailing: icon == Symbol.logout
+        ? null
+        : const AppIcon(Symbol.chevron, size: 17),
     onTap: onTap,
   );
 }

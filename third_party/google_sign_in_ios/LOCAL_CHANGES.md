@@ -1,0 +1,1 @@
+Based on official Flutter google_sign_in_ios 6.3.8 from pub.dev, with original license retained. The Swift Package dependency uses GoogleSignIn 10 to resolve AppCheckCore 12 with Firebase Apple SDK 13. No Dart or native sign-in implementation changes. GoogleSignIn 10 requires iOS 15; both applications target iOS 15.

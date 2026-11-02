@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import '../app_config.dart';
 
@@ -24,11 +26,37 @@ class ApiClient {
     final request = http.Request(method, uri)
       ..headers.addAll({
         'Accept': 'application/json',
-        'User-Agent': 'TheDateAndroid/1.0',
+        'User-Agent': '${AppConfig.product}/${Platform.operatingSystem}/1.0',
         'Content-Type': 'application/json',
         if (token != null) 'Authorization': 'Bearer $token',
       });
     if (body != null) request.body = jsonEncode(body);
+    return _send(request);
+  }
+
+  Future<dynamic> uploadPhoto(Uint8List bytes) async {
+    final request =
+        http.MultipartRequest(
+            'POST',
+            Uri.parse('${AppConfig.api}/profile/avatar'),
+          )
+          ..headers.addAll({
+            'Accept': 'application/json',
+            'User-Agent':
+                '${AppConfig.product}/${Platform.operatingSystem}/1.0',
+            if (token != null) 'Authorization': 'Bearer $token',
+          })
+          ..files.add(
+            http.MultipartFile.fromBytes(
+              'photo',
+              bytes,
+              filename: 'profile-photo.png',
+            ),
+          );
+    return _send(request);
+  }
+
+  Future<dynamic> _send(http.BaseRequest request) async {
     try {
       final response = await http.Response.fromStream(
         await client.send(request).timeout(const Duration(seconds: 20)),
@@ -49,6 +77,10 @@ class ApiClient {
         throw ApiException(message, response.statusCode);
       }
       return result;
+    } on TimeoutException {
+      throw const ApiException(
+        'La conexión tardó demasiado. Vuelve a intentarlo.',
+      );
     } on SocketException {
       throw const ApiException(
         'Sin conexión. Revisa tu internet y vuelve a intentarlo.',

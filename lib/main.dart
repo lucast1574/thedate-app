@@ -3,10 +3,15 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'data/events_repository.dart';
 import 'state/app_model.dart';
 import 'ui/app.dart';
+import 'data/push_notifications.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(DateApp(model: AppModel(EventsRepository())));
+  runApp(
+    DateApp(
+      model: AppModel(EventsRepository(), notifications: PushNotifications()),
+    ),
+  );
 }
 
 class DateApp extends StatelessWidget {

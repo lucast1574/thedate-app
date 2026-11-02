@@ -1,5 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uuid/uuid.dart';
+import 'dart:typed_data';
 import '../app_config.dart';
 import '../domain/models.dart';
 import 'api_client.dart';
@@ -69,7 +70,12 @@ class EventsRepository {
               e['paymentStatus'] == 'paid',
         )
         .map((e) => Celebration.fromJson(e as Map<String, dynamic>))
-        .toList();
+        .toList()
+      ..sort(
+        (a, b) => (a.startsAt ?? DateTime(9999)).compareTo(
+          b.startsAt ?? DateTime(9999),
+        ),
+      );
   }
 
   Future<Snapshot> snapshot(String id) async {
@@ -87,10 +93,25 @@ class EventsRepository {
     return Snapshot(
       guests,
       items
-          .map((j) => Gift.fromJson(j as Map<String, dynamic>, names))
+          .map(
+            (j) => Gift.fromJson({
+              ...j as Map<String, dynamic>,
+              if ((j['imageUrl'] as String? ?? '').isNotEmpty)
+                'imageUrl':
+                    '${AppConfig.api}/events/${Uri.encodeComponent(id)}/wishlist/images/${Uri.encodeComponent(j['id'] as String)}',
+            }, names),
+          )
           .toList(),
     );
   }
+
+  Future<Account> updateProfile(String name) async => Account.fromJson(
+    await api.request('/profile', method: 'PATCH', body: {'name': name.trim()})
+        as Map<String, dynamic>,
+  );
+
+  Future<Account> uploadAvatar(Uint8List photo) async =>
+      Account.fromJson(await api.uploadPhoto(photo) as Map<String, dynamic>);
 
   Future<void> requestDeletion(String requestId) async {
     await api.request(
@@ -107,7 +128,35 @@ class EventsRepository {
   }
 
   String deletionId() => const Uuid().v4();
+  Future<String> installationId() async {
+    final existing = await storage.read(key: 'push-installation-v1');
+    if (existing != null) return existing;
+    final id = const Uuid().v4();
+    await storage.write(key: 'push-installation-v1', value: id);
+    return id;
+  }
+
+  Future<void> registerDevice(String fid, String platform) async {
+    await api.request(
+      '/devices',
+      method: 'POST',
+      body: {
+        'installationId': await installationId(),
+        'fid': fid,
+        'platform': platform,
+      },
+    );
+  }
+
+  Future<void> removeDevice() async {
+    final id = await storage.read(key: 'push-installation-v1');
+    if (id != null && api.token != null) {
+      await api.request('/devices/$id', method: 'DELETE');
+    }
+  }
+
   Future<void> logout() async {
+    await google.signOut();
     await storage.delete(key: _tokenKey);
     api.token = null;
   }

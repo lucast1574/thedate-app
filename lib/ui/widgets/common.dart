@@ -74,30 +74,49 @@ class FilterTabs extends StatelessWidget {
   final int selected;
   final ValueChanged<int> onSelected;
   @override
-  Widget build(BuildContext context) => Wrap(
-    spacing: 8,
-    runSpacing: 8,
+  Widget build(BuildContext context) => Row(
     children: [
       for (var n = 0; n < labels.length; n++)
-        Semantics(
-          selected: selected == n,
-          button: true,
-          child: TextButton(
-            onPressed: () => onSelected(n),
-            style: TextButton.styleFrom(
-              backgroundColor: selected == n
-                  ? AppConfig.soft
-                  : Colors.transparent,
-              foregroundColor: selected == n
-                  ? AppConfig.ink
-                  : Theme.of(context).colorScheme.onSurface,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-              textStyle: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
+        Expanded(
+          child: Semantics(
+            selected: selected == n,
+            button: true,
+            child: InkWell(
+              onTap: () => onSelected(n),
+              child: Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 3,
+                  vertical: 14,
+                ),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: selected == n
+                          ? AppConfig.accent
+                          : Theme.of(context).dividerColor,
+                      width: selected == n ? 2 : 1,
+                    ),
+                  ),
+                ),
+                child: Text(
+                  labels[n],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: AppConfig.product == 'wedding'
+                        ? AppConfig.headingFont
+                        : 'DM Sans',
+                    fontSize: AppConfig.product == 'wedding' ? 15 : 13,
+                    fontWeight: selected == n
+                        ? FontWeight.w600
+                        : FontWeight.w400,
+                    color: selected == n
+                        ? AppConfig.accent
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                ),
               ),
             ),
-            child: Text(labels[n]),
           ),
         ),
     ],

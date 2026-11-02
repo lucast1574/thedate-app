@@ -21,7 +21,7 @@ void main() {
       await tester.tap(find.text('Regalos'));
       await tester.pumpAndSettle();
       expect(find.text('Cafetera para las mañanas juntos'), findsOneWidget);
-      expect(find.text('Valeria Mendoza'), findsOneWidget);
+      expect(find.text('Por Valeria Mendoza'), findsOneWidget);
       expect(find.text('Cerrar sesión'), findsNothing);
       await tester.tap(find.text('Cuenta'));
       await tester.pumpAndSettle();
@@ -68,13 +68,13 @@ void main() {
       await tester.pumpAndSettle();
       await tester.drag(find.byType(ListView).first, const Offset(0, -500));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Eliminar mi cuenta'));
+      await tester.tap(find.text('Solicitar eliminación de cuenta'));
       await tester.pumpAndSettle();
       expect(repo.deletionCalls, 0);
       await tester.tap(find.text('Volver'));
       await tester.pumpAndSettle();
       expect(repo.deletionCalls, 0);
-      await tester.tap(find.text('Eliminar mi cuenta'));
+      await tester.tap(find.text('Solicitar eliminación de cuenta'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Enviar solicitud'));
       await tester.pumpAndSettle();

@@ -12,11 +12,11 @@ abstract final class AppConfig {
         '802955936980-stjng7n36q7d8rp7s1buggn20chl0t8q.apps.googleusercontent.com',
   );
   static const headingFont = 'Nunito';
-  static const loginTitle = 'Tu celebración,\nsin complicaciones.';
-  static const homeTitle = 'Ya dijeron que sí.';
-  static const giftsTitle = 'Cada detalle\ntiene un nombre.';
+  static const loginTitle = 'Tu gente,\nmás cerca.';
+  static const homeTitle = 'Ya vienen.';
+  static const giftsTitle = 'Regalos con cariño.';
   static const accent = Color(0xFF7451AC),
-      paper = Color(0xFFFFF9ED),
+      paper = Color(0xFFFAF8FF),
       ink = Color(0xFF241638),
-      soft = Color(0xFFF4B93C);
+      soft = Color(0xFFEAE2FC);
 }

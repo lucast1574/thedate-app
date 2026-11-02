@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../app_config.dart';
 import '../domain/models.dart';
 import 'widgets/app_icon.dart';
 import 'widgets/common.dart';
+import 'widgets/brand.dart';
+import 'widgets/presentation.dart';
+import 'widgets/gift_picture.dart';
 
 class GiftsScreen extends StatefulWidget {
-  const GiftsScreen({super.key, required this.data});
+  const GiftsScreen({super.key, required this.data, this.token});
+  final String? token;
   final Snapshot data;
   @override
   State<GiftsScreen> createState() => _GiftsScreenState();
@@ -27,36 +30,19 @@ class _GiftsScreenState extends State<GiftsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SectionTitle(AppConfig.giftsTitle),
+        const SizedBox(height: 5),
         Text(
-          AppConfig.giftsTitle,
-          style: Theme.of(context).textTheme.headlineLarge,
+          '$reserved de ${gifts.length} regalos reservados.',
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
-        const SizedBox(height: 24),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              '$reserved',
-              style: TextStyle(
-                fontFamily: AppConfig.headingFont,
-                fontSize: 56,
-                height: 1,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Text('regalos reservados\nde ${gifts.length} en la lista'),
-            ),
-          ],
-        ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 15),
         FilterTabs(
           labels: const ['Reservados', 'Todos'],
           selected: filter,
           onSelected: (n) => setState(() => filter = n),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 14),
         if (list.isEmpty)
           const EmptyState(
             title: 'Los detalles también tienen su tiempo',
@@ -64,59 +50,95 @@ class _GiftsScreenState extends State<GiftsScreen> {
                 'Cuando alguien reserve un regalo, verás aquí su nombre y lo que ha elegido.',
             icon: Symbol.gift,
           ),
-        ...list.map(
-          (gift) => Container(
-            margin: const EdgeInsets.only(bottom: 16),
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: AppConfig.soft.withValues(
-                alpha: Theme.of(context).brightness == Brightness.dark
-                    ? 0.12
-                    : 0.5,
+        for (final gift in list) GiftRow(gift: gift, token: widget.token),
+      ],
+    );
+  }
+}
+
+class GiftRow extends StatelessWidget {
+  const GiftRow({super.key, required this.gift, this.token});
+  final String? token;
+  final Gift gift;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final statusColor = wedding ? AppConfig.accent : const Color(0xFF31886D);
+    return Container(
+      margin: EdgeInsets.only(bottom: wedding ? 0 : 12),
+      padding: EdgeInsets.symmetric(horizontal: wedding ? 0 : 12, vertical: 16),
+      decoration: BoxDecoration(
+        color: wedding
+            ? Colors.transparent
+            : theme.colorScheme.surfaceContainerLowest,
+        borderRadius: BorderRadius.circular(wedding ? 0 : 18),
+        border: wedding
+            ? Border(bottom: BorderSide(color: theme.dividerColor))
+            : Border.all(color: theme.dividerColor),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(wedding ? 10 : 12),
+            child: Container(
+              width: 76,
+              height: 76,
+              padding: const EdgeInsets.all(4),
+              color: Colors.white,
+              child: GiftPicture(
+                gift.imageUrl,
+                token: token,
+                fit: BoxFit.contain,
               ),
-              borderRadius: BorderRadius.circular(24),
             ),
-            child: Row(
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppIcon(
-                  Symbol.gift,
-                  color: Theme.of(context).colorScheme.primary,
-                  size: 24,
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        gift.title,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        gift.reserved ? gift.guestName : 'Todavía disponible',
-                        style: const TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                      if (gift.reservedAt != null) ...[
-                        const SizedBox(height: 4),
-                        Text(
-                          'Reservado el ${DateFormat("d 'de' MMMM", 'es').format(gift.reservedAt!.toLocal())}',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ],
-                      if (gift.delivered) ...[
-                        const SizedBox(height: 8),
-                        const Text('Recibido'),
-                      ],
-                    ],
+                Text(
+                  gift.title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.titleMedium!.copyWith(
+                    fontFamily: 'DM Sans',
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    height: 1.35,
                   ),
                 ),
+                const SizedBox(height: 8),
+                if (gift.reserved)
+                  Row(
+                    children: [
+                      AppIcon(Symbol.check, size: 15, color: statusColor),
+                      const SizedBox(width: 5),
+                      Flexible(
+                        child: Text(
+                          gift.delivered ? 'Recibido' : 'Reservado',
+                          style: theme.textTheme.bodySmall!.copyWith(
+                            color: statusColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  Text('Disponible', style: theme.textTheme.bodySmall),
+                if (gift.reserved) ...[
+                  const SizedBox(height: 3),
+                  Text(
+                    'Por ${gift.guestName}',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                ],
               ],
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

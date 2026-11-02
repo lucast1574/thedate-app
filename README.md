@@ -13,11 +13,11 @@ flutter test
 flutter run -d DISPOSITIVO
 ```
 
-Usar Android (scrcpy)/Waydroid para la vista nativa. No iniciar emuladores AVD. Compilar una app por vez. Android: `now.thedate.app`, minSdk 24, targetSdk 36. iOS queda fuera del alcance de esta versión.
+Usar Android (scrcpy)/Waydroid para la vista nativa. No iniciar emuladores AVD. Compilar una app por vez. Android: `now.thedate.app`, minSdk 24, targetSdk 36. La base nativa de iOS está preparada; build y pruebas en dispositivo pendientes. Ver `docs/firebase-mobile.md`.
 
 API exclusiva: `https://api.thedate.now/products/general`. No cambiar al otro producto como respaldo. Sesión cifrada en el almacenamiento seguro de Android; nunca se guarda la contraseña. Al cerrar sesión se borra el token local. La sesión del backend vence y exige volver a entrar.
 
-Los datos se consultan al abrir, al volver a primer plano, al deslizar y cada 45 segundos mientras la app está activa. Un error conserva el último snapshot con su fecha de actualización. No hay notificaciones push, publicidad ni analítica publicitaria.
+Los datos se consultan al abrir, al volver a primer plano, al deslizar y cada 45 segundos mientras la app está activa. Un error conserva el último snapshot con su fecha de actualización. La base FCM está configurada; suscripción y envíos del backend pendientes. No hay publicidad ni analítica publicitaria.
 
 ## Firebase y firma
 
@@ -28,7 +28,7 @@ python3 scripts/build_release.py          # APK firmado
 python3 scripts/build_release.py --bundle # AAB firmado
 ```
 
-El script requiere el archivo privado `thedate-app-signing.json` de esa carpeta. El build release nunca utiliza la firma debug. Después de habilitar Play App Signing hay que registrar también en Firebase la huella del certificado de distribución de Google Play.
+En Windows se usa la credencial DPAPI de `.codex/secrets/`, fuera del repo. En Linux el script requiere el archivo privado `thedate-app-signing.json` de esa carpeta. El build release nunca utiliza la firma debug. Después de habilitar Play App Signing hay que registrar también en Firebase la huella del certificado de distribución de Google Play.
 
 ## Iconos y ficha
 

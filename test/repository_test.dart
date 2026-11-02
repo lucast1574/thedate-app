@@ -7,6 +7,37 @@ import 'package:thedate_app/data/api_client.dart';
 import 'package:thedate_app/data/events_repository.dart';
 
 void main() {
+  test('gift images use the authorized API proxy', () async {
+    final api = ApiClient(
+      client: MockClient(
+        (r) async => http.Response(
+          jsonEncode(
+            r.url.path.endsWith('/guests')
+                ? []
+                : {
+                    'list': {
+                      'items': [
+                        {
+                          'id': 'gift',
+                          'title': 'Coffee',
+                          'imageUrl': 'https://vendor.example/image.jpg',
+                        },
+                      ],
+                    },
+                    'guests': {},
+                  },
+          ),
+          200,
+        ),
+      ),
+    );
+    final result = await EventsRepository(api: api).snapshot('event');
+    expect(
+      result.gifts.single.imageUrl,
+      '${AppConfig.api}/events/event/wishlist/images/gift',
+    );
+  });
+
   test(
     'the repository only returns paid events of this product, excluding demos and other products',
     () async {

@@ -4,6 +4,7 @@ import '../state/app_model.dart';
 import 'theme.dart';
 import 'login.dart';
 import 'shell.dart';
+import 'startup_splash.dart';
 
 class AppRoot extends StatefulWidget {
   const AppRoot({super.key, required this.model, required this.delegates});
@@ -14,6 +15,7 @@ class AppRoot extends StatefulWidget {
 }
 
 class _AppRootState extends State<AppRoot> {
+  bool introComplete = false;
   @override
   void initState() {
     super.initState();
@@ -31,8 +33,14 @@ class _AppRootState extends State<AppRoot> {
     localizationsDelegates: widget.delegates,
     home: ListenableBuilder(
       listenable: widget.model,
-      builder: (context, _) => widget.model.starting
-          ? const Scaffold(body: Center(child: CircularProgressIndicator()))
+      builder: (context, _) => !introComplete || widget.model.starting
+          ? StartupSplash(
+              onIntroComplete: () {
+                if (mounted && !introComplete) {
+                  setState(() => introComplete = true);
+                }
+              },
+            )
           : widget.model.account == null
           ? LoginScreen(model: widget.model)
           : AppShell(model: widget.model),
