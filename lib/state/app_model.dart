@@ -1,3 +1,4 @@
+import '../domain/invitation_details.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
 import '../data/notification_gateway.dart';
@@ -121,6 +122,7 @@ class AppModel extends ChangeNotifier {
       notifyListeners();
     } finally {
       _openingNotification = false;
+      if (_pendingEvent != null) unawaited(_openNotification());
     }
   }
 
@@ -198,6 +200,8 @@ class AppModel extends ChangeNotifier {
     }
   }
 
+  bool get viewingRecord => event != null && eventEnded(event!, DateTime.now());
+
   Future<void> _events() async {
     final generation = ++_generation;
     final incoming = await repository.events();
@@ -210,7 +214,9 @@ class AppModel extends ChangeNotifier {
       return;
     }
     final previous = event?.id;
-    event = events.where((e) => e.id == previous).firstOrNull ?? events.first;
+    event =
+        events.where((e) => e.id == previous).firstOrNull ??
+        events.where((e) => !eventEnded(e, DateTime.now())).firstOrNull;
     if (event?.id != previous) {
       data = null;
       updatedAt = null;

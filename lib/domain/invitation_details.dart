@@ -12,9 +12,30 @@ DateTime eventLocalTime(Celebration event, DateTime instant) {
   try {
     return tz.TZDateTime.from(instant, tz.getLocation(event.timeZone));
   } on tz.LocationNotFoundException {
-    return instant.toLocal();
+    return instant.toUtc();
   }
 }
+
+bool eventEnded(Celebration event, DateTime now) {
+  if (event.startsAt == null) return false;
+  final day = eventLocalTime(event, event.startsAt!);
+  final today = eventLocalTime(event, now);
+  return DateTime.utc(
+    today.year,
+    today.month,
+    today.day,
+  ).isAfter(DateTime.utc(day.year, day.month, day.day));
+}
+
+Uri privateInvitationUri(
+  Celebration event,
+  String product, {
+  String tab = 'invitation',
+}) => Uri.https(
+  product == 'wedding' ? 'studio.save.thedate.now' : 'crea.thedate.now',
+  '/editor/${Uri.encodeComponent(event.id)}',
+  {'tab': tab},
+);
 
 String? eventCountdown(Celebration event, DateTime now) {
   if (event.startsAt == null) return null;
@@ -48,7 +69,8 @@ Uri? generalInvitationUri(Celebration event, String product) {
     'assets',
     'support',
   };
-  if (event.publishedAt == null ||
+  if (eventEnded(event, DateTime.now()) ||
+      event.publishedAt == null ||
       !{'general', 'wedding'}.contains(product) ||
       !RegExp(r'^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$').hasMatch(slug) ||
       slug.contains('--') ||

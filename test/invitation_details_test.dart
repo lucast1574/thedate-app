@@ -69,7 +69,7 @@ void main() {
       );
       expect(
         eventLocalTime(event(zone: 'invalid'), DateTime.utc(2027)).isUtc,
-        isFalse,
+        isTrue,
       );
     },
   );

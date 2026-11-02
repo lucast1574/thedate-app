@@ -52,7 +52,7 @@ class EventPicker extends StatelessWidget {
   final AppModel model;
   @override
   Widget build(BuildContext context) {
-    final multi = model.events.length > 1,
+    final multi = model.events.length > 1 || model.event == null,
         dark = Theme.of(context).brightness == Brightness.dark;
     final event = model.event;
     final tile = Material(
@@ -91,7 +91,7 @@ class EventPicker extends StatelessWidget {
                 ),
               ),
         title: Text(
-          event?.title ?? 'Sin celebración activa',
+          event?.title ?? 'Elegir evento',
           style: TextStyle(
             fontFamily: wedding ? AppConfig.headingFont : 'DM Sans',
             fontSize: wedding ? 23 : 14,

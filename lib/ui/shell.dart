@@ -6,6 +6,7 @@ import 'widgets/presentation.dart';
 import 'package:intl/intl.dart';
 import '../state/app_model.dart';
 import 'guests.dart';
+import 'event_record.dart';
 import 'gifts.dart';
 import 'account.dart';
 import 'widgets/bottom_tabs.dart';
@@ -32,10 +33,12 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
 
   void startTimer() {
     timer?.cancel();
-    timer = Timer.periodic(
-      const Duration(seconds: 45),
-      (_) => widget.model.refresh(),
-    );
+    timer = Timer.periodic(const Duration(seconds: 45), (_) {
+      if (!widget.model.viewingRecord && widget.model.event != null) {
+        widget.model.refresh();
+      }
+      if (mounted) setState(() {});
+    });
   }
 
   @override
@@ -108,7 +111,7 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
                           model.error!,
                           onRetry: model.busy ? null : model.refresh,
                         ),
-                      if (tab != 2 && model.event != null) ...[
+                      if (tab != 2 && model.events.isNotEmpty) ...[
                         EventPicker(model: model),
                         if (wedding) ...[
                           const SizedBox(height: 12),
@@ -128,6 +131,21 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
                           model.events.isEmpty)
                         InvitationStart(
                           key: ValueKey('empty-$tab'),
+                          gifts: tab == 1,
+                        )
+                      else if (model.event == null && model.events.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.all(24),
+                          child: Text(
+                            'Elige un evento para consultar su información.',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        )
+                      else if (model.viewingRecord && model.data != null)
+                        EventRecord(
+                          repository: model.repository,
+                          data: model.data!,
+                          event: model.event!,
                           gifts: tab == 1,
                         )
                       else if (model.data == null && model.error == null)

@@ -51,3 +51,12 @@ Navigation consumes push destinations once; manual tab changes cancel pending pu
 ## Gift list typography and spacing
 
 Product titles use DM Sans at medium weight, capped at two lines. Consistent square white image wells contain the complete product photo. Reservation/received status and the reserving person appear below the title; no trailing status column competes for width. Wedding keeps ivory paper and fine separators; general keeps rounded cards and its violet brand. The decorative list footer is removed.
+
+
+## Consulta de eventos anteriores
+
+El cierre se calcula al terminar el día local del evento, con la misma zona IANA del backend y fallback UTC. Al restaurar sesión no se selecciona automáticamente un evento anterior; el usuario puede elegirlo aunque sea el único. Una selección explícita se conserva al refrescar. Las notificaciones abren el evento indicado y la sección correspondiente; los identificadores que ya no existen se ignoran.
+
+Confirmaciones, Regalos y Cuenta siguen siendo los tres destinos principales. Un evento anterior usa listas de consulta con la tipografía y colores del tema de cada app. Mesas se consulta en un panel nativo mediante GET autenticado, sin edición. El enlace de invitación abre la copia privada del estudio para consultar y descargar; usa únicamente el ID y una pestaña, nunca un token de sesión. La sesión del navegador es independiente y puede requerir inicio de sesión. El enlace público apagado no se usa para eventos anteriores.
+
+Los registros anteriores no hacen polling cada 45 segundos. Se mantienen el refresco manual y al regresar del segundo plano. No se añaden avisos comerciales o mensajes sobre la regla de cierre.

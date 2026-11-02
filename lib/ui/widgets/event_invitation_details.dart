@@ -35,7 +35,10 @@ class _EventInvitationDetailsState extends State<EventInvitationDetails> {
     setState(() => opening = true);
     var opened = false;
     try {
-      opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      final target = eventEnded(widget.event, DateTime.now())
+          ? privateInvitationUri(widget.event, AppConfig.product)
+          : uri;
+      opened = await launchUrl(target, mode: LaunchMode.externalApplication);
     } catch (_) {
       // Unavailable browsers use the same retryable feedback.
     }
@@ -52,8 +55,13 @@ class _EventInvitationDetailsState extends State<EventInvitationDetails> {
 
   @override
   Widget build(BuildContext context) {
-    final countdown = eventCountdown(widget.event, DateTime.now());
-    final uri = generalInvitationUri(widget.event, AppConfig.product);
+    final ended = eventEnded(widget.event, DateTime.now());
+    final countdown = ended
+        ? null
+        : eventCountdown(widget.event, DateTime.now());
+    final uri = ended
+        ? privateInvitationUri(widget.event, AppConfig.product)
+        : generalInvitationUri(widget.event, AppConfig.product);
     return Padding(
       padding: const EdgeInsets.only(top: 4),
       child: Wrap(
@@ -74,7 +82,13 @@ class _EventInvitationDetailsState extends State<EventInvitationDetails> {
             TextButton.icon(
               onPressed: opening ? null : () => openInvitation(uri),
               icon: const AppIcon(Symbol.externalLink, size: 16),
-              label: Text(opening ? 'Abriendo…' : 'Ver mi invitación'),
+              label: Text(
+                opening
+                    ? 'Abriendo…'
+                    : ended
+                    ? 'Ver y descargar invitación'
+                    : 'Ver mi invitación',
+              ),
             )
           else
             Padding(
