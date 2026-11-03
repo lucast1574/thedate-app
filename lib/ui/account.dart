@@ -292,7 +292,7 @@ class AccountLink extends StatelessWidget {
       color: icon == Symbol.logout
           ? const Color(0xFFC94850)
           : wedding
-          ? AppConfig.accent
+          ? Theme.of(context).colorScheme.primary
           : Theme.of(context).colorScheme.onSurfaceVariant,
     ),
     title: Text(

@@ -16,7 +16,7 @@ abstract final class AppConfig {
   static const homeTitle = 'Ya vienen.';
   static const giftsTitle = 'Regalos con cariño.';
   static const accent = Color(0xFF7451AC),
-      paper = Color(0xFFFAF8FF),
+      paper = Color(0xFFFFFFFF),
       ink = Color(0xFF241638),
       soft = Color(0xFFEAE2FC);
 }

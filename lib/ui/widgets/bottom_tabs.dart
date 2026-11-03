@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../app_config.dart';
 import 'app_icon.dart';
 
 class BottomTabs extends StatelessWidget {
@@ -36,7 +35,7 @@ class BottomTabs extends StatelessWidget {
                         AppIcon(
                           icons[index],
                           color: selected == index
-                              ? AppConfig.accent
+                              ? Theme.of(context).colorScheme.primary
                               : Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                         const SizedBox(height: 5),
@@ -44,9 +43,9 @@ class BottomTabs extends StatelessWidget {
                           labels[index],
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 11,
+                            fontSize: 12,
                             color: selected == index
-                                ? AppConfig.accent
+                                ? Theme.of(context).colorScheme.primary
                                 : Theme.of(
                                     context,
                                   ).colorScheme.onSurfaceVariant,
@@ -62,7 +61,7 @@ class BottomTabs extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: selected == index
-                                ? AppConfig.accent
+                                ? Theme.of(context).colorScheme.primary
                                 : Colors.transparent,
                           ),
                         ),

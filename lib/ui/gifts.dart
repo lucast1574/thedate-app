@@ -63,7 +63,7 @@ class GiftRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final statusColor = wedding ? AppConfig.accent : const Color(0xFF31886D);
+    final statusColor = positive(context);
     return Container(
       margin: EdgeInsets.only(bottom: wedding ? 0 : 12),
       padding: EdgeInsets.symmetric(horizontal: wedding ? 0 : 12, vertical: 16),

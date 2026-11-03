@@ -93,7 +93,7 @@ class FilterTabs extends StatelessWidget {
                   border: Border(
                     bottom: BorderSide(
                       color: selected == n
-                          ? AppConfig.accent
+                          ? Theme.of(context).colorScheme.primary
                           : Theme.of(context).dividerColor,
                       width: selected == n ? 2 : 1,
                     ),
@@ -111,7 +111,7 @@ class FilterTabs extends StatelessWidget {
                         ? FontWeight.w600
                         : FontWeight.w400,
                     color: selected == n
-                        ? AppConfig.accent
+                        ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),

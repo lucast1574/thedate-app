@@ -4,8 +4,15 @@ import '../../domain/models.dart';
 import 'app_icon.dart';
 import 'brand.dart';
 
-Color positive(BuildContext context) =>
-    wedding ? AppConfig.accent : const Color(0xFF32947B);
+Color positive(BuildContext context) {
+  final scheme = Theme.of(context).colorScheme;
+  return wedding
+      ? scheme.primary
+      : scheme.brightness == Brightness.dark
+      ? const Color(0xFF83D6BA)
+      : const Color(0xFF23705B);
+}
+
 String initialsOf(String name) => name
     .trim()
     .split(RegExp(r'\s+'))

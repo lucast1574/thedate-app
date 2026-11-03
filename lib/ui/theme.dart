@@ -9,18 +9,21 @@ abstract final class AppTheme {
     final paper = dark ? const Color(0xFF211B2B) : AppConfig.paper;
     final muted = dark
         ? const Color(0xFFC2B8CE)
-        : (wedding ? const Color(0xFF79716C) : const Color(0xFF706883));
+        : (wedding ? const Color(0xFF6C6057) : const Color(0xFF625A70));
     final scheme =
         ColorScheme.fromSeed(
           seedColor: AppConfig.accent,
           brightness: brightness,
         ).copyWith(
           primary: dark ? AppConfig.soft : AppConfig.accent,
-          onPrimary: Colors.white,
+          onPrimary: dark ? AppConfig.ink : Colors.white,
           surface: paper,
           onSurface: ink,
           onSurfaceVariant: muted,
           surfaceContainerLowest: dark ? const Color(0xFF2C2538) : Colors.white,
+          surfaceContainerLow: dark
+              ? const Color(0xFF2C2538)
+              : const Color(0xFFF7F6F4),
           outlineVariant: ink.withValues(alpha: .10),
         );
     TextStyle body(
@@ -103,8 +106,8 @@ abstract final class AppTheme {
           horizontal: 14,
           vertical: 14,
         ),
-        hintStyle: body(13, color: muted.withValues(alpha: .8)),
-        labelStyle: body(13, color: muted),
+        hintStyle: body(14, color: muted),
+        labelStyle: body(14, color: muted),
         border: border,
         enabledBorder: border,
         focusedBorder: border.copyWith(
@@ -129,7 +132,7 @@ abstract final class AppTheme {
       listTileTheme: ListTileThemeData(
         iconColor: muted,
         textColor: ink,
-        selectedColor: AppConfig.accent,
+        selectedColor: scheme.primary,
         selectedTileColor: AppConfig.soft.withValues(alpha: .4),
       ),
     );
