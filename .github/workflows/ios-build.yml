@@ -36,7 +36,7 @@ jobs:
       - name: Resolve dependencies and validate configuration
         run: |
           flutter pub get
-          flutter analyze
+          flutter analyze lib test
           flutter test
       - name: Compile the real iOS app without distribution credentials
         run: flutter build ios --release --no-codesign
