@@ -2,12 +2,20 @@
 
 Fecha: 14 de noviembre de 2026 (America/Lima).
 
+## Distribución en tiendas — 15/11/2026
+
+- **2.0.0 (8) enviada a revisión**, estado verificado `WAITING_FOR_REVIEW`; sustituye el envío anterior 1.0.0 (5). Sigue disponible en TestFlight para QA.
+- Video de Lucas adjunto y procesamiento `COMPLETE`. En Save the Date se excluyó del archivo de revisión el selector inicial de Google; los originales de Descargas permanecen intactos.
+- Se conservaron las cinco capturas originales de iPhone y las cinco de iPad. La ficha de iPhone incluye además cuatro capturas actuales. Los videos se adjuntaron para el equipo revisor.
+- **Google Play:** AAB firmado 8 (2.0.0) cargado y enviado en **Prueba cerrada - Alpha**, versión de canal 5. La consola muestra «Cambios en revisión»; las comprobaciones automáticas pueden continuar. No se publicó en producción.
+- Este estado reemplaza las indicaciones históricas de esperar el video y conservar el envío 1.0.0 de las secciones siguientes.
+
 ## Build 8 — centrado y salida del buscador, 14/11/2026
 
 - Corrección compartida por ambas apps: el estado vacío ocupa todo el ancho disponible; icono, título y explicación comparten el centro de la pantalla.
 - El buscador libera el teclado al tocar fuera, desplazar la lista, pulsar Buscar, cambiar de filtro o cambiar de destino. Conserva la consulta al cerrar el teclado.
 - 51 pruebas pasan por app, incluidas regresiones de gestos táctiles iOS/Android y geometría del centrado a 320 y 390 px. Formato y análisis sin incidencias.
-- **2.0.0 (8) disponible en TestFlight**, grupo QA, estado interno `IN_BETA_TESTING`. Código `914eb6c`, GitHub Actions `43676987405`; Apple completó la carga sin errores ni advertencias. Build `17a8c9bc-b9a6-4709-8697-9bbe3d89532c`. Los AAB firmados y verificados están en `D:/vscode/thedate.now/ops/release-2.0.0-8/`, sin subir esta versión a Google Play. **Esperar el video de Lucas antes de cualquier envío de esta actualización a revisión de App Store o Google Play.**
+- **2.0.0 (8) disponible en TestFlight**, grupo QA, estado interno `IN_BETA_TESTING`. Código `914eb6c`, GitHub Actions `43676987405`; Apple completó la carga sin errores ni advertencias. Build `17a8c9bc-b9a6-4709-8697-9bbe3d89532c`. Los AAB firmados y verificados están en `D:/vscode/thedate.now/ops/release-2.0.0-8/`, cargados en Google Play para prueba cerrada Alpha. El video ya fue entregado y el envío de App Store se completó; consultar el estado de distribución más reciente arriba.
 
 ## Build 7 — modo oscuro neutro y TestFlight, 14/11/2026
 
