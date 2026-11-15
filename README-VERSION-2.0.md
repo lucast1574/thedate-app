@@ -2,6 +2,13 @@
 
 Fecha: 14 de noviembre de 2026 (America/Lima).
 
+## Build 8 — centrado y salida del buscador, 14/11/2026
+
+- Corrección compartida por ambas apps: el estado vacío ocupa todo el ancho disponible; icono, título y explicación comparten el centro de la pantalla.
+- El buscador libera el teclado al tocar fuera, desplazar la lista, pulsar Buscar, cambiar de filtro o cambiar de destino. Conserva la consulta al cerrar el teclado.
+- 51 pruebas pasan por app, incluidas regresiones de gestos táctiles iOS/Android y geometría del centrado a 320 y 390 px. Formato y análisis sin incidencias.
+- **2.0.0 (8) disponible en TestFlight**, grupo QA, estado interno `IN_BETA_TESTING`. Código `914eb6c`, GitHub Actions `43676987405`; Apple completó la carga sin errores ni advertencias. Build `17a8c9bc-b9a6-4709-8697-9bbe3d89532c`. Los AAB firmados y verificados están en `D:/vscode/thedate.now/ops/release-2.0.0-8/`, sin subir esta versión a Google Play. **Esperar el video de Lucas antes de cualquier envío de esta actualización a revisión de App Store o Google Play.**
+
 ## Build 7 — modo oscuro neutro y TestFlight, 14/11/2026
 
 Este estado reemplaza el del build 6 para la actualización actual.
