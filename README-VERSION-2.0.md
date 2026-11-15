@@ -2,6 +2,18 @@
 
 Fecha: 14 de noviembre de 2026 (America/Lima).
 
+## Distribución realizada desde el PC de casa — 14/11/2026
+
+Este estado actualiza los pendientes históricos de las secciones siguientes.
+
+- Código compilado: `6632185`, versión **2.0.0 (6)**. Se corrigió la limpieza de `debugDefaultTargetPlatformOverride` del test de capturas; las 46 pruebas pasan y el análisis y formato Dart están limpios.
+- iOS compilado con Xcode en GitHub Actions, ejecución `43668340613`; IPA firmado con la identidad y el perfil existentes. Apple completó la carga sin errores ni advertencias. Build `845f77a1-8932-4acc-9b7a-823e3dcd68ac`, estado interno `IN_BETA_TESTING`, asignado a QA para `lucas.santillan.arevalo@gmail.com`.
+- Android: APK y AAB release firmados, `now.thedate.app`, versionCode 6. Firma del APK verificada contra el certificado registrado. Se instaló y abrió el APK en BlueStacks existente antes del AAB; se comprobó la llegada al login. No se utilizó un AVD.
+- Google Play: AAB 6 (2.0.0) cargado y envío confirmado en **Prueba cerrada - Alpha**, versión de canal 4. La consola muestra «Cambios en revisión» y comprobaciones automáticas previas en curso. No equivale a aprobación ni publicación en producción.
+- Capturas de widgets claro/oscuro revisadas; no sustituyen pruebas en teléfono. Sigue pendiente probar en iPhone real el arranque nativo, Google, permisos, enlaces y navegación; grabar después la 2.0.0 instalada desde TestFlight.
+- La 1.0.0 (5) de App Store sigue pendiente de revisión y no se retiró. No se encontró una solicitud de video en el envío actual. «Clip de app» es una función App Clip, no el video de vista previa.
+- Comprobantes, logs y artefactos locales: `D:/vscode/thedate.now/ops/release-2.0.0-6/`. La firma se realizó en WSL usando la clave por stdin y una carpeta temporal privada eliminada al finalizar; no se añadieron secretos al repo.
+
 ## Alcance y estado
 
 Cambios de código para **iOS y Android**, sobre `origin/main` actualizado mediante `git pull --ff-only`. Base remota: `ef1a5ea`. Se conservaron el workflow manual de iOS y los ajustes de Google Sign-In incorporados por upstream para la compilación 5.
