@@ -1,4 +1,6 @@
-# The Date para Android
+# The Date para iOS y Android
+
+**Versión 2.0.0 en preparación:** [cambios, estado y pendientes para terminar en casa](README-VERSION-2.0.md). Los arreglos de esta versión se guardan en este repositorio; requieren pruebas y compilación en el PC de casa.
 
 App Flutter independiente con tres destinos: **Confirmaciones**, **Regalos** y **Cuenta**. Consulta el mismo evento y los mismos permisos del estudio web. No incluye el editor, compras ni envíos de invitaciones.
 
@@ -44,4 +46,4 @@ dart run flutter_launcher_icons
 
 Las credenciales de revisión son de una cuenta normal, aislada de usuarios reales, guardadas fuera del repositorio. No existe un bypass de autenticación en la app. `integration_test/preview.dart` es una entrada exclusivamente local para previsualizar datos ficticios y no se utiliza al compilar release.
 
-Cuenta permite solicitar la eliminación mediante el sistema autenticado de soporte con una clave idempotente. No afirma que la cuenta se borre de inmediato. Las páginas `/privacidad`, `/terminos` y `/eliminar-cuenta` viven en la landing del producto. Soporte: lucasraulsantillanarevalo@gmail.com.
+Cuenta abre la página de eliminación directa del estudio web de este producto, con aviso previo de alcance permanente. La web exige iniciar sesión y confirmar el borrado; abrir el enlace no elimina nada ni envía una solicitud de soporte. Las páginas `/privacidad`, `/terminos` y `/eliminar-cuenta` viven en la landing del producto. Soporte: lucasraulsantillanarevalo@gmail.com.

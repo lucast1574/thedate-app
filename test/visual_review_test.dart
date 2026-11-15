@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,6 +13,16 @@ void main() {
   testWidgets('visual inspection of four mobile screens', (tester) async {
     tester.view.physicalSize = const Size(390, 844);
     tester.view.devicePixelRatio = 1;
+    const dark = bool.fromEnvironment('REVIEW_DARK');
+    const android = bool.fromEnvironment('REVIEW_ANDROID');
+    debugDefaultTargetPlatformOverride = android
+        ? TargetPlatform.android
+        : TargetPlatform.iOS;
+    addTearDown(() => debugDefaultTargetPlatformOverride = null);
+    tester.platformDispatcher.platformBrightnessTestValue = dark
+        ? Brightness.dark
+        : Brightness.light;
+    addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
     for (final entry in {
       'DM Sans': 'DMSans[opsz,wght].ttf',
       'Nunito': 'Nunito[wght].ttf',
@@ -31,7 +42,6 @@ void main() {
     await tester.pumpAndSettle();
     await tester.runAsync(() async {
       for (final asset in [
-        'assets/brand/access-hero.png',
         'assets/preview/coffee.png',
         'assets/preview/glasses.png',
         'assets/preview/speaker.png',
@@ -52,7 +62,9 @@ void main() {
       await tester.runAsync(() async {
         final image = await boundary.toImage();
         final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
-        final file = File('artifacts/visual/$name.png');
+        final file = File(
+          'artifacts/visual/${android ? 'android' : 'ios'}/${dark ? 'dark' : 'light'}/$name.png',
+        );
         await file.parent.create(recursive: true);
         await file.writeAsBytes(bytes!.buffer.asUint8List());
       });

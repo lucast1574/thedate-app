@@ -24,7 +24,7 @@ class AccountAvatar extends StatelessWidget {
         style: TextStyle(
           fontFamily: wedding ? AppConfig.headingFont : 'DM Sans',
           fontSize: wedding ? 30 : 28,
-          color: AppConfig.accent,
+          color: Theme.of(context).colorScheme.primary,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -38,7 +38,7 @@ class AccountAvatar extends StatelessWidget {
           width: 76,
           height: 76,
           child: ColoredBox(
-            color: AppConfig.soft,
+            color: Theme.of(context).colorScheme.surfaceContainerLow,
             child: source == null
                 ? initials
                 : Image.network(

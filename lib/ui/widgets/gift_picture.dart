@@ -12,7 +12,7 @@ class GiftPicture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fallback = ColoredBox(
-      color: AppConfig.soft.withValues(alpha: .55),
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
       child: const Center(child: AppIcon(Symbol.gift, size: 28)),
     );
     if (kDebugMode && url.startsWith('preview:')) {

@@ -17,7 +17,17 @@ class BrandWordmark extends StatelessWidget {
     mainAxisSize: MainAxisSize.min,
     children: [
       if (wedding) ...[
-        SvgPicture.asset('assets/brand/mark.svg', width: 32, height: 32),
+        SvgPicture.asset(
+          Theme.of(context).brightness == Brightness.dark
+              ? 'assets/brand/mark-dark.svg'
+              : 'assets/brand/mark.svg',
+          width: 28,
+          height: 28,
+          colorFilter: ColorFilter.mode(
+            Theme.of(context).colorScheme.primary,
+            BlendMode.srcIn,
+          ),
+        ),
         const SizedBox(width: 7),
       ],
       Flexible(
@@ -52,20 +62,17 @@ class EventPicker extends StatelessWidget {
   final AppModel model;
   @override
   Widget build(BuildContext context) {
-    final multi = model.events.length > 1 || model.event == null,
-        dark = Theme.of(context).brightness == Brightness.dark;
+    final multi = model.events.length > 1 || model.event == null;
     final event = model.event;
     final tile = Material(
-      color: dark
-          ? Theme.of(context).colorScheme.surfaceContainerLowest
-          : (wedding ? const Color(0xFFF3EEE6) : const Color(0xFFFFFAF1)),
+      color: Theme.of(context).colorScheme.primaryContainer,
       child: ListTile(
         dense: true,
         minVerticalPadding: 8,
         contentPadding: EdgeInsets.fromLTRB(
           wedding ? 16 : 12,
           0,
-          multi ? 14 : 20,
+          wedding ? (multi ? 14 : 20) : 32,
           0,
         ),
         leading: wedding
@@ -150,7 +157,12 @@ class EventPicker extends StatelessWidget {
             padding: const EdgeInsets.only(top: 4, right: 12),
             child: ClipPath(
               clipper: _TicketClipper(),
-              child: CustomPaint(foregroundPainter: _TicketSeam(), child: tile),
+              child: CustomPaint(
+                foregroundPainter: _TicketSeam(
+                  Theme.of(context).colorScheme.primary.withValues(alpha: .35),
+                ),
+                child: tile,
+              ),
             ),
           ),
         ],
@@ -170,10 +182,14 @@ class _EventFallback extends StatelessWidget {
   const _EventFallback();
   @override
   Widget build(BuildContext context) => ColoredBox(
-    color: AppConfig.soft,
+    color: Theme.of(context).colorScheme.surfaceContainerLow,
     child: Padding(
       padding: const EdgeInsets.all(9),
-      child: SvgPicture.asset('assets/brand/mark.svg'),
+      child: SvgPicture.asset(
+        Theme.of(context).brightness == Brightness.dark
+            ? 'assets/brand/mark-dark.svg'
+            : 'assets/brand/mark.svg',
+      ),
     ),
   );
 }
@@ -198,10 +214,12 @@ class _TicketClipper extends CustomClipper<Path> {
 }
 
 class _TicketSeam extends CustomPainter {
+  const _TicketSeam(this.color);
+  final Color color;
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = const Color(0xFFC9BEAE)
+      ..color = color
       ..strokeWidth = .8;
     for (double y = 4; y < size.height; y += 6) {
       canvas.drawLine(
@@ -213,68 +231,110 @@ class _TicketSeam extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_TicketSeam oldDelegate) => false;
+  bool shouldRepaint(_TicketSeam oldDelegate) => oldDelegate.color != color;
 }
 
+/// Theme-aware paper composition, drawn at device resolution without a bitmap.
 class AccessArtwork extends StatelessWidget {
   const AccessArtwork({super.key});
   @override
-  Widget build(BuildContext context) => SizedBox(
-    height: wedding ? 270 : 195,
-    child: Stack(
-      alignment: Alignment.center,
-      children: [
-        Positioned.fill(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: wedding ? 0 : 32),
-            child: Image.asset(
-              'assets/brand/access-hero.png',
-              fit: wedding ? BoxFit.cover : BoxFit.contain,
-              excludeFromSemantics: true,
-            ),
-          ),
-        ),
-        if (!wedding)
-          Transform.rotate(
-            angle: -.22,
-            child: SvgPicture.asset(
-              'assets/brand/mark.svg',
-              width: 56,
-              height: 56,
-              excludeFromSemantics: true,
-            ),
-          ),
-        if (wedding)
-          Positioned(
-            bottom: 18,
-            left: 24,
-            right: 24,
-            child: Column(
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return ExcludeSemantics(
+      child: SizedBox(
+        height: wedding ? 186 : 150,
+        child: Center(
+          child: SizedBox(
+            width: 300,
+            height: 160,
+            child: Stack(
+              alignment: Alignment.center,
               children: [
-                SvgPicture.asset(
-                  'assets/brand/mark.svg',
-                  width: 38,
-                  height: 38,
-                  excludeFromSemantics: true,
+                Positioned.fill(
+                  child: CustomPaint(painter: _AccessPaper(scheme)),
                 ),
-                const SizedBox(height: 6),
-                Text(
-                  'SAVE THE DATE',
-                  style: TextStyle(
-                    fontFamily: AppConfig.headingFont,
-                    letterSpacing: 3,
-                    fontSize: 18,
+                Transform.rotate(
+                  angle: wedding ? 0 : -.14,
+                  child: SvgPicture.asset(
+                    Theme.of(context).brightness == Brightness.dark
+                        ? 'assets/brand/mark-dark.svg'
+                        : 'assets/brand/mark.svg',
+                    width: wedding ? 52 : 62,
+                    height: wedding ? 52 : 62,
+                    colorFilter: wedding
+                        ? ColorFilter.mode(scheme.primary, BlendMode.srcIn)
+                        : null,
                   ),
-                ),
-                const SizedBox(height: 2),
-                const Text(
-                  'INVITACIONES DE BODA',
-                  style: TextStyle(fontSize: 8, letterSpacing: 1.5),
                 ),
               ],
             ),
           ),
-      ],
-    ),
-  );
+        ),
+      ),
+    );
+  }
+}
+
+class _AccessPaper extends CustomPainter {
+  const _AccessPaper(this.scheme);
+  final ColorScheme scheme;
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = size.center(Offset.zero);
+    final fill = Paint()..color = scheme.primaryContainer;
+    final line = Paint()
+      ..color = scheme.primary.withValues(alpha: .3)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+    canvas.save();
+    canvas.translate(center.dx, center.dy);
+    canvas.rotate(wedding ? -.07 : -.14);
+    final rect = Rect.fromCenter(center: Offset.zero, width: 226, height: 112);
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(rect.translate(9, 8), const Radius.circular(8)),
+      Paint()..color = scheme.primary.withValues(alpha: .14),
+    );
+    if (wedding) {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(rect, const Radius.circular(5)),
+        fill,
+      );
+      canvas.drawRect(rect.deflate(10), line);
+      canvas.drawRect(
+        rect.deflate(14),
+        line..color = scheme.primary.withValues(alpha: .15),
+      );
+    } else {
+      canvas.drawPath(
+        _TicketClipper().getClip(rect.size).shift(rect.topLeft),
+        fill,
+      );
+      for (double y = -42; y < 48; y += 8) {
+        canvas.drawLine(Offset(78, y), Offset(78, y + 4), line);
+      }
+      final confetti = Paint()
+        ..strokeWidth = 4
+        ..strokeCap = StrokeCap.round;
+      for (final piece in [
+        (
+          const Offset(-126, -51),
+          const Offset(-132, -62),
+          const Color(0xFFE45C87),
+        ),
+        (
+          const Offset(112, -58),
+          const Offset(122, -62),
+          const Color(0xFFF4B93C),
+        ),
+        (const Offset(-118, 59), const Offset(-128, 64), scheme.primary),
+        (const Offset(132, 48), const Offset(137, 60), const Color(0xFFE45C87)),
+      ]) {
+        canvas.drawLine(piece.$1, piece.$2, confetti..color = piece.$3);
+      }
+    }
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_AccessPaper oldDelegate) => oldDelegate.scheme != scheme;
 }

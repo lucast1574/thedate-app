@@ -26,6 +26,7 @@ class _AppRootState extends State<AppRoot> {
   Widget build(BuildContext context) => MaterialApp(
     title: AppConfig.name,
     debugShowCheckedModeBanner: false,
+    themeMode: ThemeMode.system,
     theme: AppTheme.create(Brightness.light),
     darkTheme: AppTheme.create(Brightness.dark),
     locale: const Locale('es'),

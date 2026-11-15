@@ -12,11 +12,16 @@ void main() {
     test('readable text and actions in $brightness', () {
       final theme = AppTheme.create(brightness);
       final scheme = theme.colorScheme;
-      for (final surface in [scheme.surface, scheme.surfaceContainerLowest]) {
+      for (final surface in [
+        scheme.surface,
+        scheme.surfaceContainerLowest,
+        scheme.primaryContainer,
+      ]) {
         for (final ink in [
           scheme.onSurface,
           scheme.onSurfaceVariant,
           scheme.primary,
+          scheme.error,
         ]) {
           expect(contrast(ink, surface), greaterThanOrEqualTo(4.5));
         }

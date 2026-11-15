@@ -167,6 +167,7 @@ class _ProfileEditorState extends State<ProfileEditor> {
                     TextFormField(
                       controller: name,
                       enabled: !blocked,
+                      keyboardAppearance: Theme.of(context).brightness,
                       textCapitalization: TextCapitalization.words,
                       textInputAction: TextInputAction.done,
                       maxLength: 80,

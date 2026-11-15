@@ -85,7 +85,9 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
               Padding(
                 padding: const EdgeInsets.only(right: 24),
                 child: SvgPicture.asset(
-                  'assets/brand/mark.svg',
+                  Theme.of(context).brightness == Brightness.dark
+                      ? 'assets/brand/mark-dark.svg'
+                      : 'assets/brand/mark.svg',
                   width: 40,
                   height: 40,
                   excludeFromSemantics: true,

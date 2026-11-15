@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'widgets/web_link.dart';
 import '../app_config.dart';
 import '../state/app_model.dart';
 import 'widgets/brand.dart';
@@ -46,22 +46,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      if (!wedding)
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(26, 18, 26, 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const BrandWordmark(),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(26, 18, 26, 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const BrandWordmark(),
+                            if (!wedding)
                               SvgPicture.asset(
-                                'assets/brand/mark.svg',
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? 'assets/brand/mark-dark.svg'
+                                    : 'assets/brand/mark.svg',
                                 width: 42,
                                 height: 42,
                                 excludeFromSemantics: true,
                               ),
-                            ],
-                          ),
+                          ],
                         ),
+                      ),
                       const AccessArtwork(),
                       Padding(
                         padding: EdgeInsets.fromLTRB(
@@ -99,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             const SizedBox(height: 7),
                             Text(
                               wedding
-                                  ? 'Vuestros invitados y regalos, con calma.'
+                                  ? 'Tus invitados y regalos, con calma.'
                                   : 'Confirmaciones y regalos,\nen un solo lugar.',
                               textAlign: wedding
                                   ? TextAlign.left
@@ -174,6 +176,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               enabled: !widget.model.busy,
                               autofillHints: const [AutofillHints.username],
                               keyboardType: TextInputType.emailAddress,
+                              keyboardAppearance: Theme.of(context).brightness,
+                              autocorrect: false,
+                              enableSuggestions: false,
                               textInputAction: TextInputAction.next,
                               decoration: InputDecoration(
                                 hintText: wedding
@@ -206,6 +211,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: password,
                               enabled: !widget.model.busy,
                               obscureText: !showPassword,
+                              keyboardAppearance: Theme.of(context).brightness,
+                              autocorrect: false,
+                              enableSuggestions: false,
                               autofillHints: const [AutofillHints.password],
                               onFieldSubmitted: (_) => submit(),
                               decoration: InputDecoration(
@@ -251,7 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Center(
                               child: Text(
                                 wedding
-                                    ? 'Con vuestra cuenta del estudio web.'
+                                    ? 'Con tu cuenta del estudio web.'
                                     : 'Usa tu cuenta del estudio web.',
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
@@ -261,7 +269,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 TextButton(
-                                  onPressed: () => launchUrl(
+                                  onPressed: () => openWebLink(
+                                    context,
                                     Uri.parse(
                                       '${AppConfig.website}/privacidad',
                                     ),
@@ -269,7 +278,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: const Text('Privacidad'),
                                 ),
                                 TextButton(
-                                  onPressed: () => launchUrl(
+                                  onPressed: () => openWebLink(
+                                    context,
                                     Uri.parse('${AppConfig.website}/terminos'),
                                   ),
                                   child: const Text('Condiciones'),

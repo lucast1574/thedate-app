@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart';
+import 'widgets/web_link.dart';
 import '../app_config.dart';
 import '../state/app_model.dart';
 import 'profile_editor.dart';
 import 'widgets/app_icon.dart';
-import 'widgets/common.dart';
 import 'widgets/brand.dart';
 import 'widgets/account_avatar.dart';
 
@@ -12,17 +12,7 @@ class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key, required this.model});
   final AppModel model;
   Future<void> open(BuildContext context, String path) async {
-    final ok = await launchUrl(
-      Uri.parse(path),
-      mode: LaunchMode.externalApplication,
-    );
-    if (!ok && context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No pudimos abrir el enlace. Inténtalo de nuevo.'),
-        ),
-      );
-    }
+    await openWebLink(context, Uri.parse(path));
   }
 
   Future<void> selectEvent(BuildContext context) async {
@@ -42,23 +32,33 @@ class AccountScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Flexible(
-                child: ListView(
-                  shrinkWrap: true,
-                  children: model.events
-                      .map(
-                        (event) => ListTile(
-                          title: Text(event.title),
-                          selected: model.event?.id == event.id,
-                          trailing: model.event?.id == event.id
-                              ? const AppIcon(Symbol.check)
-                              : null,
-                          onTap: () {
-                            Navigator.pop(context);
-                            model.select(event);
-                          },
-                        ),
-                      )
-                      .toList(),
+                child: Shortcuts(
+                  shortcuts: const {
+                    SingleActivator(LogicalKeyboardKey.arrowDown):
+                        NextFocusIntent(),
+                    SingleActivator(LogicalKeyboardKey.arrowUp):
+                        PreviousFocusIntent(),
+                  },
+                  child: FocusTraversalGroup(
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: model.events
+                          .map(
+                            (event) => ListTile(
+                              title: Text(event.title),
+                              selected: model.event?.id == event.id,
+                              trailing: model.event?.id == event.id
+                                  ? const AppIcon(Symbol.check)
+                                  : null,
+                              onTap: () {
+                                Navigator.pop(context);
+                                model.select(event);
+                              },
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -72,9 +72,10 @@ class AccountScreen extends StatelessWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Solicitar eliminación de cuenta'),
+        scrollable: true,
+        title: const Text('Eliminar cuenta en la web'),
         content: const Text(
-          'Enviaremos una solicitud para eliminar tu cuenta y sus datos personales. El equipo te contactará en el correo de tu cuenta para verificarla y comunicarte los datos que deban conservarse por obligación legal. Esta acción no elimina la cuenta inmediatamente.',
+          'Abriremos la web de The Date. Inicia sesión con la cuenta que quieres eliminar y confirma allí el borrado. Es permanente: se eliminarán tu perfil, tus eventos, invitados y archivos de este producto. No elimina tu cuenta del otro producto ni tu cuenta de Google. Abrir la web todavía no borra nada.',
         ),
         actions: [
           TextButton(
@@ -83,12 +84,14 @@ class AccountScreen extends StatelessWidget {
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Enviar solicitud'),
+            child: const Text('Continuar en la web'),
           ),
         ],
       ),
     );
-    if (confirmed == true) await model.deleteAccount();
+    if (confirmed == true && context.mounted) {
+      await open(context, AppConfig.deletionUrl);
+    }
   }
 
   @override
@@ -137,8 +140,10 @@ class AccountScreen extends StatelessWidget {
                 ? null
                 : () => showProfileEditor(context, model),
             style: IconButton.styleFrom(
-              backgroundColor: AppConfig.soft.withValues(alpha: .6),
-              foregroundColor: AppConfig.accent,
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerLow,
+              foregroundColor: Theme.of(context).colorScheme.primary,
             ),
             icon: const AppIcon(Symbol.edit, size: 19),
           ),
@@ -205,10 +210,7 @@ class AccountScreen extends StatelessWidget {
               AccountLink(
                 icon: Symbol.help,
                 title: 'Ayuda y soporte',
-                onTap: () => open(
-                  context,
-                  'mailto:${AppConfig.support}?subject=${Uri.encodeComponent('Ayuda con ${AppConfig.name}')}',
-                ),
+                onTap: () => open(context, AppConfig.supportUrl),
               ),
               const Divider(),
               AccountLink(
@@ -225,19 +227,13 @@ class AccountScreen extends StatelessWidget {
               const Divider(),
               AccountLink(
                 icon: Symbol.trash,
-                title: 'Solicitar eliminación de cuenta',
-                onTap: model.busy || model.deletionRequested
-                    ? null
-                    : () => deletion(context),
+                title: 'Eliminar cuenta',
+                onTap: model.busy ? null : () => deletion(context),
               ),
             ],
           ),
         ),
       ),
-      if (model.deletionRequested)
-        const Notice(
-          'Solicitud enviada. Te contactaremos en el correo de tu cuenta para continuar.',
-        ),
       const SizedBox(height: 20),
       if (wedding) const Divider(),
       SizedBox(
@@ -245,16 +241,18 @@ class AccountScreen extends StatelessWidget {
         child: FilledButton.icon(
           onPressed: model.busy ? null : model.logout,
           style: FilledButton.styleFrom(
-            backgroundColor: const Color(0xFFC94850).withValues(alpha: .07),
-            foregroundColor: const Color(0xFFC94850),
+            backgroundColor: Theme.of(
+              context,
+            ).colorScheme.error.withValues(alpha: .07),
+            foregroundColor: Theme.of(context).colorScheme.error,
             minimumSize: const Size(48, 52),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(wedding ? 12 : 16),
             ),
           ),
-          icon: const AppIcon(
+          icon: AppIcon(
             Symbol.logout,
-            color: Color(0xFFC94850),
+            color: Theme.of(context).colorScheme.error,
             size: 20,
           ),
           label: const Text('Cerrar sesión'),
@@ -263,7 +261,7 @@ class AccountScreen extends StatelessWidget {
       const SizedBox(height: 12),
       Center(
         child: Text(
-          '${AppConfig.name} · Versión 1.0.0',
+          '${AppConfig.name} · Versión ${AppConfig.version}',
           style: Theme.of(context).textTheme.bodySmall,
         ),
       ),
@@ -290,7 +288,7 @@ class AccountLink extends StatelessWidget {
     leading: AppIcon(
       icon,
       color: icon == Symbol.logout
-          ? const Color(0xFFC94850)
+          ? Theme.of(context).colorScheme.error
           : wedding
           ? Theme.of(context).colorScheme.primary
           : Theme.of(context).colorScheme.onSurfaceVariant,
@@ -298,7 +296,9 @@ class AccountLink extends StatelessWidget {
     title: Text(
       title,
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-        color: icon == Symbol.logout ? const Color(0xFFC94850) : null,
+        color: icon == Symbol.logout
+            ? Theme.of(context).colorScheme.error
+            : null,
       ),
     ),
     trailing: icon == Symbol.logout

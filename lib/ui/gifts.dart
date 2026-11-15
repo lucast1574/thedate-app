@@ -85,7 +85,7 @@ class GiftRow extends StatelessWidget {
               width: 76,
               height: 76,
               padding: const EdgeInsets.all(4),
-              color: Colors.white,
+              color: theme.colorScheme.surfaceContainerLow,
               child: GiftPicture(
                 gift.imageUrl,
                 token: token,

@@ -49,14 +49,14 @@ class _InvitationStartState extends State<InvitationStart> {
               width: 88,
               height: 88,
               decoration: BoxDecoration(
-                color: AppConfig.soft.withValues(alpha: .65),
+                color: Theme.of(context).colorScheme.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(wedding ? 18 : 28),
               ),
               child: Center(
                 child: AppIcon(
                   widget.gifts ? Symbol.gift : Symbol.mail,
                   size: 38,
-                  color: AppConfig.accent,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
@@ -93,10 +93,10 @@ class _InvitationStartState extends State<InvitationStart> {
                         ),
                       ),
                       const SizedBox(width: 12),
-                      const AppIcon(
+                      AppIcon(
                         Symbol.externalLink,
                         size: 18,
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.onPrimary,
                       ),
                     ],
                   ),

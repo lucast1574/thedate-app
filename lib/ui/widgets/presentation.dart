@@ -139,8 +139,10 @@ class AttendanceSummary extends StatelessWidget {
             child: LinearProgressIndicator(
               value: data.guests.isEmpty ? 0 : responded / data.guests.length,
               minHeight: 5,
-              color: AppConfig.accent,
-              backgroundColor: AppConfig.soft.withValues(alpha: .5),
+              color: Theme.of(context).colorScheme.primary,
+              backgroundColor: Theme.of(
+                context,
+              ).colorScheme.primary.withValues(alpha: .15),
             ),
           ),
         ],
@@ -223,9 +225,15 @@ class BrandRule extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
     children: [
-      Container(height: 1, color: AppConfig.accent.withValues(alpha: .65)),
+      Container(
+        height: 1,
+        color: Theme.of(context).colorScheme.primary.withValues(alpha: .65),
+      ),
       const SizedBox(height: 3),
-      Container(height: 1, color: AppConfig.accent.withValues(alpha: .65)),
+      Container(
+        height: 1,
+        color: Theme.of(context).colorScheme.primary.withValues(alpha: .65),
+      ),
     ],
   );
 }

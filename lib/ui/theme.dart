@@ -1,29 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../app_config.dart';
 
 abstract final class AppTheme {
   static ThemeData create(Brightness brightness) {
     final wedding = AppConfig.product == 'wedding',
         dark = brightness == Brightness.dark;
-    final ink = dark ? AppConfig.paper : AppConfig.ink;
-    final paper = dark ? const Color(0xFF211B2B) : AppConfig.paper;
+    final ink = dark
+        ? (wedding ? const Color(0xFFF8EDE2) : const Color(0xFFF8F2FF))
+        : AppConfig.ink;
+    final paper = dark
+        ? (wedding ? const Color(0xFF211C18) : const Color(0xFF1D1629))
+        : AppConfig.paper;
+    final raised = dark
+        ? (wedding ? const Color(0xFF2C251F) : const Color(0xFF2B2239))
+        : (wedding ? const Color(0xFFFAF6F0) : const Color(0xFFF7F3FD));
+    final invitation = dark
+        ? (wedding ? const Color(0xFF3B2D24) : const Color(0xFF38294D))
+        : (wedding ? const Color(0xFFF3EEE6) : const Color(0xFFFFFAF1));
+    final primary = dark
+        ? (wedding ? const Color(0xFFE4B491) : const Color(0xFFCDB4FA))
+        : AppConfig.accent;
     final muted = dark
-        ? const Color(0xFFC2B8CE)
+        ? (wedding ? const Color(0xFFD0BEB0) : const Color(0xFFC7BCD6))
         : (wedding ? const Color(0xFF6C6057) : const Color(0xFF625A70));
     final scheme =
         ColorScheme.fromSeed(
           seedColor: AppConfig.accent,
           brightness: brightness,
         ).copyWith(
-          primary: dark ? AppConfig.soft : AppConfig.accent,
-          onPrimary: dark ? AppConfig.ink : Colors.white,
+          primary: primary,
+          onPrimary: dark ? paper : Colors.white,
+          primaryContainer: invitation,
+          onPrimaryContainer: ink,
+          secondary: primary,
+          onSecondary: dark ? paper : Colors.white,
+          error: dark ? const Color(0xFFFFABA6) : const Color(0xFFAE303B),
+          onError: dark ? const Color(0xFF3C080E) : Colors.white,
           surface: paper,
           onSurface: ink,
           onSurfaceVariant: muted,
-          surfaceContainerLowest: dark ? const Color(0xFF2C2538) : Colors.white,
-          surfaceContainerLow: dark
-              ? const Color(0xFF2C2538)
-              : const Color(0xFFF7F6F4),
+          surfaceContainerLowest: dark ? raised : Colors.white,
+          surfaceContainerLow: raised,
+          surfaceContainer: raised,
+          surfaceContainerHigh: raised,
+          surfaceContainerHighest: raised,
           outlineVariant: ink.withValues(alpha: .10),
         );
     TextStyle body(
@@ -55,12 +76,14 @@ abstract final class AppTheme {
     );
     return ThemeData(
       useMaterial3: true,
+      brightness: brightness,
+      iconTheme: IconThemeData(color: muted),
       colorScheme: scheme,
       fontFamily: 'DM Sans',
       scaffoldBackgroundColor: paper,
       dividerColor: ink.withValues(alpha: .09),
-      focusColor: AppConfig.soft.withValues(alpha: .45),
-      hoverColor: AppConfig.soft.withValues(alpha: .2),
+      focusColor: primary.withValues(alpha: .14),
+      hoverColor: primary.withValues(alpha: .08),
       textTheme: TextTheme(
         headlineLarge: heading(wedding ? 36 : 32),
         headlineMedium: heading(wedding ? 34 : 30),
@@ -74,6 +97,16 @@ abstract final class AppTheme {
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: paper,
+        centerTitle: wedding,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: dark ? Brightness.light : Brightness.dark,
+          statusBarBrightness: dark ? Brightness.dark : Brightness.light,
+          systemNavigationBarColor: paper,
+          systemNavigationBarIconBrightness: dark
+              ? Brightness.light
+              : Brightness.dark,
+        ),
         foregroundColor: ink,
         elevation: 0,
         scrolledUnderElevation: 0,
@@ -82,10 +115,10 @@ abstract final class AppTheme {
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           minimumSize: const Size(48, 50),
-          backgroundColor: AppConfig.accent,
-          foregroundColor: Colors.white,
+          backgroundColor: scheme.primary,
+          foregroundColor: scheme.onPrimary,
           shape: RoundedRectangleBorder(borderRadius: radius),
-          textStyle: body(15, weight: FontWeight.w700, color: Colors.white),
+          textStyle: body(15, weight: FontWeight.w700, color: scheme.onPrimary),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
@@ -110,10 +143,10 @@ abstract final class AppTheme {
         labelStyle: body(14, color: muted),
         border: border,
         enabledBorder: border,
-        focusedBorder: border.copyWith(
-          borderSide: BorderSide(color: ink.withValues(alpha: .2)),
-        ),
+        focusedBorder: border,
+        focusColor: scheme.primary.withValues(alpha: .12),
         errorBorder: border,
+        focusedErrorBorder: border,
       ),
       dividerTheme: DividerThemeData(
         color: ink.withValues(alpha: .10),
@@ -129,11 +162,27 @@ abstract final class AppTheme {
           ),
         ),
       ),
+      dialogTheme: DialogThemeData(
+        backgroundColor: scheme.surfaceContainerLowest,
+        surfaceTintColor: Colors.transparent,
+        titleTextStyle: heading(28),
+        contentTextStyle: body(14),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(wedding ? 12 : 24),
+        ),
+      ),
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: raised,
+        contentTextStyle: body(14),
+        actionTextColor: primary,
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+      ),
       listTileTheme: ListTileThemeData(
         iconColor: muted,
         textColor: ink,
         selectedColor: scheme.primary,
-        selectedTileColor: AppConfig.soft.withValues(alpha: .4),
+        selectedTileColor: scheme.primary.withValues(alpha: .12),
       ),
     );
   }

@@ -49,6 +49,7 @@ class _GuestsScreenState extends State<GuestsScreen> {
         ),
         const SizedBox(height: 10),
         TextField(
+          keyboardAppearance: Theme.of(context).brightness,
           onChanged: (s) => setState(() => query = s),
           decoration: const InputDecoration(
             hintText: 'Buscar invitado',
@@ -113,7 +114,7 @@ class GuestRow extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppConfig.soft,
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
             ),
             child: Text(
               g.initials,
@@ -121,7 +122,7 @@ class GuestRow extends StatelessWidget {
                 fontFamily: wedding ? AppConfig.headingFont : 'DM Sans',
                 fontSize: wedding ? 17 : 15,
                 fontWeight: FontWeight.w600,
-                color: AppConfig.accent,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
           ),
