@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:thedate_app/main.dart';
 import 'package:thedate_app/state/app_model.dart';
+import 'package:thedate_app/domain/models.dart';
 import '../integration_test/preview_data.dart';
 
 void main() {
@@ -31,7 +32,10 @@ void main() {
         ..addFont(rootBundle.load('assets/fonts/${entry.value}'));
       await loader.load();
     }
-    final model = AppModel(PreviewRepository());
+    const empty = bool.fromEnvironment('REVIEW_EMPTY');
+    final model = AppModel(
+      empty ? _SingleConfirmationRepository() : PreviewRepository(),
+    );
     final key = GlobalKey();
     await tester.pumpWidget(
       RepaintBoundary(
@@ -71,6 +75,16 @@ void main() {
     }
 
     await capture('confirmations');
+    if (empty) {
+      expect(find.text('persona confirmada'), findsOneWidget);
+      for (final filter in ['Pendientes', 'No asistirán']) {
+        await tester.tap(find.text(filter).first);
+        await tester.pumpAndSettle();
+        await capture(
+          filter == 'Pendientes' ? 'empty-pending' : 'empty-declined',
+        );
+      }
+    }
     await tester.tap(find.text('Regalos'));
     await tester.pumpAndSettle();
     await capture('gifts');
@@ -86,4 +100,17 @@ void main() {
     tester.view.resetPhysicalSize();
     tester.view.resetDevicePixelRatio();
   });
+}
+
+class _SingleConfirmationRepository extends PreviewRepository {
+  @override
+  Future<Snapshot> snapshot(String id) async => const Snapshot([
+    Guest(
+      id: 'one',
+      name: 'Lucas',
+      response: 'going',
+      seats: 1,
+      attendingSeats: 1,
+    ),
+  ], []);
 }

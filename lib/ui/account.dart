@@ -234,8 +234,8 @@ class AccountScreen extends StatelessWidget {
           ),
         ),
       ),
-      const SizedBox(height: 20),
       if (wedding) const Divider(),
+      const SizedBox(height: 20),
       SizedBox(
         width: double.infinity,
         child: FilledButton.icon(

@@ -114,7 +114,9 @@ class AttendanceSummary extends StatelessWidget {
             children: [
               metric(
                 '${data.confirmedPeople}',
-                'personas confirmadas',
+                data.confirmedPeople == 1
+                    ? 'persona confirmada'
+                    : 'personas confirmadas',
                 main: true,
               ),
               Container(
@@ -167,11 +169,13 @@ class AttendanceSummary extends StatelessWidget {
                     context,
                   ).textTheme.headlineLarge!.copyWith(fontSize: 40),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 80,
                   child: Text(
-                    'personas confirmadas',
-                    style: TextStyle(fontSize: 12, height: 1.15),
+                    data.confirmedPeople == 1
+                        ? 'persona confirmada'
+                        : 'personas confirmadas',
+                    style: const TextStyle(fontSize: 12, height: 1.15),
                   ),
                 ),
               ],

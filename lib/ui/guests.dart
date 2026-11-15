@@ -41,7 +41,7 @@ class _GuestsScreenState extends State<GuestsScreen> {
         ),
         const SizedBox(height: 14),
         AttendanceSummary(data),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         FilterTabs(
           labels: const ['Confirmaron', 'Pendientes', 'No asistirán'],
           selected: filter,

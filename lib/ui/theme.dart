@@ -7,22 +7,20 @@ abstract final class AppTheme {
     final wedding = AppConfig.product == 'wedding',
         dark = brightness == Brightness.dark;
     final ink = dark
-        ? (wedding ? const Color(0xFFF8EDE2) : const Color(0xFFF8F2FF))
+        ? (wedding ? const Color(0xFFF4F0EA) : const Color(0xFFF2F2F2))
         : AppConfig.ink;
-    final paper = dark
-        ? (wedding ? const Color(0xFF211C18) : const Color(0xFF1D1629))
-        : AppConfig.paper;
+    final paper = dark ? const Color(0xFF181818) : AppConfig.paper;
     final raised = dark
-        ? (wedding ? const Color(0xFF2C251F) : const Color(0xFF2B2239))
+        ? const Color(0xFF222222)
         : (wedding ? const Color(0xFFFAF6F0) : const Color(0xFFF7F3FD));
     final invitation = dark
-        ? (wedding ? const Color(0xFF3B2D24) : const Color(0xFF38294D))
+        ? const Color(0xFF2C2C2C)
         : (wedding ? const Color(0xFFF3EEE6) : const Color(0xFFFFFAF1));
     final primary = dark
-        ? (wedding ? const Color(0xFFE4B491) : const Color(0xFFCDB4FA))
+        ? (wedding ? const Color(0xFFDEB99B) : const Color(0xFFC8B6EA))
         : AppConfig.accent;
     final muted = dark
-        ? (wedding ? const Color(0xFFD0BEB0) : const Color(0xFFC7BCD6))
+        ? (wedding ? const Color(0xFFC1BDB7) : const Color(0xFFBABABA))
         : (wedding ? const Color(0xFF6C6057) : const Color(0xFF625A70));
     final scheme =
         ColorScheme.fromSeed(
@@ -35,17 +33,27 @@ abstract final class AppTheme {
           onPrimaryContainer: ink,
           secondary: primary,
           onSecondary: dark ? paper : Colors.white,
+          secondaryContainer: dark
+              ? Color.alphaBlend(primary.withValues(alpha: .12), raised)
+              : null,
+          onSecondaryContainer: dark ? ink : null,
           error: dark ? const Color(0xFFFFABA6) : const Color(0xFFAE303B),
           onError: dark ? const Color(0xFF3C080E) : Colors.white,
           surface: paper,
           onSurface: ink,
           onSurfaceVariant: muted,
           surfaceContainerLowest: dark ? raised : Colors.white,
-          surfaceContainerLow: raised,
-          surfaceContainer: raised,
-          surfaceContainerHigh: raised,
-          surfaceContainerHighest: raised,
-          outlineVariant: ink.withValues(alpha: .10),
+          surfaceContainerLow: dark ? const Color(0xFF262626) : raised,
+          surfaceContainer: dark ? const Color(0xFF292929) : raised,
+          surfaceContainerHigh: dark ? const Color(0xFF303030) : raised,
+          surfaceContainerHighest: dark ? const Color(0xFF363636) : raised,
+          surfaceDim: dark ? paper : null,
+          surfaceBright: dark ? const Color(0xFF363636) : null,
+          surfaceTint: dark ? Colors.transparent : null,
+          outline: dark ? const Color(0xFF777777) : null,
+          outlineVariant: dark
+              ? const Color(0xFF383838)
+              : ink.withValues(alpha: .10),
         );
     TextStyle body(
       double size, {
@@ -72,7 +80,7 @@ abstract final class AppTheme {
     final radius = BorderRadius.circular(wedding ? 5 : 14);
     final border = OutlineInputBorder(
       borderRadius: radius,
-      borderSide: BorderSide(color: ink.withValues(alpha: .10)),
+      borderSide: BorderSide(color: scheme.outlineVariant),
     );
     return ThemeData(
       useMaterial3: true,
@@ -81,7 +89,7 @@ abstract final class AppTheme {
       colorScheme: scheme,
       fontFamily: 'DM Sans',
       scaffoldBackgroundColor: paper,
-      dividerColor: ink.withValues(alpha: .09),
+      dividerColor: dark ? const Color(0xFF343434) : ink.withValues(alpha: .09),
       focusColor: primary.withValues(alpha: .14),
       hoverColor: primary.withValues(alpha: .08),
       textTheme: TextTheme(
@@ -149,7 +157,7 @@ abstract final class AppTheme {
         focusedErrorBorder: border,
       ),
       dividerTheme: DividerThemeData(
-        color: ink.withValues(alpha: .10),
+        color: scheme.outlineVariant,
         space: 1,
         thickness: 1,
       ),
