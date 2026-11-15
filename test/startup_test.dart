@@ -10,10 +10,14 @@ import 'fixtures.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  test('brand mark SVG compiles for native startup', () async {
-    await const SvgAssetLoader('assets/brand/mark.svg').loadBytes(null);
-  });
-  testWidgets('session data loads while intro is visible', (tester) async {
+  for (final appearance in ['light', 'dark']) {
+    test('splash emblem SVG parses in $appearance', () async {
+      await SvgAssetLoader(
+        'assets/brand/splash-$appearance.svg',
+      ).loadBytes(null);
+    });
+  }
+  testWidgets('session data loads independently of the splash', (tester) async {
     final repository = FakeRepository()..pending = Completer<Snapshot>();
     final model = AppModel(repository);
     await tester.pumpWidget(DateApp(model: model));
@@ -27,22 +31,23 @@ void main() {
     expect(find.text('personas confirmadas'), findsOneWidget);
     await tester.pumpWidget(const SizedBox());
   });
-  testWidgets('reduced motion finishes without holding the user', (
-    tester,
-  ) async {
-    var completed = 0;
-    await tester.pumpWidget(
-      MaterialApp(
-        home: MediaQuery(
-          data: const MediaQueryData(disableAnimations: true),
-          child: StartupSplash(onIntroComplete: () => completed++),
+  testWidgets(
+    'splash reports readiness after the first frame without an artificial delay',
+    (tester) async {
+      var completed = 0;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: MediaQuery(
+            data: const MediaQueryData(disableAnimations: true),
+            child: StartupSplash(onIntroComplete: () => completed++),
+          ),
         ),
-      ),
-    );
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 1));
-    expect(completed, 1);
-    expect(tester.takeException(), isNull);
-    await tester.pumpWidget(const SizedBox());
-  });
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 1));
+      expect(completed, 1);
+      expect(tester.takeException(), isNull);
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
 }

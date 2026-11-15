@@ -94,7 +94,7 @@ Se revisaron de nuevo las pantallas frente a los problemas de las capturas, sin 
 - La flecha de «Continuar en la web» usa `onPrimary`, evitando el icono blanco sobre el botón claro del modo oscuro.
 - El encabezado define su alineación por marca (The Date a la izquierda, Save the Date centrado), idéntica en iOS y Android, sin depender del valor predeterminado de la plataforma. Los iconos de las barras del sistema se adaptan al modo.
 - Los diálogos usan tipografía y superficies de la marca. Los avisos flotantes usan texto y fondo coordinados en lugar de heredar combinaciones de colores ajenas.
-- El splash nativo incluye símbolo claro/oscuro en iOS a 1x, 2x y 3x y recursos nocturnos Android. En Android anterior a 12, el símbolo usa 88dp con densidades específicas; Android 12+ mantiene su recurso con margen para la máscara del sistema. Son recursos fuente generados, no una compilación de la app.
+- El splash nativo incluye símbolo claro/oscuro en iOS a 1x, 2x y 3x y recursos nocturnos Android. En Android anterior a 12, el símbolo usa 112dp con densidades específicas; Android 12+ mantiene su recurso con margen para la máscara del sistema. Son recursos fuente generados, no una compilación de la app.
 - El splash Flutter puede desplazarse si falta altura o aumenta el texto, en vez de desbordarse.
 - Privacidad y Condiciones en el login usan el mismo abridor HTTPS y manejo recuperable de errores que Cuenta; no quedan llamadas de apertura sin capturar excepciones en esos enlaces.
 - El selector personalizado de eventos incorpora flechas arriba/abajo y mantiene Tab, Escape y cierre exterior propios de la ruta modal. Probarlo con teclado físico en casa.
@@ -110,3 +110,15 @@ node scripts/generate_splash.cjs
 ```
 
 Pendiente especialmente: revisar la máscara y tamaño real del splash Android en ambas generaciones, la variante nocturna del catálogo iOS, estado de barras del sistema al entrar/salir del navegador y recuperación de sesión al volver de eliminar la cuenta. Confirmar que teclado/texto ampliado no recortan botones o títulos. Ninguna de estas pruebas de dispositivo se declara completada por el análisis estático.
+
+## Splash definitivo — revisión adicional del 14/11/2026
+
+El splash tiene una composición exclusiva de arranque: ticket compacto con confeti para The Date y sello floral con doble filete para Save the Date. Ya no reutiliza el hero de login ni una tarjeta grande con el logotipo repetido.
+
+- `assets/brand/splash-light.svg` y `splash-dark.svg` son las fuentes del mismo emblema que se muestra en Flutter y se exporta a los PNG nativos.
+- iOS usa un catálogo de seis imágenes (claro/oscuro, 1x/2x/3x) y el color dinámico `LaunchBackground`. El símbolo mide 112 puntos, permanece centrado en el mismo sitio al entrar Flutter y tiene fondo transparente. El nombre y lema aparecen debajo, sin mover el emblema. No se fija `UIUserInterfaceStyle` ni se fuerza el modo claro/oscuro.
+- Android anterior a 12 usa el símbolo a 112dp en sus densidades y variantes nocturnas. Android 12+ usa su propio recurso con margen para el recorte; el sistema controla el tamaño final. Fondo y barras nativas tienen variantes día/noche.
+- Flutter sigue el tema del sistema y usa el mismo fondo exacto que los recursos nativos. Se eliminó la espera artificial de 450ms y la animación de opacidad: el splash cede al terminar la inicialización. En ventanas bajas se mantiene solo el emblema; con espacio se muestra nombre y lema, con desplazamiento para texto ampliado. No hay reproducción/pausa ni animación que anular con reducción de movimiento.
+- `scripts/generate_splash.cjs` exporta exclusivamente recursos fuente; no compila, firma ni instala la app. Se regeneraron estos assets y se inspeccionaron sus variantes estáticas. El análisis Dart y las comprobaciones XML/JSON pasan. Las pruebas Flutter de arranque se actualizaron para leer los nuevos SVG, pero deben ejecutarse en casa.
+
+**Pendiente en casa:** compilar una nueva versión y verificar el arranque en frío en iPhone claro/oscuro, iPad y Android anterior/posterior a 12. iOS puede conservar el snapshot de launch screen: validar con una instalación limpia de prueba si sigue mostrando el anterior. Revisar el cambio de apariencia con la app cerrada y abierta, la transición sin destellos y la máscara Android 12+. Esta revisión de código y recursos no sustituye la prueba real del storyboard/catálogo compilados. El teléfono seguirá mostrando el splash anterior hasta instalar el nuevo build desde TestFlight o la distribución Android.

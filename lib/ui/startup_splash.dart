@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'widgets/brand.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../app_config.dart';
 
-/// Finite entrance animation; startup work runs independently in AppModel.
+/// The emblem and background match the native launch assets in both appearances.
+/// Initialization owns the duration: no artificial delay or second intro scene.
 class StartupSplash extends StatefulWidget {
   const StartupSplash({super.key, required this.onIntroComplete});
   final VoidCallback onIntroComplete;
@@ -10,66 +12,93 @@ class StartupSplash extends StatefulWidget {
   State<StartupSplash> createState() => _StartupSplashState();
 }
 
-class _StartupSplashState extends State<StartupSplash>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController controller =
-      AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: 450),
-      )..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            if (mounted) widget.onIntroComplete();
-          });
-        }
-      });
-
+class _StartupSplashState extends State<StartupSplash> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (MediaQuery.disableAnimationsOf(context)) {
-      controller.duration = Duration.zero;
-    }
-    if (!controller.isAnimating && controller.value == 0) controller.forward();
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) widget.onIntroComplete();
+    });
   }
 
   @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-    body: SafeArea(
-      child: Center(
-        child: SingleChildScrollView(
-          child: AnimatedBuilder(
-            animation: controller,
-            builder: (context, child) => Opacity(
-              opacity: .65 + .35 * Curves.easeOut.transform(controller.value),
-              child: child,
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const AccessArtwork(),
-                  SizedBox(height: 24),
-                  BrandWordmark(),
-                  SizedBox(height: 12),
-                  Text(
-                    wedding
-                        ? 'Cada detalle, con calma.'
-                        : 'Tu celebración, más cerca.',
-                  ),
-                ],
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final wedding = AppConfig.product == 'wedding';
+    final dark = theme.brightness == Brightness.dark;
+    return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
+      body: LayoutBuilder(
+        builder: (context, constraints) => Stack(
+          fit: StackFit.expand,
+          children: [
+            // Match iOS and legacy Android geometry; Android 12+ sizes its own masked icon.
+            Center(
+              child: Semantics(
+                label: 'Abriendo ${AppConfig.name}',
+                image: true,
+                child: SvgPicture.asset(
+                  'assets/brand/splash-${dark ? 'dark' : 'light'}.svg',
+                  width: 112,
+                  height: 112,
+                  excludeFromSemantics: true,
+                ),
               ),
             ),
-          ),
+            if (constraints.maxHeight >= 400)
+              Positioned(
+                top: constraints.maxHeight / 2 + 80,
+                left: 32,
+                right: 32,
+                bottom: MediaQuery.paddingOf(context).bottom + 24,
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text.rich(
+                            TextSpan(
+                              text: wedding ? 'SAVE THE DATE' : 'the date',
+                              children: [
+                                if (!wedding)
+                                  const TextSpan(
+                                    text: '.',
+                                    style: TextStyle(color: Color(0xFFE45C87)),
+                                  ),
+                              ],
+                            ),
+                            semanticsLabel: AppConfig.name,
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontFamily: AppConfig.headingFont,
+                              fontSize: wedding ? 22 : 30,
+                              fontWeight: wedding
+                                  ? FontWeight.w600
+                                  : FontWeight.w900,
+                              letterSpacing: wedding ? 2.4 : -1,
+                              color: theme.colorScheme.onSurface,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          wedding
+                              ? 'Cada detalle, con calma.'
+                              : 'Que empiece la celebración.',
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
-    ),
-  );
+    );
+  }
 }
