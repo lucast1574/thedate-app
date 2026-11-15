@@ -1,6 +1,6 @@
 # The Date para iOS y Android
 
-**Versión 2.0.0 en preparación:** [cambios, estado y pendientes para terminar en casa](README-VERSION-2.0.md). Los arreglos de esta versión se guardan en este repositorio; requieren pruebas y compilación en el PC de casa.
+**Versión 2.0.0 (7) en TestFlight:** [cambios, validaciones y estado de distribución](README-VERSION-2.0.md). Modo oscuro con fondo #181818 y paleta coordinada. AAB firmado preparado; esperar la prueba y el video de Lucas antes de enviar esta actualización a revisión.
 
 App Flutter independiente con tres destinos: **Confirmaciones**, **Regalos** y **Cuenta**. Consulta el mismo evento y los mismos permisos del estudio web. No incluye el editor, compras ni envíos de invitaciones.
 

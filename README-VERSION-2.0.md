@@ -2,6 +2,17 @@
 
 Fecha: 14 de noviembre de 2026 (America/Lima).
 
+## Build 7 — modo oscuro neutro y TestFlight, 14/11/2026
+
+Este estado reemplaza el del build 6 para la actualización actual.
+
+- **2.0.0 (7)**, código `de87aed`. Fondo oscuro exacto **#181818** en las dos apps y en sus arranques nativos; superficies neutras escalonadas, textos y bordes coordinados. Lavanda/cobre quedan en acciones y detalles de marca.
+- Estados vacíos más compactos, texto secundario de menor énfasis, singular «1 persona confirmada» y separación del botón de sesión en Cuenta.
+- Formato y análisis sin incidencias; **47 pruebas pasan** por app, incluidas contraste y consistencia del fondo nativo. Capturas de widgets claro/oscuro e iOS/Android inspeccionadas; la prueba en iPhone real corresponde al siguiente paso con Lucas.
+- Xcode/GitHub Actions `43674878128` completado. Apple aceptó el IPA sin errores ni advertencias; TestFlight `9902082a-695d-4872-8b6e-4e7ead5ad5f7`, grupo QA, estado interno **IN_BETA_TESTING**. Incluye `lucas.santillan.arevalo@gmail.com`.
+- Ambos AAB del build 7 están firmados y verificados, guardados en `D:/vscode/thedate.now/ops/release-2.0.0-7/`. **No se subió el build 7 a Google Play ni se envió a revisión de App Store. Esperar el video de Lucas antes de gestionar cualquier envío a revisión.** Los envíos anteriores no se modificaron.
+- Recursos, capturas y comprobantes: `ops/release-2.0.0-7/` en el workspace padre. No se añadieron credenciales al repositorio.
+
 ## Distribución realizada desde el PC de casa — 14/11/2026
 
 Este estado actualiza los pendientes históricos de las secciones siguientes.
