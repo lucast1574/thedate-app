@@ -82,6 +82,7 @@ void main() {
     await capture('login');
     expect(tester.takeException(), isNull);
     await tester.pumpWidget(const SizedBox());
+    debugDefaultTargetPlatformOverride = null;
     tester.view.resetPhysicalSize();
     tester.view.resetDevicePixelRatio();
   });
