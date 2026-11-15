@@ -45,11 +45,17 @@ class _GuestsScreenState extends State<GuestsScreen> {
         FilterTabs(
           labels: const ['Confirmaron', 'Pendientes', 'No asistirán'],
           selected: filter,
-          onSelected: (n) => setState(() => filter = n),
+          onSelected: (n) {
+            FocusScope.of(context).unfocus();
+            setState(() => filter = n);
+          },
         ),
         const SizedBox(height: 10),
         TextField(
           keyboardAppearance: Theme.of(context).brightness,
+          textInputAction: TextInputAction.search,
+          onTapOutside: (_) => FocusScope.of(context).unfocus(),
+          onSubmitted: (_) => FocusScope.of(context).unfocus(),
           onChanged: (s) => setState(() => query = s),
           decoration: const InputDecoration(
             hintText: 'Buscar invitado',

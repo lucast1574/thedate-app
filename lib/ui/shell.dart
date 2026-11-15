@@ -61,6 +61,7 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
   }
 
   void select(int n) {
+    FocusScope.of(context).unfocus();
     widget.model.cancelNotificationNavigation();
     setState(() => tab = n);
     if (scroll.hasClients) scroll.jumpTo(0);
@@ -105,6 +106,8 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
                   onRefresh: model.refresh,
                   child: ListView(
                     controller: scroll,
+                    keyboardDismissBehavior:
+                        ScrollViewKeyboardDismissBehavior.onDrag,
                     physics: const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.fromLTRB(20, 4, 20, 20),
                     children: [

@@ -41,33 +41,36 @@ class EmptyState extends StatelessWidget {
   final String title, body;
   final Symbol icon;
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
-    child: Column(
-      children: [
-        AppIcon(
-          icon,
-          size: 32,
-          color: Theme.of(context).colorScheme.onSurfaceVariant,
-        ),
-        const SizedBox(height: 16),
-        Text(
-          title,
-          style: Theme.of(
-            context,
-          ).textTheme.titleMedium!.copyWith(fontSize: 16),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 8),
-        Text(
-          body,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+  Widget build(BuildContext context) => SizedBox(
+    width: double.infinity,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+      child: Column(
+        children: [
+          AppIcon(
+            icon,
+            size: 32,
             color: Theme.of(context).colorScheme.onSurfaceVariant,
-            height: 1.45,
           ),
-        ),
-      ],
+          const SizedBox(height: 16),
+          Text(
+            title,
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium!.copyWith(fontSize: 16),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            body,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              height: 1.45,
+            ),
+          ),
+        ],
+      ),
     ),
   );
 }
