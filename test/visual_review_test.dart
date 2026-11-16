@@ -1,3 +1,4 @@
+import 'package:thedate_app/l10n/translate.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ void main() {
   testWidgets('visual inspection of four mobile screens', (tester) async {
     tester.view.physicalSize = const Size(390, 844);
     tester.view.devicePixelRatio = 1;
+    const locale = String.fromEnvironment('REVIEW_LOCALE', defaultValue: 'es');
+    tester.binding.platformDispatcher.localesTestValue = [Locale(locale)];
     const dark = bool.fromEnvironment('REVIEW_DARK');
     const android = bool.fromEnvironment('REVIEW_ANDROID');
     debugDefaultTargetPlatformOverride = android
@@ -67,7 +70,7 @@ void main() {
         final image = await boundary.toImage();
         final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
         final file = File(
-          'artifacts/visual/${android ? 'android' : 'ios'}/${dark ? 'dark' : 'light'}/$name.png',
+          'artifacts/visual/$locale/${android ? 'android' : 'ios'}/${dark ? 'dark' : 'light'}/$name.png',
         );
         await file.parent.create(recursive: true);
         await file.writeAsBytes(bytes!.buffer.asUint8List());
@@ -76,19 +79,19 @@ void main() {
 
     await capture('confirmations');
     if (empty) {
-      expect(find.text('persona confirmada'), findsOneWidget);
-      for (final filter in ['Pendientes', 'No asistirán']) {
+      expect(find.text(tr('persona confirmada')), findsOneWidget);
+      for (final filter in [tr('Pendientes'), tr('No asistirán')]) {
         await tester.tap(find.text(filter).first);
         await tester.pumpAndSettle();
         await capture(
-          filter == 'Pendientes' ? 'empty-pending' : 'empty-declined',
+          filter == tr('Pendientes') ? 'empty-pending' : 'empty-declined',
         );
       }
     }
-    await tester.tap(find.text('Regalos'));
+    await tester.tap(find.text(tr('Regalos')));
     await tester.pumpAndSettle();
     await capture('gifts');
-    await tester.tap(find.text('Cuenta'));
+    await tester.tap(find.text(tr('Cuenta')));
     await tester.pumpAndSettle();
     await capture('account');
     await model.logout();

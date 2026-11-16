@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../app_config.dart';
@@ -35,7 +36,7 @@ class _StartupSplashState extends State<StartupSplash> {
             // Match iOS and legacy Android geometry; Android 12+ sizes its own masked icon.
             Center(
               child: Semantics(
-                label: 'Abriendo ${AppConfig.name}',
+                label: tr("Abriendo {v0}", {'v0': AppConfig.name}),
                 image: true,
                 child: SvgPicture.asset(
                   'assets/brand/splash-${dark ? 'dark' : 'light'}.svg',
@@ -86,8 +87,8 @@ class _StartupSplashState extends State<StartupSplash> {
                         const SizedBox(height: 10),
                         Text(
                           wedding
-                              ? 'Cada detalle, con calma.'
-                              : 'Que empiece la celebración.',
+                              ? tr("Cada detalle, con calma.")
+                              : tr("Que empiece la celebración."),
                           textAlign: TextAlign.center,
                           style: theme.textTheme.bodySmall,
                         ),

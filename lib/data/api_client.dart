@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
@@ -69,24 +70,24 @@ class ApiClient {
       }
       if (response.statusCode < 200 || response.statusCode >= 300) {
         final message = switch (response.statusCode) {
-          401 => 'Tu sesión terminó. Vuelve a entrar.',
-          403 => 'Tu cuenta no tiene acceso a esta información.',
-          429 => 'Espera un momento y vuelve a intentarlo.',
-          _ => 'No pudimos cargar la información. Inténtalo de nuevo.',
+          401 => tr("Tu sesión terminó. Vuelve a entrar."),
+          403 => tr("Tu cuenta no tiene acceso a esta información."),
+          429 => tr("Espera un momento y vuelve a intentarlo."),
+          _ => tr("No pudimos cargar la información. Inténtalo de nuevo."),
         };
         throw ApiException(message, response.statusCode);
       }
       return result;
     } on TimeoutException {
-      throw const ApiException(
-        'La conexión tardó demasiado. Vuelve a intentarlo.',
+      throw ApiException(
+        tr("La conexión tardó demasiado. Vuelve a intentarlo."),
       );
     } on SocketException {
-      throw const ApiException(
-        'Sin conexión. Revisa tu internet y vuelve a intentarlo.',
+      throw ApiException(
+        tr("Sin conexión. Revisa tu internet y vuelve a intentarlo."),
       );
     } on http.ClientException {
-      throw const ApiException('No pudimos conectar. Vuelve a intentarlo.');
+      throw ApiException(tr("No pudimos conectar. Vuelve a intentarlo."));
     }
   }
 }

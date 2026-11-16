@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'widgets/web_link.dart';
@@ -27,7 +28,7 @@ class AccountScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Elegir evento',
+                tr("Elegir evento"),
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: 16),
@@ -73,18 +74,20 @@ class AccountScreen extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         scrollable: true,
-        title: const Text('Eliminar cuenta en la web'),
-        content: const Text(
-          'Abriremos la web de The Date. Inicia sesión con la cuenta que quieres eliminar y confirma allí el borrado. Es permanente: se eliminarán tu perfil, tus eventos, invitados y archivos de este producto. No elimina tu cuenta del otro producto ni tu cuenta de Google. Abrir la web todavía no borra nada.',
+        title: Text(tr("Eliminar cuenta en la web")),
+        content: Text(
+          tr(
+            "Abriremos la web de The Date. Inicia sesión con la cuenta que quieres eliminar y confirma allí el borrado. Es permanente: se eliminarán tu perfil, tus eventos, invitados y archivos de este producto. No elimina tu cuenta del otro producto ni tu cuenta de Google. Abrir la web todavía no borra nada.",
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Volver'),
+            child: Text(tr("Volver")),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Continuar en la web'),
+            child: Text(tr("Continuar en la web")),
           ),
         ],
       ),
@@ -100,7 +103,7 @@ class AccountScreen extends StatelessWidget {
     children: [
       const SizedBox(height: 8),
       Text(
-        wedding ? 'Vuestra cuenta' : 'Tu cuenta',
+        wedding ? tr("Vuestra cuenta") : tr("Tu cuenta"),
         style: Theme.of(context).textTheme.headlineMedium,
       ),
       const SizedBox(height: 22),
@@ -135,7 +138,7 @@ class AccountScreen extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           IconButton(
-            tooltip: 'Editar perfil',
+            tooltip: tr("Editar perfil"),
             onPressed: model.busy
                 ? null
                 : () => showProfileEditor(context, model),
@@ -166,7 +169,7 @@ class AccountScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              wedding ? 'VUESTRA CELEBRACIÓN' : 'Tu celebración',
+              wedding ? tr("VUESTRA CELEBRACIÓN") : tr("Tu celebración"),
               style: wedding
                   ? Theme.of(context).textTheme.bodySmall
                   : Theme.of(context).textTheme.bodyMedium,
@@ -191,8 +194,8 @@ class AccountScreen extends StatelessWidget {
                 AccountLink(
                   icon: Symbol.bell,
                   title: model.notificationsBusy
-                      ? 'Activando notificaciones…'
-                      : 'Activar notificaciones',
+                      ? tr("Activando notificaciones…")
+                      : tr("Activar notificaciones"),
                   onTap: model.notificationsBusy
                       ? null
                       : () => model.syncNotifications(requestPermission: true),
@@ -209,25 +212,25 @@ class AccountScreen extends StatelessWidget {
               ],
               AccountLink(
                 icon: Symbol.help,
-                title: 'Ayuda y soporte',
+                title: tr("Ayuda y soporte"),
                 onTap: () => open(context, AppConfig.supportUrl),
               ),
               const Divider(),
               AccountLink(
                 icon: Symbol.lock,
-                title: 'Privacidad',
+                title: tr("Privacidad"),
                 onTap: () => open(context, '${AppConfig.website}/privacidad'),
               ),
               const Divider(),
               AccountLink(
                 icon: Symbol.file,
-                title: 'Términos y condiciones',
+                title: tr("Términos y condiciones"),
                 onTap: () => open(context, '${AppConfig.website}/terminos'),
               ),
               const Divider(),
               AccountLink(
                 icon: Symbol.trash,
-                title: 'Eliminar cuenta',
+                title: tr("Eliminar cuenta"),
                 onTap: model.busy ? null : () => deletion(context),
               ),
             ],
@@ -255,13 +258,16 @@ class AccountScreen extends StatelessWidget {
             color: Theme.of(context).colorScheme.error,
             size: 20,
           ),
-          label: const Text('Cerrar sesión'),
+          label: Text(tr("Cerrar sesión")),
         ),
       ),
       const SizedBox(height: 12),
       Center(
         child: Text(
-          '${AppConfig.name} · Versión ${AppConfig.version}',
+          tr("{v0} · Versión {v1}", {
+            'v0': AppConfig.name,
+            'v1': AppConfig.version,
+          }),
           style: Theme.of(context).textTheme.bodySmall,
         ),
       ),

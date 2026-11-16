@@ -1,3 +1,4 @@
+import '../../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import 'app_icon.dart';
 
@@ -9,7 +10,11 @@ class BottomTabs extends StatelessWidget {
   });
   final int selected;
   final ValueChanged<int> onSelected;
-  static const labels = ['Confirmaciones', 'Regalos', 'Cuenta'];
+  static List<String> get labels => [
+    tr("Confirmaciones"),
+    tr("Regalos"),
+    tr("Cuenta"),
+  ];
   static const icons = [Symbol.people, Symbol.gift, Symbol.user];
 
   @override

@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -25,8 +26,8 @@ class GoogleIdentity {
       final account = await GoogleSignIn.instance.authenticate();
       final token = account.authentication.idToken;
       if (token == null || token.isEmpty) {
-        throw const ApiException(
-          'Google no devolvió una identidad. Vuelve a intentarlo.',
+        throw ApiException(
+          tr("Google no devolvió una identidad. Vuelve a intentarlo."),
         );
       }
       return token;
@@ -34,19 +35,23 @@ class GoogleIdentity {
       if (kDebugMode) debugPrint('Google sign-in failed: ${error.code.name}');
       if (error.code == GoogleSignInExceptionCode.canceled) return null;
       throw ApiException(switch (error.code) {
-        GoogleSignInExceptionCode.clientConfigurationError =>
-          'No pudimos validar esta app con Google. Revisa que tengas la versión más reciente.',
-        GoogleSignInExceptionCode.providerConfigurationError =>
-          'Google no está disponible en este dispositivo. Revisa Google Play Services y vuelve a intentarlo.',
-        GoogleSignInExceptionCode.uiUnavailable =>
-          'No pudimos abrir el selector de Google. Vuelve a intentarlo con la app abierta.',
-        GoogleSignInExceptionCode.interrupted =>
-          'El acceso con Google se interrumpió. Vuelve a intentarlo.',
-        _ => 'Google no pudo completar el acceso. Vuelve a intentarlo.',
+        GoogleSignInExceptionCode.clientConfigurationError => tr(
+          "No pudimos validar esta app con Google. Revisa que tengas la versión más reciente.",
+        ),
+        GoogleSignInExceptionCode.providerConfigurationError => tr(
+          "Google no está disponible en este dispositivo. Revisa Google Play Services y vuelve a intentarlo.",
+        ),
+        GoogleSignInExceptionCode.uiUnavailable => tr(
+          "No pudimos abrir el selector de Google. Vuelve a intentarlo con la app abierta.",
+        ),
+        GoogleSignInExceptionCode.interrupted => tr(
+          "El acceso con Google se interrumpió. Vuelve a intentarlo.",
+        ),
+        _ => tr("Google no pudo completar el acceso. Vuelve a intentarlo."),
       });
     } on TimeoutException {
-      throw const ApiException(
-        'Google tardó demasiado en iniciar. Vuelve a intentarlo.',
+      throw ApiException(
+        tr("Google tardó demasiado en iniciar. Vuelve a intentarlo."),
       );
     }
   }

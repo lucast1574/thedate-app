@@ -1,3 +1,4 @@
+import '../../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -98,7 +99,7 @@ class EventPicker extends StatelessWidget {
                 ),
               ),
         title: Text(
-          event?.title ?? 'Elegir evento',
+          event?.title ?? tr("Elegir evento"),
           style: TextStyle(
             fontFamily: wedding ? AppConfig.headingFont : 'DM Sans',
             fontSize: wedding ? 23 : 14,
@@ -113,7 +114,7 @@ class EventPicker extends StatelessWidget {
                 child: Text(
                   DateFormat(
                     'd MMM y',
-                    'es',
+                    deviceLocale.languageCode,
                   ).format(eventLocalTime(event!, event.startsAt!)),
                   style: TextStyle(
                     fontSize: 12,

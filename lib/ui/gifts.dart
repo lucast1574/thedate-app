@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import '../app_config.dart';
 import '../domain/models.dart';
@@ -33,21 +34,25 @@ class _GiftsScreenState extends State<GiftsScreen> {
         SectionTitle(AppConfig.giftsTitle),
         const SizedBox(height: 5),
         Text(
-          '$reserved de ${gifts.length} regalos reservados.',
+          tr("{v0} de {v1} regalos reservados.", {
+            'v0': reserved,
+            'v1': gifts.length,
+          }),
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         const SizedBox(height: 15),
         FilterTabs(
-          labels: const ['Reservados', 'Todos'],
+          labels: [tr("Reservados"), tr("Todos")],
           selected: filter,
           onSelected: (n) => setState(() => filter = n),
         ),
         const SizedBox(height: 14),
         if (list.isEmpty)
-          const EmptyState(
-            title: 'Los detalles también tienen su tiempo',
-            body:
-                'Cuando alguien reserve un regalo, verás aquí su nombre y lo que ha elegido.',
+          EmptyState(
+            title: tr("Los detalles también tienen su tiempo"),
+            body: tr(
+              "Cuando alguien reserve un regalo, verás aquí su nombre y lo que ha elegido.",
+            ),
             icon: Symbol.gift,
           ),
         for (final gift in list) GiftRow(gift: gift, token: widget.token),
@@ -117,7 +122,7 @@ class GiftRow extends StatelessWidget {
                       const SizedBox(width: 5),
                       Flexible(
                         child: Text(
-                          gift.delivered ? 'Recibido' : 'Reservado',
+                          gift.delivered ? tr("Recibido") : tr("Reservado"),
                           style: theme.textTheme.bodySmall!.copyWith(
                             color: statusColor,
                           ),
@@ -126,11 +131,11 @@ class GiftRow extends StatelessWidget {
                     ],
                   )
                 else
-                  Text('Disponible', style: theme.textTheme.bodySmall),
+                  Text(tr("Disponible"), style: theme.textTheme.bodySmall),
                 if (gift.reserved) ...[
                   const SizedBox(height: 3),
                   Text(
-                    'Por ${gift.guestName}',
+                    tr("Por {v0}", {'v0': gift.guestName}),
                     style: theme.textTheme.bodySmall,
                   ),
                 ],

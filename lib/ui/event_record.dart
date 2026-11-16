@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../app_config.dart';
@@ -8,7 +9,7 @@ import '../domain/invitation_details.dart';
 
 String _partyLabel(Guest guest) {
   final count = guest.attendingSeats > 0 ? guest.attendingSeats : guest.seats;
-  return '$count ${count == 1 ? 'persona' : 'personas'}';
+  return '$count ${count == 1 ? tr("persona") : tr("personas")}';
 }
 
 class EventRecord extends StatelessWidget {
@@ -33,8 +34,8 @@ class EventRecord extends StatelessWidget {
     } catch (_) {}
     if (!ok && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No pudimos abrir el enlace. Vuelve a intentarlo.'),
+        SnackBar(
+          content: Text(tr("No pudimos abrir el enlace. Vuelve a intentarlo.")),
         ),
       );
     }
@@ -45,41 +46,41 @@ class EventRecord extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        gifts ? 'Regalos' : 'Invitados',
+        gifts ? tr("Regalos") : tr("Invitados"),
         style: Theme.of(context).textTheme.headlineMedium,
       ),
       const SizedBox(height: 16),
       if (gifts) ...[
-        if (data.gifts.isEmpty) const Text('No hay regalos en esta lista.'),
+        if (data.gifts.isEmpty) Text(tr("No hay regalos en esta lista.")),
         ...data.gifts.map(
           (gift) => ListTile(
             contentPadding: EdgeInsets.zero,
             title: Text(gift.title),
             subtitle: Text(
-              gift.guestName.isEmpty ? 'Sin elección' : gift.guestName,
+              gift.guestName.isEmpty ? tr("Sin elección") : gift.guestName,
             ),
             trailing: Text(
               gift.delivered
-                  ? 'Recibido'
+                  ? tr("Recibido")
                   : gift.reserved
-                  ? 'Reservado'
-                  : 'Disponible',
+                  ? tr("Reservado")
+                  : tr("Disponible"),
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
         ),
       ] else ...[
-        if (data.guests.isEmpty) const Text('No hay invitados en esta lista.'),
+        if (data.guests.isEmpty) Text(tr("No hay invitados en esta lista.")),
         ...data.guests.map(
           (guest) => ListTile(
             contentPadding: EdgeInsets.zero,
             title: Text(guest.name),
             subtitle: Text(
               guest.confirmed
-                  ? 'Confirmó'
+                  ? tr("Confirmó")
                   : guest.declined
-                  ? 'Declinó'
-                  : 'Sin confirmar',
+                  ? tr("Declinó")
+                  : tr("Sin confirmar"),
             ),
             trailing: Text(
               _partyLabel(guest),
@@ -99,7 +100,7 @@ class EventRecord extends StatelessWidget {
             data: data,
           ),
         ),
-        child: const Text('Consultar mesas'),
+        child: Text(tr("Consultar mesas")),
       ),
     ],
   );

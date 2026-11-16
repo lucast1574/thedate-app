@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import '../app_config.dart';
 import '../domain/models.dart';
@@ -36,14 +37,14 @@ class _GuestsScreenState extends State<GuestsScreen> {
         SectionTitle(AppConfig.homeTitle),
         const SizedBox(height: 4),
         Text(
-          wedding ? 'Cada sí, un poco más cerca.' : 'Tu lista, al día.',
+          wedding ? tr("Cada sí, un poco más cerca.") : tr("Tu lista, al día."),
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         const SizedBox(height: 14),
         AttendanceSummary(data),
         const SizedBox(height: 16),
         FilterTabs(
-          labels: const ['Confirmaron', 'Pendientes', 'No asistirán'],
+          labels: [tr("Confirmaron"), tr("Pendientes"), tr("No asistirán")],
           selected: filter,
           onSelected: (n) {
             FocusScope.of(context).unfocus();
@@ -57,8 +58,8 @@ class _GuestsScreenState extends State<GuestsScreen> {
           onTapOutside: (_) => FocusScope.of(context).unfocus(),
           onSubmitted: (_) => FocusScope.of(context).unfocus(),
           onChanged: (s) => setState(() => query = s),
-          decoration: const InputDecoration(
-            hintText: 'Buscar invitado',
+          decoration: InputDecoration(
+            hintText: tr("Buscar invitado"),
             prefixIcon: Padding(
               padding: EdgeInsets.all(12),
               child: AppIcon(Symbol.search, size: 18),
@@ -70,15 +71,15 @@ class _GuestsScreenState extends State<GuestsScreen> {
         if (list.isEmpty)
           EmptyState(
             title: query.isNotEmpty
-                ? 'No encontramos ese nombre'
+                ? tr("No encontramos ese nombre")
                 : filter == 0
-                ? 'Las confirmaciones llegarán aquí'
+                ? tr("Las confirmaciones llegarán aquí")
                 : filter == 1
-                ? 'Nadie queda pendiente'
-                : 'Por ahora, ninguna ausencia',
+                ? tr("Nadie queda pendiente")
+                : tr("Por ahora, ninguna ausencia"),
             body: query.isNotEmpty
-                ? 'Prueba con otro nombre.'
-                : 'Cada respuesta se refleja automáticamente.',
+                ? tr("Prueba con otro nombre.")
+                : tr("Cada respuesta se refleja automáticamente."),
             icon: Symbol.people,
           ),
         for (final guest in list) GuestRow(guest: guest),
@@ -98,11 +99,11 @@ class GuestRow extends StatelessWidget {
     if (g.respondedAt != null) {
       final age = DateTime.now().difference(g.respondedAt!);
       responseTime = age.inMinutes < 1
-          ? 'Ahora'
+          ? tr("Ahora")
           : age.inMinutes < 60
-          ? 'Hace ${age.inMinutes} min'
+          ? tr("Hace {v0} min", {'v0': age.inMinutes})
           : age.inHours < 24
-          ? 'Hoy'
+          ? tr("Hoy")
           : '${g.respondedAt!.day}/${g.respondedAt!.month}';
     }
     return Container(
@@ -151,12 +152,12 @@ class GuestRow extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   g.confirmed
-                      ? '$seats ${seats == 1 ? 'persona' : 'personas'}${responseTime.isEmpty ? '' : ' · $responseTime'}'
+                      ? '$seats ${seats == 1 ? tr("persona") : tr("personas")}${responseTime.isEmpty ? '' : ' · $responseTime'}'
                       : g.declined
-                      ? 'No asistirá'
+                      ? tr("No asistirá")
                       : g.response == 'maybe'
-                      ? 'Por confirmar'
-                      : 'Sin respuesta',
+                      ? tr("Por confirmar")
+                      : tr("Sin respuesta"),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
@@ -165,10 +166,10 @@ class GuestRow extends StatelessWidget {
           const SizedBox(width: 8),
           StateMark(
             g.confirmed
-                ? 'Confirmó'
+                ? tr("Confirmó")
                 : g.declined
-                ? 'No asistirá'
-                : 'Pendiente',
+                ? tr("No asistirá")
+                : tr("Pendiente"),
             confirmed: g.confirmed,
           ),
         ],

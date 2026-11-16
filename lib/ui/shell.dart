@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -142,7 +143,9 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
                         Padding(
                           padding: const EdgeInsets.all(24),
                           child: Text(
-                            'Elige un evento para consultar su información.',
+                            tr(
+                              "Elige un evento para consultar su información.",
+                            ),
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         )
@@ -172,7 +175,9 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
                       if (tab != 2 && model.updatedAt != null) ...[
                         const SizedBox(height: 16),
                         Text(
-                          'Actualizado a las ${DateFormat('HH:mm').format(model.updatedAt!)}',
+                          tr("Actualizado a las {v0}", {
+                            'v0': DateFormat('HH:mm').format(model.updatedAt!),
+                          }),
                           style: Theme.of(context).textTheme.bodySmall,
                           textAlign: TextAlign.center,
                         ),

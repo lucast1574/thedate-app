@@ -1,3 +1,4 @@
+import '../../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import '../../app_config.dart';
 import '../../domain/models.dart';
@@ -30,7 +31,7 @@ class AccountAvatar extends StatelessWidget {
       ),
     );
     return Semantics(
-      label: 'Foto de perfil de ${account.name}',
+      label: tr("Foto de perfil de {v0}", {'v0': account.name}),
       image: true,
       excludeSemantics: true,
       child: ClipOval(

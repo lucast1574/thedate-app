@@ -1,3 +1,5 @@
+import '../l10n/app_localizations.dart';
+import '../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import '../app_config.dart';
 import '../state/app_model.dart';
@@ -14,12 +16,24 @@ class AppRoot extends StatefulWidget {
   State<AppRoot> createState() => _AppRootState();
 }
 
-class _AppRootState extends State<AppRoot> {
+class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
   bool introComplete = false;
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     widget.model.initialize();
+  }
+
+  @override
+  void didChangeLocales(List<Locale>? locales) {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override
@@ -29,9 +43,9 @@ class _AppRootState extends State<AppRoot> {
     themeMode: ThemeMode.system,
     theme: AppTheme.create(Brightness.light),
     darkTheme: AppTheme.create(Brightness.dark),
-    locale: const Locale('es'),
-    supportedLocales: const [Locale('es')],
-    localizationsDelegates: widget.delegates,
+    supportedLocales: AppLocalizations.supportedLocales,
+    localeListResolutionCallback: resolveAppLocale,
+    localizationsDelegates: [AppLocalizations.delegate, ...widget.delegates],
     home: ListenableBuilder(
       listenable: widget.model,
       builder: (context, _) => !introComplete || widget.model.starting

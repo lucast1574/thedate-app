@@ -1,3 +1,4 @@
+import '../../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,8 +14,8 @@ Future<bool> openWebLink(BuildContext context, Uri uri) async {
   }
   if (!opened && context.mounted) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('No pudimos abrir el enlace. Inténtalo de nuevo.'),
+      SnackBar(
+        content: Text(tr("No pudimos abrir el enlace. Inténtalo de nuevo.")),
       ),
     );
   }

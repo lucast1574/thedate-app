@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'package:timezone/data/latest.dart' as database;
 import 'package:timezone/timezone.dart' as tz;
 import 'models.dart';
@@ -47,10 +48,10 @@ String? eventCountdown(Celebration event, DateTime now) {
     day.month,
     day.day,
   ).difference(DateTime.utc(today.year, today.month, today.day)).inDays;
-  if (days == 0) return '¡Hoy es el día!';
-  if (days == 1) return 'Falta 1 día';
-  if (days > 1) return 'Faltan $days días';
-  return 'Celebración realizada';
+  if (days == 0) return tr("¡Hoy es el día!");
+  if (days == 1) return tr("Falta 1 día");
+  if (days > 1) return tr("Faltan {v0} días", {'v0': days});
+  return tr("Celebración realizada");
 }
 
 Uri? generalInvitationUri(Celebration event, String product) {

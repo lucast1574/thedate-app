@@ -1,5 +1,7 @@
 # The Date para iOS y Android
 
+**Próxima versión 2.1.0 (9):** interfaz en español, inglés y portugués según el idioma del dispositivo, sin selector y con español de respaldo. El código preparado no cambia el estado de distribución descrito a continuación. Ver [i18n](docs/i18n.md).
+
 **Versión 2.0.0 (8) en TestFlight:** [cambios, validaciones y estado de distribución](README-VERSION-2.0.md). Modo oscuro con fondo #181818 y paleta coordinada; estados vacíos centrados y buscador con cierre cómodo del teclado. App Store: 2.0.0 (8) enviada y pendiente de revisión, con el video de Lucas adjunto. Se conservaron las capturas originales de iPhone e iPad. Google Play: AAB 8 enviado a revisión en prueba cerrada Alpha.
 
 App Flutter independiente con tres destinos: **Confirmaciones**, **Regalos** y **Cuenta**. Consulta el mismo evento y los mismos permisos del estudio web. No incluye el editor, compras ni envíos de invitaciones.

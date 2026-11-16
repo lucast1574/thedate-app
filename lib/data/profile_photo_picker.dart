@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'dart:math' as math;
@@ -16,7 +17,7 @@ class ProfilePhotoPicker {
     );
     if (file == null) return null;
     if (await file.length() > (10 << 20)) {
-      throw const ApiException('Elige una foto de menos de 10 MB.');
+      throw ApiException(tr("Elige una foto de menos de 10 MB."));
     }
     return normalize(await file.readAsBytes());
   }
@@ -39,8 +40,8 @@ class ProfilePhotoPicker {
       image = (await codec.getNextFrame()).image;
       final data = await image.toByteData(format: ui.ImageByteFormat.png);
       if (data == null || data.lengthInBytes > (1 << 20)) {
-        throw const ApiException(
-          'No pudimos preparar esta foto. Elige otra imagen.',
+        throw ApiException(
+          tr("No pudimos preparar esta foto. Elige otra imagen."),
         );
       }
       return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);

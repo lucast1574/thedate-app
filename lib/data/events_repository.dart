@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uuid/uuid.dart';
 import 'dart:typed_data';
@@ -119,9 +120,13 @@ class EventsRepository {
       method: 'POST',
       body: {
         'requestId': requestId,
-        'title': 'Eliminar mi cuenta y datos de ${AppConfig.name}',
-        'description':
-            'Solicito la eliminación de mi cuenta y de los datos personales asociados en ${AppConfig.name}. Contactadme en el correo de esta cuenta para confirmar la titularidad y comunicar cualquier retención legal aplicable.',
+        'title': tr("Eliminar mi cuenta y datos de {v0}", {
+          'v0': AppConfig.name,
+        }),
+        'description': tr(
+          "Solicito la eliminación de mi cuenta y de los datos personales asociados en {v0}. Contactadme en el correo de esta cuenta para confirmar la titularidad y comunicar cualquier retención legal aplicable.",
+          {'v0': AppConfig.name},
+        ),
         'images': <String>[],
       },
     );

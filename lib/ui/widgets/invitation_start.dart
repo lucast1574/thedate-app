@@ -1,3 +1,4 @@
+import '../../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../app_config.dart';
@@ -30,8 +31,8 @@ class _InvitationStartState extends State<InvitationStart> {
     setState(() => opening = false);
     if (!opened) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No pudimos abrir la web. Vuelve a intentarlo.'),
+        SnackBar(
+          content: Text(tr("No pudimos abrir la web. Vuelve a intentarlo.")),
         ),
       );
     }
@@ -63,16 +64,20 @@ class _InvitationStartState extends State<InvitationStart> {
             const SizedBox(height: 26),
             Text(
               widget.gifts
-                  ? 'Los regalos empiezan con tu invitación.'
-                  : 'Tu invitación empieza en la web.',
+                  ? tr("Los regalos empiezan con tu invitación.")
+                  : tr("Tu invitación empieza en la web."),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 14),
             Text(
               widget.gifts
-                  ? 'Crea, personaliza y compra tu invitación en nuestra web. Después, consulta aquí los regalos y quién los reservó.'
-                  : 'Crea, personaliza y compra tu invitación en nuestra web. Después, consulta aquí quién confirmó su asistencia.',
+                  ? tr(
+                      "Crea, personaliza y compra tu invitación en nuestra web. Después, consulta aquí los regalos y quién los reservó.",
+                    )
+                  : tr(
+                      "Crea, personaliza y compra tu invitación en nuestra web. Después, consulta aquí quién confirmó su asistencia.",
+                    ),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
@@ -88,7 +93,9 @@ class _InvitationStartState extends State<InvitationStart> {
                     children: [
                       Flexible(
                         child: Text(
-                          opening ? 'Abriendo la web…' : 'Continuar en la web',
+                          opening
+                              ? tr("Abriendo la web…")
+                              : tr("Continuar en la web"),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -113,8 +120,12 @@ class _InvitationStartState extends State<InvitationStart> {
             const SizedBox(height: 14),
             Text(
               wedding
-                  ? '¿Te han dado acceso como pareja? Entra con el correo al que te invitaron. Tu celebración aparecerá aquí automáticamente.'
-                  : '¿Te han dado acceso como miembro? Entra con el correo al que te invitaron. Tu celebración aparecerá aquí automáticamente.',
+                  ? tr(
+                      "¿Te han dado acceso como pareja? Entra con el correo al que te invitaron. Tu celebración aparecerá aquí automáticamente.",
+                    )
+                  : tr(
+                      "¿Te han dado acceso como miembro? Entra con el correo al que te invitaron. Tu celebración aparecerá aquí automáticamente.",
+                    ),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodySmall,
             ),

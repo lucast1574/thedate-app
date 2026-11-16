@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import '../data/events_repository.dart';
 import '../domain/models.dart';
@@ -43,13 +44,13 @@ class _RecordTablesState extends State<RecordTables> {
               children: [
                 Expanded(
                   child: Text(
-                    'Mesas',
+                    tr("Mesas"),
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Volver'),
+                  child: Text(tr("Volver")),
                 ),
               ],
             ),
@@ -61,10 +62,10 @@ class _RecordTablesState extends State<RecordTables> {
                   if (snapshot.hasError) {
                     return Column(
                       children: [
-                        const Text('No pudimos cargar las mesas.'),
+                        Text(tr("No pudimos cargar las mesas.")),
                         TextButton(
                           onPressed: () => setState(() => plan = load()),
-                          child: const Text('Volver a intentar'),
+                          child: Text(tr("Volver a intentar")),
                         ),
                       ],
                     );
@@ -76,7 +77,7 @@ class _RecordTablesState extends State<RecordTables> {
                   final assignments =
                       snapshot.data!['assignments'] as Map? ?? {};
                   if (tables.isEmpty) {
-                    return const Text('No hay mesas guardadas.');
+                    return Text(tr("No hay mesas guardadas."));
                   }
                   return ListView(
                     children: tables.map((table) {
@@ -100,13 +101,13 @@ class _RecordTablesState extends State<RecordTables> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              table['name'] as String? ?? 'Mesa',
+                              table['name'] as String? ?? tr("Mesa"),
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                             const SizedBox(height: 8),
                             Text(
                               names.isEmpty
-                                  ? 'Sin invitados asignados'
+                                  ? tr("Sin invitados asignados")
                                   : names.join('\n'),
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),

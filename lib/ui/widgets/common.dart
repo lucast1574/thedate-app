@@ -1,3 +1,4 @@
+import '../../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import '../../app_config.dart';
 import 'app_icon.dart';
@@ -23,7 +24,7 @@ class Notice extends StatelessWidget {
           if (onRetry != null)
             TextButton(
               onPressed: onRetry,
-              child: const Text('Volver a intentar'),
+              child: Text(tr("Volver a intentar")),
             ),
         ],
       ),

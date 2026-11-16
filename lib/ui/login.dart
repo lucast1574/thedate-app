@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'widgets/web_link.dart';
@@ -80,8 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             Text.rich(
                               TextSpan(
                                 text: wedding
-                                    ? 'Lo importante, cerca.'
-                                    : 'Tu gente,\nmás cerca',
+                                    ? tr("Lo importante, cerca.")
+                                    : tr("Tu gente,\nmás cerca"),
                                 children: [
                                   if (!wedding)
                                     const TextSpan(
@@ -101,8 +102,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             const SizedBox(height: 7),
                             Text(
                               wedding
-                                  ? 'Tus invitados y regalos, con calma.'
-                                  : 'Confirmaciones y regalos,\nen un solo lugar.',
+                                  ? tr("Tus invitados y regalos, con calma.")
+                                  : tr(
+                                      "Confirmaciones y regalos,\nen un solo lugar.",
+                                    ),
                               textAlign: wedding
                                   ? TextAlign.left
                                   : TextAlign.center,
@@ -138,8 +141,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       excludeFromSemantics: true,
                                     ),
                                     const SizedBox(width: 12),
-                                    const Flexible(
-                                      child: Text('Continuar con Google'),
+                                    Flexible(
+                                      child: Text(tr("Continuar con Google")),
                                     ),
                                   ],
                                 ),
@@ -154,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     horizontal: 10,
                                   ),
                                   child: Text(
-                                    'o con tu correo',
+                                    tr("o con tu correo"),
                                     style: Theme.of(
                                       context,
                                     ).textTheme.bodySmall,
@@ -166,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             const SizedBox(height: 17),
                             if (wedding) ...[
                               Text(
-                                'Correo electrónico',
+                                tr("Correo electrónico"),
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
                               const SizedBox(height: 6),
@@ -183,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: InputDecoration(
                                 hintText: wedding
                                     ? 'tu@email.com'
-                                    : 'Correo electrónico',
+                                    : tr("Correo electrónico"),
                                 prefixIcon: wedding
                                     ? null
                                     : const Padding(
@@ -197,12 +200,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                         r'^\S+@\S+\.\S+$',
                                       ).hasMatch(v.trim())
                                   ? null
-                                  : 'Escribe tu correo electrónico.',
+                                  : tr("Escribe tu correo electrónico."),
                             ),
                             const SizedBox(height: 12),
                             if (wedding) ...[
                               Text(
-                                'Contraseña',
+                                tr("Contraseña"),
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
                               const SizedBox(height: 6),
@@ -218,8 +221,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               onFieldSubmitted: (_) => submit(),
                               decoration: InputDecoration(
                                 hintText: wedding
-                                    ? 'Tu contraseña'
-                                    : 'Contraseña',
+                                    ? tr("Tu contraseña")
+                                    : tr("Contraseña"),
                                 prefixIcon: wedding
                                     ? null
                                     : const Padding(
@@ -228,8 +231,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                 suffixIcon: IconButton(
                                   tooltip: showPassword
-                                      ? 'Ocultar contraseña'
-                                      : 'Mostrar contraseña',
+                                      ? tr("Ocultar contraseña")
+                                      : tr("Mostrar contraseña"),
                                   onPressed: () => setState(
                                     () => showPassword = !showPassword,
                                   ),
@@ -241,7 +244,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               validator: (v) => (v?.isNotEmpty ?? false)
                                   ? null
-                                  : 'Escribe tu contraseña.',
+                                  : tr("Escribe tu contraseña."),
                             ),
                             const SizedBox(height: 16),
                             if (widget.model.error != null)
@@ -251,7 +254,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: FilledButton(
                                 onPressed: widget.model.busy ? null : submit,
                                 child: Text(
-                                  widget.model.busy ? 'Entrando…' : 'Entrar',
+                                  widget.model.busy
+                                      ? tr("Entrando…")
+                                      : tr("Entrar"),
                                 ),
                               ),
                             ),
@@ -259,14 +264,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             Center(
                               child: Text(
                                 wedding
-                                    ? 'Con tu cuenta del estudio web.'
-                                    : 'Usa tu cuenta del estudio web.',
+                                    ? tr("Con tu cuenta del estudio web.")
+                                    : tr("Usa tu cuenta del estudio web."),
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
                             ),
                             const SizedBox(height: 8),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            Wrap(
+                              alignment: WrapAlignment.center,
+                              spacing: 8,
                               children: [
                                 TextButton(
                                   onPressed: () => openWebLink(
@@ -275,14 +281,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                       '${AppConfig.website}/privacidad',
                                     ),
                                   ),
-                                  child: const Text('Privacidad'),
+                                  child: Text(tr("Privacidad")),
                                 ),
                                 TextButton(
                                   onPressed: () => openWebLink(
                                     context,
                                     Uri.parse('${AppConfig.website}/terminos'),
                                   ),
-                                  child: const Text('Condiciones'),
+                                  child: Text(tr("Condiciones")),
                                 ),
                               ],
                             ),

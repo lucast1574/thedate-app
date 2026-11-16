@@ -1,3 +1,5 @@
+import '../l10n/translate.dart';
+
 class Account {
   const Account({
     required this.id,
@@ -111,7 +113,7 @@ class Gift {
         imageUrl: j['imageUrl'] as String? ?? '',
         guestName: (j['guestId'] as String? ?? '').isEmpty
             ? ''
-            : names[j['guestId']] as String? ?? 'Invitado',
+            : names[j['guestId']] as String? ?? tr("Invitado"),
         delivered: j['delivered'] == true,
         reservedAt: DateTime.tryParse(j['reservedAt'] as String? ?? ''),
       );

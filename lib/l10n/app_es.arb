@@ -1,0 +1,271 @@
+{
+  "@@locale": "es",
+  "m000": "Abriendo la web…",
+  "m001": "Abriendo {v0}",
+  "@m001": {
+    "description": "Abriendo {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m002": "Abriendo…",
+  "m003": "Abriremos la web de Save the Date. Inicia sesión con la cuenta que quieres eliminar y confirma allí el borrado. Es permanente: se eliminarán tu perfil, tus eventos, invitados y archivos de este producto. No elimina tu cuenta del otro producto ni tu cuenta de Google. Abrir la web todavía no borra nada.",
+  "m004": "Abriremos la web de The Date. Inicia sesión con la cuenta que quieres eliminar y confirma allí el borrado. Es permanente: se eliminarán tu perfil, tus eventos, invitados y archivos de este producto. No elimina tu cuenta del otro producto ni tu cuenta de Google. Abrir la web todavía no borra nada.",
+  "m005": "Activando notificaciones…",
+  "m006": "Activar notificaciones",
+  "m007": "Actualizado a las {v0}",
+  "@m007": {
+    "description": "Actualizado a las {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m008": "Ahora",
+  "m009": "Ayuda y soporte",
+  "m010": "Buscar invitado",
+  "m011": "Cada detalle, con calma.",
+  "m012": "Cada respuesta se refleja automáticamente.",
+  "m013": "Cada sí, un poco más cerca.",
+  "m014": "Cambiar foto",
+  "m015": "Celebración realizada",
+  "m016": "Cerrar",
+  "m017": "Cerrar sesión",
+  "m018": "Con tu cuenta del estudio web.",
+  "m019": "Condiciones",
+  "m020": "Confirmaciones",
+  "m021": "Confirmaciones y regalos,\nen un solo lugar.",
+  "m022": "Confirmaron",
+  "m023": "Confirmó",
+  "m024": "Consultar mesas",
+  "m025": "Continuar con Google",
+  "m026": "Continuar en la web",
+  "m027": "Contraseña",
+  "m028": "Correo electrónico",
+  "m029": "Crea, personaliza y compra tu invitación en nuestra web. Después, consulta aquí los regalos y quién los reservó.",
+  "m030": "Crea, personaliza y compra tu invitación en nuestra web. Después, consulta aquí quién confirmó su asistencia.",
+  "m031": "Cuando alguien reserve un regalo, verás aquí su nombre y lo que ha elegido.",
+  "m032": "Cuenta",
+  "m033": "Declinó",
+  "m034": "Detalles con cariño.",
+  "m035": "Disponible",
+  "m036": "Editar perfil",
+  "m037": "El acceso con Google se interrumpió. Vuelve a intentarlo.",
+  "m038": "El nombre se guardó, pero la foto no se pudo actualizar. Puedes volver a intentarlo.",
+  "m039": "Elegir evento",
+  "m040": "Elige un evento para consultar su información.",
+  "m041": "Elige una foto de menos de 10 MB.",
+  "m042": "Eliminar cuenta",
+  "m043": "Eliminar cuenta en la web",
+  "m044": "Eliminar mi cuenta y datos de {v0}",
+  "@m044": {
+    "description": "Eliminar mi cuenta y datos de {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m045": "Entrando…",
+  "m046": "Entrar",
+  "m047": "Escribe tu contraseña.",
+  "m048": "Escribe tu correo electrónico.",
+  "m049": "Escribe un nombre de 2 a 80 caracteres.",
+  "m050": "Espera un momento y vuelve a intentarlo.",
+  "m051": "Falta 1 día",
+  "m052": "Faltan {v0} días",
+  "@m052": {
+    "description": "Faltan {v0} días",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m053": "Foto de perfil de {v0}",
+  "@m053": {
+    "description": "Foto de perfil de {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m054": "Google no devolvió una identidad. Vuelve a intentarlo.",
+  "m055": "Google no está disponible en este dispositivo. Revisa Google Play Services y vuelve a intentarlo.",
+  "m056": "Google no pudo completar el acceso. Vuelve a intentarlo.",
+  "m057": "Google tardó demasiado en iniciar. Vuelve a intentarlo.",
+  "m058": "Guardando…",
+  "m059": "Guardar cambios",
+  "m060": "Hace {v0} min",
+  "@m060": {
+    "description": "Hace {v0} min",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m061": "Hoy",
+  "m062": "Invitación aún no publicada",
+  "m063": "Invitado",
+  "m064": "Invitados",
+  "m065": "La conexión tardó demasiado. Vuelve a intentarlo.",
+  "m066": "Las confirmaciones llegarán aquí",
+  "m067": "Lo importante, cerca.",
+  "m068": "Los detalles también tienen su tiempo",
+  "m069": "Los regalos empiezan con tu invitación.",
+  "m070": "Mesa",
+  "m071": "Mesas",
+  "m072": "Mostrar contraseña",
+  "m073": "Nadie queda pendiente",
+  "m074": "No asistirá",
+  "m075": "No asistirán",
+  "m076": "No encontramos ese nombre",
+  "m077": "No hay invitados en esta lista.",
+  "m078": "No hay mesas guardadas.",
+  "m079": "No hay regalos en esta lista.",
+  "m080": "No pudimos abrir el enlace. Inténtalo de nuevo.",
+  "m081": "No pudimos abrir el enlace. Vuelve a intentarlo.",
+  "m082": "No pudimos abrir el selector de Google. Vuelve a intentarlo con la app abierta.",
+  "m083": "No pudimos abrir esta foto. Revisa el acceso a tus fotos y vuelve a intentarlo.",
+  "m084": "No pudimos abrir la invitación. Vuelve a intentarlo.",
+  "m085": "No pudimos abrir la web. Vuelve a intentarlo.",
+  "m086": "No pudimos activar las notificaciones. Vuelve a intentarlo.",
+  "m087": "No pudimos cargar la información. Inténtalo de nuevo.",
+  "m088": "No pudimos cargar las mesas.",
+  "m089": "No pudimos completar la acción. Vuelve a intentarlo.",
+  "m090": "No pudimos conectar. Vuelve a intentarlo.",
+  "m091": "No pudimos guardar el perfil. Vuelve a intentarlo.",
+  "m092": "No pudimos preparar esta foto. Elige otra imagen.",
+  "m093": "No pudimos registrar este dispositivo. Vuelve a intentarlo.",
+  "m094": "No pudimos validar esta app con Google. Revisa que tengas la versión más reciente.",
+  "m095": "Nombre visible",
+  "m096": "Notificaciones activadas",
+  "m097": "Notificaciones no disponibles. Puedes volver a intentarlo desde tu cuenta.",
+  "m098": "Ocultar contraseña",
+  "m099": "Pendiente",
+  "m100": "Pendientes",
+  "m101": "Permite las notificaciones en los ajustes del dispositivo. Si ya lo hiciste, vuelve a intentarlo en unos segundos.",
+  "m102": "Por ahora, ninguna ausencia",
+  "m103": "Por confirmar",
+  "m104": "Por {v0}",
+  "@m104": {
+    "description": "Por {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m105": "Preparando foto…",
+  "m106": "Privacidad",
+  "m107": "Prueba con otro nombre.",
+  "m108": "Que empiece la celebración.",
+  "m109": "Recibido",
+  "m110": "Regalos",
+  "m111": "Regalos con cariño.",
+  "m112": "Reservado",
+  "m113": "Reservados",
+  "m114": "Revisa tu correo y contraseña.",
+  "m115": "Sin conexión. Revisa tu internet y vuelve a intentarlo.",
+  "m116": "Sin confirmar",
+  "m117": "Sin elección",
+  "m118": "Sin invitados asignados",
+  "m119": "Sin respuesta",
+  "m120": "Solicito la eliminación de mi cuenta y de los datos personales asociados en {v0}. Contactadme en el correo de esta cuenta para confirmar la titularidad y comunicar cualquier retención legal aplicable.",
+  "@m120": {
+    "description": "Solicito la eliminación de mi cuenta y de los datos personales asociados en {v0}. Contactadme en el correo de esta cuenta para confirmar la titularidad y comunicar cualquier retención legal aplicable.",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m121": "Solicito la eliminación de mi cuenta y de los datos personales asociados en {v0}. Contáctenme en el correo de esta cuenta para confirmar la titularidad y comunicar cualquier retención legal aplicable.",
+  "@m121": {
+    "description": "Solicito la eliminación de mi cuenta y de los datos personales asociados en {v0}. Contáctenme en el correo de esta cuenta para confirmar la titularidad y comunicar cualquier retención legal aplicable.",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m122": "TU CELEBRACIÓN",
+  "m123": "Todos",
+  "m124": "Tu celebración",
+  "m125": "Tu contraseña",
+  "m126": "Tu cuenta",
+  "m127": "Tu cuenta no tiene acceso a esta información.",
+  "m128": "Tu gente,\nmás cerca",
+  "m129": "Tu gente,\nmás cerca.",
+  "m130": "Tu gente.",
+  "m131": "Tu invitación empieza en la web.",
+  "m132": "Tu lista, al día.",
+  "m133": "Tu sesión terminó. Vuelve a entrar.",
+  "m134": "Tus invitados y regalos, con calma.",
+  "m135": "Términos y condiciones",
+  "m136": "Usa tu cuenta del estudio web.",
+  "m137": "VUESTRA CELEBRACIÓN",
+  "m138": "Ver mi invitación",
+  "m139": "Ver y descargar invitación",
+  "m140": "Volver",
+  "m141": "Volver a intentar",
+  "m142": "Vuestra cuenta",
+  "m143": "Ya vienen.",
+  "m144": "no asistirán",
+  "m145": "o con tu correo",
+  "m146": "pendientes",
+  "m147": "persona",
+  "m148": "persona confirmada",
+  "m149": "personas",
+  "m150": "personas confirmadas",
+  "m151": "{v0} de {v1} regalos reservados.",
+  "@m151": {
+    "description": "{v0} de {v1} regalos reservados.",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      },
+      "v1": {
+        "type": "String"
+      }
+    }
+  },
+  "m152": "{v0} no asistirán",
+  "@m152": {
+    "description": "{v0} no asistirán",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m153": "{v0} pendientes",
+  "@m153": {
+    "description": "{v0} pendientes",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m154": "{v0} · Versión {v1}",
+  "@m154": {
+    "description": "{v0} · Versión {v1}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      },
+      "v1": {
+        "type": "String"
+      }
+    }
+  },
+  "m155": "¡Hoy es el día!",
+  "m156": "¿Te han dado acceso como miembro? Entra con el correo al que te invitaron. Tu celebración aparecerá aquí automáticamente.",
+  "m157": "¿Te han dado acceso como pareja? Entra con el correo al que te invitaron. Tu celebración aparecerá aquí automáticamente."
+}

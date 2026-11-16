@@ -1,0 +1,271 @@
+{
+  "@@locale": "en",
+  "m000": "Opening the website…",
+  "m001": "Opening {v0}",
+  "@m001": {
+    "description": "Abriendo {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m002": "Opening…",
+  "m003": "We will open the website of Save the Date. Log in with the account you want to delete and confirm the deletion there. It's permanent: your profile, events, guests, and files from this product will be deleted. It does not delete your account from the other product or your Google account. Opening the website still doesn't delete anything.",
+  "m004": "We will open the website of The Date. Log in with the account you want to delete and confirm the deletion there. It's permanent: your profile, events, guests, and files from this product will be deleted. It does not delete your account from the other product or your Google account. Opening the website still doesn't delete anything.",
+  "m005": "Activating notifications…",
+  "m006": "Activate notifications",
+  "m007": "Updated at {v0}",
+  "@m007": {
+    "description": "Actualizado a las {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m008": "now",
+  "m009": "Help and support",
+  "m010": "Search guest",
+  "m011": "Every detail, calmly.",
+  "m012": "Each response is automatically reflected.",
+  "m013": "Each yes, a little closer.",
+  "m014": "Change photo",
+  "m015": "Celebration held",
+  "m016": "Close",
+  "m017": "Sign out",
+  "m018": "With your web studio account.",
+  "m019": "Conditions",
+  "m020": "Confirmations",
+  "m021": "Confirmations and gifts,\nin one place.",
+  "m022": "Confirmed",
+  "m023": "Confirmed",
+  "m024": "Consult tables",
+  "m025": "Continue with Google",
+  "m026": "Continue on the web",
+  "m027": "Password",
+  "m028": "Email address",
+  "m029": "Create, personalize and purchase your invitation on our website. Then, check out the gifts and who reserved them here.",
+  "m030": "Create, personalize and purchase your invitation on our website. Then, check here who confirmed their attendance.",
+  "m031": "When someone reserves a gift, you'll see their name and what they chose here.",
+  "m032": "Account",
+  "m033": "Declined",
+  "m034": "Details with love.",
+  "m035": "Available",
+  "m036": "Edit profile",
+  "m037": "Access with Google was interrupted. Try again.",
+  "m038": "The name was saved, but the photo could not be updated. You can try again.",
+  "m039": "Choose event",
+  "m040": "Choose an event to view its information.",
+  "m041": "Choose a photo less than 10 MB.",
+  "m042": "Delete account",
+  "m043": "Delete account on the web",
+  "m044": "Delete my account and data from {v0}",
+  "@m044": {
+    "description": "Eliminar mi cuenta y datos de {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m045": "Entering…",
+  "m046": "Enter",
+  "m047": "Write your password.",
+  "m048": "Write your email.",
+  "m049": "Enter a name of 2 to 80 characters.",
+  "m050": "Wait a moment and try again.",
+  "m051": "1 day to go",
+  "m052": "{v0} days to go",
+  "@m052": {
+    "description": "Faltan {v0} días",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m053": "Profile photo of {v0}",
+  "@m053": {
+    "description": "Foto de perfil de {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m054": "Google did not return an identity. Try again.",
+  "m055": "Google is not available on this device. Check Google Play Services and try again.",
+  "m056": "Google could not complete the access. Try again.",
+  "m057": "Google took too long to start. Try again.",
+  "m058": "Saving…",
+  "m059": "Save changes",
+  "m060": "{v0} min ago",
+  "@m060": {
+    "description": "Hace {v0} min",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m061": "Today",
+  "m062": "Invitation not yet published",
+  "m063": "Guest",
+  "m064": "Guests",
+  "m065": "The connection took too long. Try again.",
+  "m066": "Confirmations will arrive here",
+  "m067": "The important thing, close.",
+  "m068": "Details also have their time",
+  "m069": "The gifts start with your invitation.",
+  "m070": "table",
+  "m071": "Tables",
+  "m072": "Show password",
+  "m073": "Nobody is left pending",
+  "m074": "Not attending",
+  "m075": "Not attending",
+  "m076": "We can't find that name",
+  "m077": "There are no guests on this list.",
+  "m078": "There are no saved tables.",
+  "m079": "There are no gifts on this list.",
+  "m080": "We couldn't open the link. Try again.",
+  "m081": "We couldn't open the link. Try again.",
+  "m082": "We couldn't open the Google launcher. Try again with the app open.",
+  "m083": "We couldn't open this photo. Check access to your photos and try again.",
+  "m084": "We couldn't open the invitation. Try again.",
+  "m085": "We couldn't open the website. Try again.",
+  "m086": "We couldn't activate notifications. Try again.",
+  "m087": "We were unable to load the information. Try again.",
+  "m088": "We couldn't load the tables.",
+  "m089": "We were unable to complete the action. Try again.",
+  "m090": "We couldn't connect. Try again.",
+  "m091": "We couldn't save the profile. Try again.",
+  "m092": "We couldn't prepare this photo. Choose another image.",
+  "m093": "We were unable to register this device. Try again.",
+  "m094": "We were unable to validate this app with Google. Check that you have the most recent version.",
+  "m095": "Display name",
+  "m096": "Notifications activated",
+  "m097": "Notifications not available. You can try again from your account.",
+  "m098": "Hide password",
+  "m099": "Pending",
+  "m100": "Pending",
+  "m101": "Allow notifications in device settings. If you already did, try again in a few seconds.",
+  "m102": "For now, no absence",
+  "m103": "To be confirmed",
+  "m104": "By {v0}",
+  "@m104": {
+    "description": "Por {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m105": "Preparing photo…",
+  "m106": "Privacy",
+  "m107": "Try another name.",
+  "m108": "Let the celebration begin.",
+  "m109": "Received",
+  "m110": "Gifts",
+  "m111": "Gifts with love.",
+  "m112": "Reserved",
+  "m113": "Reserved",
+  "m114": "Check your email and password.",
+  "m115": "Offline. Check your internet and try again.",
+  "m116": "Unconfirmed",
+  "m117": "No choice",
+  "m118": "No assigned guests",
+  "m119": "No response",
+  "m120": "I request the deletion of my account and associated personal data in {v0}. Contact me at this account email to confirm ownership and communicate any applicable legal hold.",
+  "@m120": {
+    "description": "Solicito la eliminación de mi cuenta y de los datos personales asociados en {v0}. Contactadme en el correo de esta cuenta para confirmar la titularidad y comunicar cualquier retención legal aplicable.",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m121": "I request the deletion of my account and associated personal data in {v0}. Contact me at this account email to confirm ownership and communicate any applicable legal hold.",
+  "@m121": {
+    "description": "Solicito la eliminación de mi cuenta y de los datos personales asociados en {v0}. Contáctenme en el correo de esta cuenta para confirmar la titularidad y comunicar cualquier retención legal aplicable.",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m122": "YOUR CELEBRATION",
+  "m123": "All",
+  "m124": "Your celebration",
+  "m125": "Your password",
+  "m126": "Your account",
+  "m127": "Your account does not have access to this information.",
+  "m128": "Your people,\ncloser",
+  "m129": "Your people,\ncloser.",
+  "m130": "Your people.",
+  "m131": "Your invitation starts on the web.",
+  "m132": "Your list, up to date.",
+  "m133": "Your session is over. Come back in.",
+  "m134": "Your guests and gifts, calmly.",
+  "m135": "Terms and conditions",
+  "m136": "Use your web studio account.",
+  "m137": "YOUR CELEBRATION",
+  "m138": "See my invitation",
+  "m139": "View and download invitation",
+  "m140": "Back",
+  "m141": "try again",
+  "m142": "Your account",
+  "m143": "They're on their way.",
+  "m144": "not attending",
+  "m145": "or with your email",
+  "m146": "pending",
+  "m147": "person",
+  "m148": "confirmed person",
+  "m149": "people",
+  "m150": "confirmed people",
+  "m151": "{v0} of {v1} gifts reserved.",
+  "@m151": {
+    "description": "{v0} de {v1} regalos reservados.",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      },
+      "v1": {
+        "type": "String"
+      }
+    }
+  },
+  "m152": "{v0} will not attend",
+  "@m152": {
+    "description": "{v0} no asistirán",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m153": "{v0} pending",
+  "@m153": {
+    "description": "{v0} pendientes",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m154": "{v0} · Version {v1}",
+  "@m154": {
+    "description": "{v0} · Versión {v1}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      },
+      "v1": {
+        "type": "String"
+      }
+    }
+  },
+  "m155": "Today is the day!",
+  "m156": "Have you been given access as a member? Enter with the email to which you were invited. Your celebration will appear here automatically.",
+  "m157": "Have you been given access as a couple? Enter with the email to which you were invited. Your celebration will appear here automatically."
+}

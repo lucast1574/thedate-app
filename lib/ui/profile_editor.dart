@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import '../data/api_client.dart';
@@ -62,7 +63,9 @@ class _ProfileEditorState extends State<ProfileEditor> {
         setState(
           () => error = e is ApiException
               ? e.message
-              : 'No pudimos abrir esta foto. Revisa el acceso a tus fotos y vuelve a intentarlo.',
+              : tr(
+                  "No pudimos abrir esta foto. Revisa el acceso a tus fotos y vuelve a intentarlo.",
+                ),
         );
       }
     } finally {
@@ -90,9 +93,11 @@ class _ProfileEditorState extends State<ProfileEditor> {
     setState(() {
       saving = false;
       error = previousName != widget.model.account!.name && photo != null
-          ? 'El nombre se guardó, pero la foto no se pudo actualizar. Puedes volver a intentarlo.'
+          ? tr(
+              "El nombre se guardó, pero la foto no se pudo actualizar. Puedes volver a intentarlo.",
+            )
           : widget.model.error ??
-                'No pudimos guardar el perfil. Vuelve a intentarlo.';
+                tr("No pudimos guardar el perfil. Vuelve a intentarlo.");
     });
   }
 
@@ -128,12 +133,12 @@ class _ProfileEditorState extends State<ProfileEditor> {
                       children: [
                         Expanded(
                           child: Text(
-                            'Editar perfil',
+                            tr("Editar perfil"),
                             style: Theme.of(context).textTheme.headlineMedium,
                           ),
                         ),
                         IconButton(
-                          tooltip: 'Cerrar',
+                          tooltip: tr("Cerrar"),
                           onPressed: blocked ? null : close,
                           icon: const AppIcon(Symbol.close),
                         ),
@@ -159,7 +164,7 @@ class _ProfileEditorState extends State<ProfileEditor> {
                       child: TextButton(
                         onPressed: blocked ? null : choosePhoto,
                         child: Text(
-                          picking ? 'Preparando foto…' : 'Cambiar foto',
+                          picking ? tr("Preparando foto…") : tr("Cambiar foto"),
                         ),
                       ),
                     ),
@@ -172,8 +177,8 @@ class _ProfileEditorState extends State<ProfileEditor> {
                       textInputAction: TextInputAction.done,
                       maxLength: 80,
                       onChanged: (_) => setState(() {}),
-                      decoration: const InputDecoration(
-                        labelText: 'Nombre visible',
+                      decoration: InputDecoration(
+                        labelText: tr("Nombre visible"),
                         counterText: '',
                       ),
                       validator: (value) {
@@ -181,7 +186,7 @@ class _ProfileEditorState extends State<ProfileEditor> {
                         if (text.runes.length < 2 ||
                             text.runes.length > 80 ||
                             RegExp(r'[\x00-\x1f\x7f-\x9f]').hasMatch(text)) {
-                          return 'Escribe un nombre de 2 a 80 caracteres.';
+                          return tr("Escribe un nombre de 2 a 80 caracteres.");
                         }
                         return null;
                       },
@@ -198,7 +203,9 @@ class _ProfileEditorState extends State<ProfileEditor> {
                                   photo == null)
                           ? null
                           : save,
-                      child: Text(saving ? 'Guardando…' : 'Guardar cambios'),
+                      child: Text(
+                        saving ? tr("Guardando…") : tr("Guardar cambios"),
+                      ),
                     ),
                   ],
                 ),

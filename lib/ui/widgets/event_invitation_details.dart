@@ -1,3 +1,4 @@
+import '../../l10n/translate.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -46,8 +47,10 @@ class _EventInvitationDetailsState extends State<EventInvitationDetails> {
     setState(() => opening = false);
     if (!opened) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('No pudimos abrir la invitación. Vuelve a intentarlo.'),
+        SnackBar(
+          content: Text(
+            tr("No pudimos abrir la invitación. Vuelve a intentarlo."),
+          ),
         ),
       );
     }
@@ -84,17 +87,17 @@ class _EventInvitationDetailsState extends State<EventInvitationDetails> {
               icon: const AppIcon(Symbol.externalLink, size: 16),
               label: Text(
                 opening
-                    ? 'Abriendo…'
+                    ? tr("Abriendo…")
                     : ended
-                    ? 'Ver y descargar invitación'
-                    : 'Ver mi invitación',
+                    ? tr("Ver y descargar invitación")
+                    : tr("Ver mi invitación"),
               ),
             )
           else
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
-                'Invitación aún no publicada',
+                tr("Invitación aún no publicada"),
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),

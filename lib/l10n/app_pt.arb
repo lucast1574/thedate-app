@@ -1,0 +1,271 @@
+{
+  "@@locale": "pt",
+  "m000": "Abrindo o site…",
+  "m001": "Abrindo {v0}",
+  "@m001": {
+    "description": "Abriendo {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m002": "Abrindo…",
+  "m003": "Abriremos o site de Save the Date. Faça login com a conta que deseja excluir e confirme a exclusão lá. É permanente: seu perfil, eventos, convidados e arquivos deste produto serão excluídos. Isso não exclui sua conta do outro produto ou de sua conta do Google. Abrir o site ainda não exclui nada.",
+  "m004": "Abriremos o site de The Date. Faça login com a conta que deseja excluir e confirme a exclusão lá. É permanente: seu perfil, eventos, convidados e arquivos deste produto serão excluídos. Isso não exclui sua conta do outro produto ou de sua conta do Google. Abrir o site ainda não exclui nada.",
+  "m005": "Ativando notificações…",
+  "m006": "Ativar notificações",
+  "m007": "Atualizado em {v0}",
+  "@m007": {
+    "description": "Actualizado a las {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m008": "agora",
+  "m009": "Ajuda e suporte",
+  "m010": "Pesquisar convidado",
+  "m011": "Cada detalhe, com calma.",
+  "m012": "Cada resposta é refletida automaticamente.",
+  "m013": "Cada confirmação, um pouco mais perto.",
+  "m014": "Alterar foto",
+  "m015": "Celebração realizada",
+  "m016": "Fechar",
+  "m017": "Sair",
+  "m018": "Com sua conta do web studio.",
+  "m019": "Condições",
+  "m020": "Confirmações",
+  "m021": "Confirmações e presentes,\nem um só lugar.",
+  "m022": "Confirmados",
+  "m023": "Confirmado",
+  "m024": "Consultar tabelas",
+  "m025": "Continuar com o Google",
+  "m026": "Continuar na web",
+  "m027": "Senha",
+  "m028": "E-mail",
+  "m029": "Crie, personalize e adquira seu convite em nosso site. Então confira os presentes e quem os reservou aqui.",
+  "m030": "Crie, personalize e adquira seu convite em nosso site. Então confira aqui quem confirmou presença.",
+  "m031": "Quando alguém reserva um presente, você verá o nome e o que escolheu aqui.",
+  "m032": "Conta",
+  "m033": "Recusou",
+  "m034": "Detalhes com amor.",
+  "m035": "Disponível",
+  "m036": "Editar perfil",
+  "m037": "O acesso com Google foi interrompido. Tente novamente.",
+  "m038": "O nome foi salvo, mas a foto não pôde ser atualizada. Você pode tentar novamente.",
+  "m039": "Escolha o evento",
+  "m040": "Escolha um evento para visualizar suas informações.",
+  "m041": "Escolha uma foto com menos de 10 MB.",
+  "m042": "Excluir conta",
+  "m043": "Excluir conta na web",
+  "m044": "Excluir minha conta e dados de {v0}",
+  "@m044": {
+    "description": "Eliminar mi cuenta y datos de {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m045": "Entrando…",
+  "m046": "Entrar",
+  "m047": "Escreva sua senha.",
+  "m048": "Escreva seu e-mail.",
+  "m049": "Insira um nome de 2 a 80 caracteres.",
+  "m050": "Espere um momento e tente novamente.",
+  "m051": "Falta 1 dia",
+  "m052": "Faltam {v0} dias",
+  "@m052": {
+    "description": "Faltan {v0} días",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m053": "Foto do perfil de {v0}",
+  "@m053": {
+    "description": "Foto de perfil de {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m054": "O Google não retornou uma identidade. Tente novamente.",
+  "m055": "O Google não está disponível neste dispositivo. Verifique o Google Play Services e tente novamente.",
+  "m056": "O Google não conseguiu concluir o acesso. Tente novamente.",
+  "m057": "O Google demorou muito para começar. Tente novamente.",
+  "m058": "Salvando…",
+  "m059": "Salvar alterações",
+  "m060": "{v0} minutos atrás",
+  "@m060": {
+    "description": "Hace {v0} min",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m061": "Hoje",
+  "m062": "Convite ainda não publicado",
+  "m063": "Convidado",
+  "m064": "Convidados",
+  "m065": "A conexão demorou muito. Tente novamente.",
+  "m066": "As confirmações chegarão aqui",
+  "m067": "O importante, perto.",
+  "m068": "Os detalhes também têm seu tempo",
+  "m069": "Os presentes começam com o seu convite.",
+  "m070": "mesa",
+  "m071": "Tabelas",
+  "m072": "Mostrar senha",
+  "m073": "Ninguém fica pendente",
+  "m074": "Não vai comparecer",
+  "m075": "Não vão comparecer",
+  "m076": "Não conseguimos encontrar esse nome",
+  "m077": "Não há convidados nesta lista.",
+  "m078": "Não há tabelas salvas.",
+  "m079": "Não há presentes nesta lista.",
+  "m080": "Não foi possível abrir o link. Tente novamente.",
+  "m081": "Não foi possível abrir o link. Tente novamente.",
+  "m082": "Não foi possível abrir o inicializador do Google. Tente novamente com o aplicativo aberto.",
+  "m083": "Não foi possível abrir esta foto. Verifique o acesso às suas fotos e tente novamente.",
+  "m084": "Não foi possível abrir o convite. Tente novamente.",
+  "m085": "Não foi possível abrir o site. Tente novamente.",
+  "m086": "Não foi possível ativar as notificações. Tente novamente.",
+  "m087": "Não foi possível carregar as informações. Tente novamente.",
+  "m088": "Não foi possível carregar as tabelas.",
+  "m089": "Não foi possível concluir a ação. Tente novamente.",
+  "m090": "Não conseguimos nos conectar. Tente novamente.",
+  "m091": "Não foi possível salvar o perfil. Tente novamente.",
+  "m092": "Não conseguimos preparar esta foto. Escolha outra imagem.",
+  "m093": "Não foi possível registrar este dispositivo. Tente novamente.",
+  "m094": "Não foi possível validar este aplicativo com o Google. Verifique se você tem a versão mais recente.",
+  "m095": "Nome de exibição",
+  "m096": "Notificações ativadas",
+  "m097": "Notificações não disponíveis. Você pode tentar novamente em sua conta.",
+  "m098": "Ocultar senha",
+  "m099": "Pendente",
+  "m100": "Pendentes",
+  "m101": "Permitir notificações nas configurações do dispositivo. Se você já fez isso, tente novamente em alguns segundos.",
+  "m102": "Por enquanto, sem ausência",
+  "m103": "A confirmar",
+  "m104": "Por {v0}",
+  "@m104": {
+    "description": "Por {v0}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m105": "Preparando foto…",
+  "m106": "Privacidade",
+  "m107": "Tente outro nome.",
+  "m108": "Deixe a celebração começar.",
+  "m109": "Recebido",
+  "m110": "Presentes",
+  "m111": "Presentes com amor.",
+  "m112": "Reservado",
+  "m113": "Reservado",
+  "m114": "Verifique seu e-mail e senha.",
+  "m115": "Off-line. Verifique sua internet e tente novamente.",
+  "m116": "Não confirmado",
+  "m117": "Sem escolha",
+  "m118": "Nenhum convidado atribuído",
+  "m119": "Sem resposta",
+  "m120": "Solicito a exclusão da minha conta e dos dados pessoais associados em {v0}. Entre em contato comigo pelo e-mail desta conta para confirmar a propriedade e comunicar qualquer retenção legal aplicável.",
+  "@m120": {
+    "description": "Solicito la eliminación de mi cuenta y de los datos personales asociados en {v0}. Contactadme en el correo de esta cuenta para confirmar la titularidad y comunicar cualquier retención legal aplicable.",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m121": "Solicito a exclusão da minha conta e dos dados pessoais associados em {v0}. Entre em contato comigo pelo e-mail desta conta para confirmar a propriedade e comunicar qualquer retenção legal aplicável.",
+  "@m121": {
+    "description": "Solicito la eliminación de mi cuenta y de los datos personales asociados en {v0}. Contáctenme en el correo de esta cuenta para confirmar la titularidad y comunicar cualquier retención legal aplicable.",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m122": "SUA CELEBRAÇÃO",
+  "m123": "Todos",
+  "m124": "Sua celebração",
+  "m125": "Sua senha",
+  "m126": "Sua conta",
+  "m127": "Sua conta não tem acesso a essas informações.",
+  "m128": "Seu povo,\nmais perto",
+  "m129": "Seu povo,\nmais perto.",
+  "m130": "Seus convidados.",
+  "m131": "Seu convite começa na web.",
+  "m132": "Sua lista, atualizada.",
+  "m133": "Sua sessão acabou. Volte para dentro.",
+  "m134": "Seus convidados e presentes, com calma.",
+  "m135": "Termos e condições",
+  "m136": "Use sua conta do web studio.",
+  "m137": "SUA CELEBRAÇÃO",
+  "m138": "Veja meu convite",
+  "m139": "Ver e baixar convite",
+  "m140": "Voltar",
+  "m141": "tente novamente",
+  "m142": "Sua conta",
+  "m143": "Eles estão vindo.",
+  "m144": "não vão comparecer",
+  "m145": "ou com seu e-mail",
+  "m146": "pendentes",
+  "m147": "pessoa",
+  "m148": "pessoa confirmada",
+  "m149": "pessoas",
+  "m150": "pessoas confirmadas",
+  "m151": "{v0} de {v1} presentes reservados.",
+  "@m151": {
+    "description": "{v0} de {v1} regalos reservados.",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      },
+      "v1": {
+        "type": "String"
+      }
+    }
+  },
+  "m152": "{v0} não comparecerá",
+  "@m152": {
+    "description": "{v0} no asistirán",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m153": "{v0} pendentes",
+  "@m153": {
+    "description": "{v0} pendientes",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      }
+    }
+  },
+  "m154": "{v0} · Versão {v1}",
+  "@m154": {
+    "description": "{v0} · Versión {v1}",
+    "placeholders": {
+      "v0": {
+        "type": "String"
+      },
+      "v1": {
+        "type": "String"
+      }
+    }
+  },
+  "m155": "Hoje é o dia!",
+  "m156": "Você recebeu acesso como membro? Entre com o e-mail para o qual você foi convidado. Sua comemoração aparecerá aqui automaticamente.",
+  "m157": "Vocês tiveram acesso como casal? Entre com o e-mail para o qual você foi convidado. Sua comemoração aparecerá aqui automaticamente."
+}

@@ -1,3 +1,4 @@
+import '../../l10n/translate.dart';
 import 'package:flutter/material.dart';
 import '../../app_config.dart';
 import '../../domain/models.dart';
@@ -115,8 +116,8 @@ class AttendanceSummary extends StatelessWidget {
               metric(
                 '${data.confirmedPeople}',
                 data.confirmedPeople == 1
-                    ? 'persona confirmada'
-                    : 'personas confirmadas',
+                    ? tr("persona confirmada")
+                    : tr("personas confirmadas"),
                 main: true,
               ),
               Container(
@@ -125,14 +126,14 @@ class AttendanceSummary extends StatelessWidget {
                 color: Theme.of(context).dividerColor,
               ),
               const SizedBox(width: 15),
-              metric('${data.pendingInvitations}', 'pendientes'),
+              metric('${data.pendingInvitations}', tr("pendientes")),
               Container(
                 width: 1,
                 height: 45,
                 color: Theme.of(context).dividerColor,
               ),
               const SizedBox(width: 15),
-              metric('$declined', 'no asistirán'),
+              metric('$declined', tr("no asistirán")),
             ],
           ),
           const SizedBox(height: 14),
@@ -173,8 +174,8 @@ class AttendanceSummary extends StatelessWidget {
                   width: 80,
                   child: Text(
                     data.confirmedPeople == 1
-                        ? 'persona confirmada'
-                        : 'personas confirmadas',
+                        ? tr("persona confirmada")
+                        : tr("personas confirmadas"),
                     style: const TextStyle(fontSize: 12, height: 1.15),
                   ),
                 ),
@@ -192,11 +193,14 @@ class AttendanceSummary extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _SummaryLine(
-                  '${data.pendingInvitations} pendientes',
+                  tr("{v0} pendientes", {"v0": data.pendingInvitations}),
                   const Color(0xFFF4B93C),
                 ),
                 const SizedBox(height: 10),
-                _SummaryLine('$declined no asistirán', const Color(0xFFE45C87)),
+                _SummaryLine(
+                  tr("{v0} no asistirán", {'v0': declined}),
+                  const Color(0xFFE45C87),
+                ),
               ],
             ),
           ),

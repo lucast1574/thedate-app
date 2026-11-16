@@ -1,3 +1,4 @@
+import '../l10n/translate.dart';
 import '../domain/invitation_details.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
@@ -42,10 +43,11 @@ class AppModel extends ChangeNotifier {
           if (account == null) return;
           try {
             await repository.registerDevice(fid, notifications!.platform);
-            notificationStatus = 'Notificaciones activadas';
+            notificationStatus = tr("Notificaciones activadas");
           } catch (_) {
-            notificationStatus =
-                'No pudimos registrar este dispositivo. Vuelve a intentarlo.';
+            notificationStatus = tr(
+              "No pudimos registrar este dispositivo. Vuelve a intentarlo.",
+            );
           }
           notifyListeners();
         }, onError: (Object _) {}),
@@ -61,8 +63,9 @@ class AppModel extends ChangeNotifier {
       _pushInitialized = true;
     } catch (_) {
       _pushReady = null;
-      notificationStatus =
-          'Notificaciones no disponibles. Puedes volver a intentarlo desde tu cuenta.';
+      notificationStatus = tr(
+        "Notificaciones no disponibles. Puedes volver a intentarlo desde tu cuenta.",
+      );
     }
   }
 
@@ -81,12 +84,14 @@ class AppModel extends ChangeNotifier {
         requestPermission: requestPermission,
       );
       if (!registered && requestPermission) {
-        notificationStatus =
-            'Permite las notificaciones en los ajustes del dispositivo. Si ya lo hiciste, vuelve a intentarlo en unos segundos.';
+        notificationStatus = tr(
+          "Permite las notificaciones en los ajustes del dispositivo. Si ya lo hiciste, vuelve a intentarlo en unos segundos.",
+        );
       }
     } catch (_) {
-      notificationStatus =
-          'No pudimos activar las notificaciones. Vuelve a intentarlo.';
+      notificationStatus = tr(
+        "No pudimos activar las notificaciones. Vuelve a intentarlo.",
+      );
     } finally {
       notificationsBusy = false;
       notifyListeners();
@@ -189,7 +194,7 @@ class AppModel extends ChangeNotifier {
         await _handle(e);
       } else {
         error = e is ApiException && e.status == 401
-            ? 'Revisa tu correo y contraseña.'
+            ? tr("Revisa tu correo y contraseña.")
             : _message(e);
       }
     } finally {
@@ -364,5 +369,5 @@ class AppModel extends ChangeNotifier {
 
   String _message(Object e) => e is ApiException
       ? e.message
-      : 'No pudimos completar la acción. Vuelve a intentarlo.';
+      : tr("No pudimos completar la acción. Vuelve a intentarlo.");
 }
