@@ -1047,6 +1047,474 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'¿Te han dado acceso como pareja? Entra con el correo al que te invitaron. Tu celebración aparecerá aquí automáticamente.'**
   String get m157;
+
+  /// No description provided for @m158.
+  ///
+  /// In es, this message translates to:
+  /// **'Actualizar asistencia'**
+  String get m158;
+
+  /// No description provided for @m159.
+  ///
+  /// In es, this message translates to:
+  /// **'Adjunto'**
+  String get m159;
+
+  /// No description provided for @m160.
+  ///
+  /// In es, this message translates to:
+  /// **'Adjunto no disponible'**
+  String get m160;
+
+  /// No description provided for @m161.
+  ///
+  /// In es, this message translates to:
+  /// **'Adjunto por revisar'**
+  String get m161;
+
+  /// No description provided for @m162.
+  ///
+  /// In es, this message translates to:
+  /// **'Adjunto recibido'**
+  String get m162;
+
+  /// No description provided for @m163.
+  ///
+  /// In es, this message translates to:
+  /// **'Apellido'**
+  String get m163;
+
+  /// No description provided for @m164.
+  ///
+  /// In es, this message translates to:
+  /// **'Atendidas'**
+  String get m164;
+
+  /// No description provided for @m165.
+  ///
+  /// In es, this message translates to:
+  /// **'Atendido'**
+  String get m165;
+
+  /// No description provided for @m166.
+  ///
+  /// In es, this message translates to:
+  /// **'Automático'**
+  String get m166;
+
+  /// No description provided for @m167.
+  ///
+  /// In es, this message translates to:
+  /// **'Añadir acompañante'**
+  String get m167;
+
+  /// No description provided for @m168.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no hay conversaciones'**
+  String get m168;
+
+  /// No description provided for @m169.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no hay mensajes'**
+  String get m169;
+
+  /// No description provided for @m170.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no hay pagos registrados.'**
+  String get m170;
+
+  /// No description provided for @m171.
+  ///
+  /// In es, this message translates to:
+  /// **'Billetera digital'**
+  String get m171;
+
+  /// No description provided for @m172.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscar invitado o teléfono'**
+  String get m172;
+
+  /// No description provided for @m173.
+  ///
+  /// In es, this message translates to:
+  /// **'Cancelar'**
+  String get m173;
+
+  /// No description provided for @m174.
+  ///
+  /// In es, this message translates to:
+  /// **'Cerrar adjunto'**
+  String get m174;
+
+  /// No description provided for @m175.
+  ///
+  /// In es, this message translates to:
+  /// **'Conversaciones'**
+  String get m175;
+
+  /// No description provided for @m176.
+  ///
+  /// In es, this message translates to:
+  /// **'Efectivo'**
+  String get m176;
+
+  /// No description provided for @m177.
+  ///
+  /// In es, this message translates to:
+  /// **'El comprobante ya está registrado o hubo cambios. Revisa los pagos antes de continuar.'**
+  String get m177;
+
+  /// No description provided for @m178.
+  ///
+  /// In es, this message translates to:
+  /// **'El envío necesita verificación en WhatsApp. No lo repitas para evitar duplicados.'**
+  String get m178;
+
+  /// No description provided for @m179.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige un invitado'**
+  String get m179;
+
+  /// No description provided for @m180.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige una respuesta'**
+  String get m180;
+
+  /// No description provided for @m181.
+  ///
+  /// In es, this message translates to:
+  /// **'Enviado'**
+  String get m181;
+
+  /// No description provided for @m182.
+  ///
+  /// In es, this message translates to:
+  /// **'Enviar respuesta'**
+  String get m182;
+
+  /// No description provided for @m183.
+  ///
+  /// In es, this message translates to:
+  /// **'Envío por verificar'**
+  String get m183;
+
+  /// No description provided for @m184.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe un motivo para Tal vez.'**
+  String get m184;
+
+  /// No description provided for @m185.
+  ///
+  /// In es, this message translates to:
+  /// **'Excedente'**
+  String get m185;
+
+  /// No description provided for @m186.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha del pago'**
+  String get m186;
+
+  /// No description provided for @m187.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar asistencia'**
+  String get m187;
+
+  /// No description provided for @m188.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar pago'**
+  String get m188;
+
+  /// No description provided for @m189.
+  ///
+  /// In es, this message translates to:
+  /// **'Importe recibido'**
+  String get m189;
+
+  /// No description provided for @m190.
+  ///
+  /// In es, this message translates to:
+  /// **'Ingresos registrados'**
+  String get m190;
+
+  /// No description provided for @m191.
+  ///
+  /// In es, this message translates to:
+  /// **'Introduce un importe válido.'**
+  String get m191;
+
+  /// No description provided for @m192.
+  ///
+  /// In es, this message translates to:
+  /// **'Los mensajes de esta conversación aparecerán aquí.'**
+  String get m192;
+
+  /// No description provided for @m193.
+  ///
+  /// In es, this message translates to:
+  /// **'Los mensajes que tus invitados envíen por WhatsApp aparecerán aquí.'**
+  String get m193;
+
+  /// No description provided for @m194.
+  ///
+  /// In es, this message translates to:
+  /// **'Marcar atendido'**
+  String get m194;
+
+  /// No description provided for @m195.
+  ///
+  /// In es, this message translates to:
+  /// **'Marcar pendiente'**
+  String get m195;
+
+  /// No description provided for @m196.
+  ///
+  /// In es, this message translates to:
+  /// **'Medio de pago'**
+  String get m196;
+
+  /// No description provided for @m197.
+  ///
+  /// In es, this message translates to:
+  /// **'Mensajes'**
+  String get m197;
+
+  /// No description provided for @m198.
+  ///
+  /// In es, this message translates to:
+  /// **'Motivo de la espera'**
+  String get m198;
+
+  /// No description provided for @m199.
+  ///
+  /// In es, this message translates to:
+  /// **'Movimientos registrados'**
+  String get m199;
+
+  /// No description provided for @m200.
+  ///
+  /// In es, this message translates to:
+  /// **'No enviado'**
+  String get m200;
+
+  /// No description provided for @m201.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay conversaciones con estos filtros.'**
+  String get m201;
+
+  /// No description provided for @m202.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos abrir el adjunto.'**
+  String get m202;
+
+  /// No description provided for @m203.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos cargar los mensajes.'**
+  String get m203;
+
+  /// No description provided for @m204.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos cargar los pagos.'**
+  String get m204;
+
+  /// No description provided for @m205.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos guardar el pago.'**
+  String get m205;
+
+  /// No description provided for @m206.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos guardar la asistencia.'**
+  String get m206;
+
+  /// No description provided for @m207.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo guardar la asistencia. Revisa el aforo y el estado de la invitación.'**
+  String get m207;
+
+  /// No description provided for @m208.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre del acompañante'**
+  String get m208;
+
+  /// No description provided for @m209.
+  ///
+  /// In es, this message translates to:
+  /// **'Ocultar teclado'**
+  String get m209;
+
+  /// No description provided for @m210.
+  ///
+  /// In es, this message translates to:
+  /// **'Pago registrado'**
+  String get m210;
+
+  /// No description provided for @m211.
+  ///
+  /// In es, this message translates to:
+  /// **'Pagos'**
+  String get m211;
+
+  /// No description provided for @m212.
+  ///
+  /// In es, this message translates to:
+  /// **'Pausar reproducción'**
+  String get m212;
+
+  /// No description provided for @m213.
+  ///
+  /// In es, this message translates to:
+  /// **'Posible comprobante'**
+  String get m213;
+
+  /// No description provided for @m214.
+  ///
+  /// In es, this message translates to:
+  /// **'Prueba otra búsqueda o cambia el filtro.'**
+  String get m214;
+
+  /// No description provided for @m215.
+  ///
+  /// In es, this message translates to:
+  /// **'Quitar acompañante'**
+  String get m215;
+
+  /// No description provided for @m216.
+  ///
+  /// In es, this message translates to:
+  /// **'Referencia o nota (opcional)'**
+  String get m216;
+
+  /// No description provided for @m217.
+  ///
+  /// In es, this message translates to:
+  /// **'Registrar acompañantes ahora'**
+  String get m217;
+
+  /// No description provided for @m218.
+  ///
+  /// In es, this message translates to:
+  /// **'Registrar pago'**
+  String get m218;
+
+  /// No description provided for @m219.
+  ///
+  /// In es, this message translates to:
+  /// **'Reproducir adjunto'**
+  String get m219;
+
+  /// No description provided for @m220.
+  ///
+  /// In es, this message translates to:
+  /// **'Responder'**
+  String get m220;
+
+  /// No description provided for @m221.
+  ///
+  /// In es, this message translates to:
+  /// **'Responder por WhatsApp'**
+  String get m221;
+
+  /// No description provided for @m222.
+  ///
+  /// In es, this message translates to:
+  /// **'Revisa el nombre de cada acompañante.'**
+  String get m222;
+
+  /// No description provided for @m223.
+  ///
+  /// In es, this message translates to:
+  /// **'Saldo de la invitación'**
+  String get m223;
+
+  /// No description provided for @m224.
+  ///
+  /// In es, this message translates to:
+  /// **'Saldo pendiente'**
+  String get m224;
+
+  /// No description provided for @m225.
+  ///
+  /// In es, this message translates to:
+  /// **'Si dejas la lista vacía, se registrará que asistirá sin acompañantes.'**
+  String get m225;
+
+  /// No description provided for @m226.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin leer'**
+  String get m226;
+
+  /// No description provided for @m227.
+  ///
+  /// In es, this message translates to:
+  /// **'Sí, asistirá'**
+  String get m227;
+
+  /// No description provided for @m228.
+  ///
+  /// In es, this message translates to:
+  /// **'Tal vez'**
+  String get m228;
+
+  /// No description provided for @m229.
+  ///
+  /// In es, this message translates to:
+  /// **'Todas'**
+  String get m229;
+
+  /// No description provided for @m230.
+  ///
+  /// In es, this message translates to:
+  /// **'Total esperado'**
+  String get m230;
+
+  /// No description provided for @m231.
+  ///
+  /// In es, this message translates to:
+  /// **'Transferencia'**
+  String get m231;
+
+  /// No description provided for @m232.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver adjunto'**
+  String get m232;
+
+  /// No description provided for @m233.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver mensajes anteriores'**
+  String get m233;
+
+  /// No description provided for @m234.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver más movimientos'**
+  String get m234;
+
+  /// No description provided for @m235.
+  ///
+  /// In es, this message translates to:
+  /// **'Verifiqué que recibí este importe.'**
+  String get m235;
 }
 
 class _AppLocalizationsDelegate

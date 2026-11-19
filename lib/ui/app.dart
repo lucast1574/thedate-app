@@ -18,11 +18,24 @@ class AppRoot extends StatefulWidget {
 
 class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
   bool introComplete = false;
+  final navigator = GlobalKey<NavigatorState>();
+  String? accountId;
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    widget.model.addListener(sessionChanged);
     widget.model.initialize();
+  }
+
+  void sessionChanged() {
+    final next = widget.model.account?.id;
+    if (accountId != null && accountId != next) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) navigator.currentState?.popUntil((route) => route.isFirst);
+      });
+    }
+    accountId = next;
   }
 
   @override
@@ -33,11 +46,13 @@ class _AppRootState extends State<AppRoot> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    widget.model.removeListener(sessionChanged);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+    navigatorKey: navigator,
     title: AppConfig.name,
     debugShowCheckedModeBanner: false,
     themeMode: ThemeMode.system,

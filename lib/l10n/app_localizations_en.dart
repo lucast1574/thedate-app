@@ -521,4 +521,242 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get m157 =>
       'Have you been given access as a couple? Enter with the email to which you were invited. Your celebration will appear here automatically.';
+
+  @override
+  String get m158 => 'Update attendance';
+
+  @override
+  String get m159 => 'Attachment';
+
+  @override
+  String get m160 => 'Attachment unavailable';
+
+  @override
+  String get m161 => 'Attachment to review';
+
+  @override
+  String get m162 => 'Attachment received';
+
+  @override
+  String get m163 => 'Surname';
+
+  @override
+  String get m164 => 'Attended';
+
+  @override
+  String get m165 => 'Handled';
+
+  @override
+  String get m166 => 'Automated';
+
+  @override
+  String get m167 => 'Add companion';
+
+  @override
+  String get m168 => 'No conversations yet';
+
+  @override
+  String get m169 => 'No messages yet';
+
+  @override
+  String get m170 => 'No payments recorded yet.';
+
+  @override
+  String get m171 => 'Digital wallet';
+
+  @override
+  String get m172 => 'Search guest or phone';
+
+  @override
+  String get m173 => 'Cancel';
+
+  @override
+  String get m174 => 'Close attachment';
+
+  @override
+  String get m175 => 'Conversations';
+
+  @override
+  String get m176 => 'Cash';
+
+  @override
+  String get m177 =>
+      'The receipt was already recorded or something changed. Review payments before continuing.';
+
+  @override
+  String get m178 =>
+      'This send needs to be checked in WhatsApp. Do not resend it to avoid duplicates.';
+
+  @override
+  String get m179 => 'Choose a guest';
+
+  @override
+  String get m180 => 'Choose a response';
+
+  @override
+  String get m181 => 'Sent';
+
+  @override
+  String get m182 => 'Send reply';
+
+  @override
+  String get m183 => 'Shipping to be verified';
+
+  @override
+  String get m184 => 'Enter a reason for Maybe.';
+
+  @override
+  String get m185 => 'Overpayment';
+
+  @override
+  String get m186 => 'Payment date';
+
+  @override
+  String get m187 => 'Save attendance';
+
+  @override
+  String get m188 => 'Save payment';
+
+  @override
+  String get m189 => 'Amount received';
+
+  @override
+  String get m190 => 'Recorded receipts';
+
+  @override
+  String get m191 => 'Enter a valid amount.';
+
+  @override
+  String get m192 => 'Messages in this conversation will appear here.';
+
+  @override
+  String get m193 => 'WhatsApp messages from your guests will appear here.';
+
+  @override
+  String get m194 => 'Mark as handled';
+
+  @override
+  String get m195 => 'Mark pending';
+
+  @override
+  String get m196 => 'Payment method';
+
+  @override
+  String get m197 => 'Messages';
+
+  @override
+  String get m198 => 'Reason for waiting';
+
+  @override
+  String get m199 => 'Recorded transactions';
+
+  @override
+  String get m200 => 'Not sent';
+
+  @override
+  String get m201 => 'No conversations match these filters.';
+
+  @override
+  String get m202 => 'We couldn’t open the attachment.';
+
+  @override
+  String get m203 => 'We couldn’t load the messages.';
+
+  @override
+  String get m204 => 'We couldn’t load the payments.';
+
+  @override
+  String get m205 => 'We couldn’t save the payment.';
+
+  @override
+  String get m206 => 'We couldn’t save the RSVP.';
+
+  @override
+  String get m207 =>
+      'The RSVP could not be saved. Check the event capacity and invitation status.';
+
+  @override
+  String get m208 => 'Companion first name';
+
+  @override
+  String get m209 => 'Hide keyboard';
+
+  @override
+  String get m210 => 'Payment recorded';
+
+  @override
+  String get m211 => 'Payments';
+
+  @override
+  String get m212 => 'Pause playback';
+
+  @override
+  String get m213 => 'Possible payment receipt';
+
+  @override
+  String get m214 => 'Try another search or change the filter.';
+
+  @override
+  String get m215 => 'Remove companion';
+
+  @override
+  String get m216 => 'Reference or note (optional)';
+
+  @override
+  String get m217 => 'Register companions now';
+
+  @override
+  String get m218 => 'Record payment';
+
+  @override
+  String get m219 => 'Play attachment';
+
+  @override
+  String get m220 => 'Reply';
+
+  @override
+  String get m221 => 'Reply on WhatsApp';
+
+  @override
+  String get m222 => 'Check each companion’s name.';
+
+  @override
+  String get m223 => 'Invitation balance';
+
+  @override
+  String get m224 => 'Outstanding balance';
+
+  @override
+  String get m225 =>
+      'Leave the list empty to record that the guest will attend alone.';
+
+  @override
+  String get m226 => 'Unread';
+
+  @override
+  String get m227 => 'Yes, will attend';
+
+  @override
+  String get m228 => 'maybe';
+
+  @override
+  String get m229 => 'All';
+
+  @override
+  String get m230 => 'Expected total';
+
+  @override
+  String get m231 => 'Bank transfer';
+
+  @override
+  String get m232 => 'View attachment';
+
+  @override
+  String get m233 => 'View older messages';
+
+  @override
+  String get m234 => 'See more payments';
+
+  @override
+  String get m235 => 'I verified that I received this amount.';
 }

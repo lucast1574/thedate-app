@@ -343,6 +343,162 @@ String tr(String source, [Map<String, Object?> values = const {}]) {
       return strings.m156;
     case "¿Te han dado acceso como pareja? Entra con el correo al que te invitaron. Tu celebración aparecerá aquí automáticamente.":
       return strings.m157;
+    case "Actualizar asistencia":
+      return strings.m158;
+    case "Adjunto":
+      return strings.m159;
+    case "Adjunto no disponible":
+      return strings.m160;
+    case "Adjunto por revisar":
+      return strings.m161;
+    case "Adjunto recibido":
+      return strings.m162;
+    case "Apellido":
+      return strings.m163;
+    case "Atendidas":
+      return strings.m164;
+    case "Atendido":
+      return strings.m165;
+    case "Automático":
+      return strings.m166;
+    case "Añadir acompañante":
+      return strings.m167;
+    case "Aún no hay conversaciones":
+      return strings.m168;
+    case "Aún no hay mensajes":
+      return strings.m169;
+    case "Aún no hay pagos registrados.":
+      return strings.m170;
+    case "Billetera digital":
+      return strings.m171;
+    case "Buscar invitado o teléfono":
+      return strings.m172;
+    case "Cancelar":
+      return strings.m173;
+    case "Cerrar adjunto":
+      return strings.m174;
+    case "Conversaciones":
+      return strings.m175;
+    case "Efectivo":
+      return strings.m176;
+    case "El comprobante ya está registrado o hubo cambios. Revisa los pagos antes de continuar.":
+      return strings.m177;
+    case "El envío necesita verificación en WhatsApp. No lo repitas para evitar duplicados.":
+      return strings.m178;
+    case "Elige un invitado":
+      return strings.m179;
+    case "Elige una respuesta":
+      return strings.m180;
+    case "Enviado":
+      return strings.m181;
+    case "Enviar respuesta":
+      return strings.m182;
+    case "Envío por verificar":
+      return strings.m183;
+    case "Escribe un motivo para Tal vez.":
+      return strings.m184;
+    case "Excedente":
+      return strings.m185;
+    case "Fecha del pago":
+      return strings.m186;
+    case "Guardar asistencia":
+      return strings.m187;
+    case "Guardar pago":
+      return strings.m188;
+    case "Importe recibido":
+      return strings.m189;
+    case "Ingresos registrados":
+      return strings.m190;
+    case "Introduce un importe válido.":
+      return strings.m191;
+    case "Los mensajes de esta conversación aparecerán aquí.":
+      return strings.m192;
+    case "Los mensajes que tus invitados envíen por WhatsApp aparecerán aquí.":
+      return strings.m193;
+    case "Marcar atendido":
+      return strings.m194;
+    case "Marcar pendiente":
+      return strings.m195;
+    case "Medio de pago":
+      return strings.m196;
+    case "Mensajes":
+      return strings.m197;
+    case "Motivo de la espera":
+      return strings.m198;
+    case "Movimientos registrados":
+      return strings.m199;
+    case "No enviado":
+      return strings.m200;
+    case "No hay conversaciones con estos filtros.":
+      return strings.m201;
+    case "No pudimos abrir el adjunto.":
+      return strings.m202;
+    case "No pudimos cargar los mensajes.":
+      return strings.m203;
+    case "No pudimos cargar los pagos.":
+      return strings.m204;
+    case "No pudimos guardar el pago.":
+      return strings.m205;
+    case "No pudimos guardar la asistencia.":
+      return strings.m206;
+    case "No se pudo guardar la asistencia. Revisa el aforo y el estado de la invitación.":
+      return strings.m207;
+    case "Nombre del acompañante":
+      return strings.m208;
+    case "Ocultar teclado":
+      return strings.m209;
+    case "Pago registrado":
+      return strings.m210;
+    case "Pagos":
+      return strings.m211;
+    case "Pausar reproducción":
+      return strings.m212;
+    case "Posible comprobante":
+      return strings.m213;
+    case "Prueba otra búsqueda o cambia el filtro.":
+      return strings.m214;
+    case "Quitar acompañante":
+      return strings.m215;
+    case "Referencia o nota (opcional)":
+      return strings.m216;
+    case "Registrar acompañantes ahora":
+      return strings.m217;
+    case "Registrar pago":
+      return strings.m218;
+    case "Reproducir adjunto":
+      return strings.m219;
+    case "Responder":
+      return strings.m220;
+    case "Responder por WhatsApp":
+      return strings.m221;
+    case "Revisa el nombre de cada acompañante.":
+      return strings.m222;
+    case "Saldo de la invitación":
+      return strings.m223;
+    case "Saldo pendiente":
+      return strings.m224;
+    case "Si dejas la lista vacía, se registrará que asistirá sin acompañantes.":
+      return strings.m225;
+    case "Sin leer":
+      return strings.m226;
+    case "Sí, asistirá":
+      return strings.m227;
+    case "Tal vez":
+      return strings.m228;
+    case "Todas":
+      return strings.m229;
+    case "Total esperado":
+      return strings.m230;
+    case "Transferencia":
+      return strings.m231;
+    case "Ver adjunto":
+      return strings.m232;
+    case "Ver mensajes anteriores":
+      return strings.m233;
+    case "Ver más movimientos":
+      return strings.m234;
+    case "Verifiqué que recibí este importe.":
+      return strings.m235;
     default:
       return source;
   }

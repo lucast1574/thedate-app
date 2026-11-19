@@ -57,6 +57,34 @@ class ApiClient {
     return _send(request);
   }
 
+  Future<Uint8List> readPrivateMedia(String path) async {
+    const timeout = Duration(seconds: 20);
+    final request = http.Request('GET', Uri.parse('${AppConfig.api}$path'))
+      ..followRedirects = false
+      ..headers.addAll({
+        'User-Agent': '${AppConfig.product}/${Platform.operatingSystem}/1.0',
+        if (token case final String session) 'Authorization': 'Bearer $session',
+      });
+    final response = await client.send(request).timeout(timeout);
+    if (response.statusCode != 200) {
+      await response.stream.listen(null).cancel();
+      throw ApiException(
+        tr('No pudimos abrir el adjunto.'),
+        response.statusCode,
+      );
+    }
+    final buffer = await response.stream
+        .fold(BytesBuilder(copy: false), (buffer, chunk) {
+          if (buffer.length + chunk.length > 10 * 1024 * 1024) {
+            throw ApiException(tr('No pudimos abrir el adjunto.'));
+          }
+          buffer.add(chunk);
+          return buffer;
+        })
+        .timeout(timeout);
+    return buffer.takeBytes();
+  }
+
   Future<dynamic> _send(http.BaseRequest request) async {
     try {
       final response = await http.Response.fromStream(

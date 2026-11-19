@@ -26,6 +26,15 @@ enum Symbol {
   close,
   flower,
   calendar,
+  messages,
+  send,
+  keyboardDown,
+  image,
+  payment,
+  reply,
+  play,
+  pause,
+  back,
 }
 
 class AppIcon extends StatelessWidget {
@@ -34,6 +43,19 @@ class AppIcon extends StatelessWidget {
   final double size;
   final Color? color;
   static const paths = <Symbol, String>{
+    Symbol.back: '<path d="M20 12H4m7-7-7 7 7 7"/>',
+    Symbol.messages:
+        '<path d="M14 16H8l-5 4v-5a3 3 0 0 1-1-2V6a3 3 0 0 1 3-3h13a3 3 0 0 1 3 3v6M10 19h7l4 3v-4a2 2 0 0 0 1-2v-2a2 2 0 0 0-2-2h-6M6 8h9m-9 4h3"/>',
+    Symbol.send: '<path d="m22 2-7 20-4-9-9-4 20-7ZM11 13 22 2"/>',
+    Symbol.keyboardDown:
+        '<rect x="2" y="3" width="20" height="12" rx="2"/><path d="M6 7h.01M10 7h.01M14 7h.01M18 7h.01M7 11h10m-8 7 3 3 3-3"/>',
+    Symbol.image:
+        '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>',
+    Symbol.payment:
+        '<rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/>',
+    Symbol.reply: '<path d="m9 10-5 5 5 5m-5-5h10a5 5 0 0 0 0-10h-1"/>',
+    Symbol.play: '<path d="M8 5v14l11-7Z"/>',
+    Symbol.pause: '<path d="M9 5v14m6-14v14"/>',
     Symbol.edit:
         '<path d="m16 3 5 5M4 20l4-1L21 6a2.1 2.1 0 0 0-3-3L5 16l-1 4Z"/>',
     Symbol.externalLink:

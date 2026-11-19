@@ -5,6 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'widgets/brand.dart';
 import 'widgets/presentation.dart';
 import 'package:intl/intl.dart';
+import '../app_config.dart';
+import '../data/messages_repository.dart';
 import '../state/app_model.dart';
 import 'guests.dart';
 import 'event_record.dart';
@@ -13,6 +15,7 @@ import 'account.dart';
 import 'widgets/bottom_tabs.dart';
 import 'widgets/invitation_start.dart';
 import 'widgets/common.dart';
+import 'messages/messages_home.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key, required this.model});
@@ -25,6 +28,10 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
   int tab = 0;
   Timer? timer;
   final scroll = ScrollController();
+  String? badgeEvent;
+  int unread = 0;
+  bool checkingUnread = false;
+  final messageQueries = <String, String>{};
   @override
   void initState() {
     super.initState();
@@ -38,6 +45,7 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
       if (!widget.model.viewingRecord && widget.model.event != null) {
         widget.model.refresh();
       }
+      unawaited(loadBadge());
       if (mounted) setState(() {});
     });
   }
@@ -47,6 +55,7 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
     if (state == AppLifecycleState.resumed) {
       widget.model.refresh();
       widget.model.syncNotifications();
+      unawaited(loadBadge());
       startTimer();
     } else {
       timer?.cancel();
@@ -68,22 +77,60 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
     if (scroll.hasClients) scroll.jumpTo(0);
   }
 
+  Future<void> loadBadge() async {
+    final event = widget.model.event;
+    if (event == null ||
+        event.publishedAt == null ||
+        tab == BottomTabs.messages ||
+        checkingUnread) {
+      return;
+    }
+    checkingUnread = true;
+    try {
+      final api = MessagesRepository(widget.model.repository.api, event.id);
+      final list = await api.conversations();
+      if (mounted &&
+          widget.model.event?.id == event.id &&
+          tab != BottomTabs.messages) {
+        setState(() => unread = list.where((item) => item.unread).length);
+      }
+    } catch (_) {
+      // A background badge refresh must not interrupt the current tab.
+    } finally {
+      checkingUnread = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final model = widget.model;
+    final event = model.event;
     final destination = model.takeNotificationTab();
     if (destination != null) tab = destination;
+    if (badgeEvent != event?.id) {
+      badgeEvent = event?.id;
+      unread = 0;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) unawaited(loadBadge());
+      });
+    }
     return PopScope(
       canPop: tab == 0,
       onPopInvokedWithResult: (didPop, result) {
-        if (!didPop && tab != 0) select(0);
+        if (!didPop && tab != 0) {
+          if (MediaQuery.viewInsetsOf(context).bottom > 0) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          } else {
+            select(0);
+          }
+        }
       },
       child: Scaffold(
         appBar: AppBar(
           title: const BrandWordmark(),
           toolbarHeight: 62,
           actions: [
-            if (!wedding && tab == 2)
+            if (!wedding && tab == BottomTabs.account)
               Padding(
                 padding: const EdgeInsets.only(right: 24),
                 child: SvgPicture.asset(
@@ -103,93 +150,127 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver {
             children: [
               if (model.busy) const LinearProgressIndicator(minHeight: 2),
               Expanded(
-                child: RefreshIndicator(
-                  onRefresh: model.refresh,
-                  child: ListView(
-                    controller: scroll,
-                    keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.onDrag,
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    padding: const EdgeInsets.fromLTRB(20, 4, 20, 20),
-                    children: [
-                      if (model.error != null)
-                        Notice(
-                          model.error!,
-                          onRetry: model.busy ? null : model.refresh,
-                        ),
-                      if (tab != 2 && model.events.isNotEmpty) ...[
-                        EventPicker(model: model),
-                        if (wedding) ...[
-                          const SizedBox(height: 12),
-                          const BrandRule(),
-                        ],
-                        const SizedBox(height: 16),
-                      ],
-                      if (tab == 2)
-                        AccountScreen(model: model)
-                      else if (model.event == null && model.busy)
-                        const Padding(
-                          padding: EdgeInsets.all(48),
-                          child: Center(child: CircularProgressIndicator()),
-                        )
-                      else if (model.event == null &&
-                          model.error == null &&
-                          model.events.isEmpty)
-                        InvitationStart(
-                          key: ValueKey('empty-$tab'),
-                          gifts: tab == 1,
-                        )
-                      else if (model.event == null && model.events.isNotEmpty)
-                        Padding(
-                          padding: const EdgeInsets.all(24),
-                          child: Text(
-                            tr(
-                              "Elige un evento para consultar su información.",
-                            ),
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        )
-                      else if (model.viewingRecord && model.data != null)
-                        EventRecord(
-                          repository: model.repository,
-                          data: model.data!,
-                          event: model.event!,
-                          gifts: tab == 1,
-                        )
-                      else if (model.data == null && model.error == null)
-                        const Padding(
-                          padding: EdgeInsets.all(48),
-                          child: Center(child: CircularProgressIndicator()),
-                        )
-                      else if (model.data != null)
-                        tab == 0
-                            ? GuestsScreen(
-                                key: ValueKey(model.event!.id),
-                                data: model.data!,
-                              )
-                            : GiftsScreen(
-                                token: model.repository.api.token,
-                                key: ValueKey(model.event!.id),
-                                data: model.data!,
+                child: tab == BottomTabs.messages && event != null
+                    ? MessagesHome(
+                        key: ValueKey(event.id),
+                        model: model,
+                        event: event,
+                        initialQuery: messageQueries[event.id] ?? '',
+                        onQueryChanged: (query) =>
+                            messageQueries[event.id] = query,
+                        canPay:
+                            AppConfig.product == 'general' &&
+                            event.admission != null &&
+                            (model.account?.role == 'admin' ||
+                                model.account?.id == event.ownerId),
+                        onUnread: (count) {
+                          if (mounted &&
+                              event.id == model.event?.id &&
+                              unread != count) {
+                            setState(() => unread = count);
+                          }
+                        },
+                      )
+                    : RefreshIndicator(
+                        onRefresh: model.refresh,
+                        child: ListView(
+                          controller: scroll,
+                          keyboardDismissBehavior:
+                              ScrollViewKeyboardDismissBehavior.onDrag,
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          padding: const EdgeInsets.fromLTRB(20, 4, 20, 20),
+                          children: [
+                            if (model.error != null)
+                              Notice(
+                                model.error!,
+                                onRetry: model.busy ? null : model.refresh,
                               ),
-                      if (tab != 2 && model.updatedAt != null) ...[
-                        const SizedBox(height: 16),
-                        Text(
-                          tr("Actualizado a las {v0}", {
-                            'v0': DateFormat('HH:mm').format(model.updatedAt!),
-                          }),
-                          style: Theme.of(context).textTheme.bodySmall,
-                          textAlign: TextAlign.center,
+                            if (tab != BottomTabs.account &&
+                                model.events.isNotEmpty) ...[
+                              EventPicker(model: model),
+                              if (wedding) ...[
+                                const SizedBox(height: 12),
+                                const BrandRule(),
+                              ],
+                              const SizedBox(height: 16),
+                            ],
+                            if (tab == BottomTabs.account)
+                              AccountScreen(model: model)
+                            else if (model.event == null && model.busy)
+                              const Padding(
+                                padding: EdgeInsets.all(48),
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              )
+                            else if (model.event == null &&
+                                model.error == null &&
+                                model.events.isEmpty)
+                              InvitationStart(
+                                key: ValueKey('empty-$tab'),
+                                gifts: tab == 1,
+                              )
+                            else if (model.event == null &&
+                                model.events.isNotEmpty)
+                              Padding(
+                                padding: const EdgeInsets.all(24),
+                                child: Text(
+                                  tr(
+                                    "Elige un evento para consultar su información.",
+                                  ),
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              )
+                            else if (model.viewingRecord && model.data != null)
+                              EventRecord(
+                                repository: model.repository,
+                                data: model.data!,
+                                event: model.event!,
+                                gifts: tab == 1,
+                              )
+                            else if (model.data == null && model.error == null)
+                              const Padding(
+                                padding: EdgeInsets.all(48),
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              )
+                            else if (model.data != null)
+                              tab == 0
+                                  ? GuestsScreen(
+                                      key: ValueKey(model.event!.id),
+                                      data: model.data!,
+                                    )
+                                  : GiftsScreen(
+                                      token: model.repository.api.token,
+                                      key: ValueKey(model.event!.id),
+                                      data: model.data!,
+                                    ),
+                            if (tab != BottomTabs.account &&
+                                model.updatedAt != null) ...[
+                              const SizedBox(height: 16),
+                              Text(
+                                tr("Actualizado a las {v0}", {
+                                  'v0': DateFormat(
+                                    'HH:mm',
+                                  ).format(model.updatedAt!),
+                                }),
+                                style: Theme.of(context).textTheme.bodySmall,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ],
                         ),
-                      ],
-                    ],
-                  ),
-                ),
+                      ),
               ),
             ],
           ),
         ),
-        bottomNavigationBar: BottomTabs(selected: tab, onSelected: select),
+        bottomNavigationBar: BottomTabs(
+          selected: tab,
+          onSelected: select,
+          unreadMessages: unread,
+        ),
       ),
     );
   }

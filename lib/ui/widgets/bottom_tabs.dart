@@ -7,15 +7,24 @@ class BottomTabs extends StatelessWidget {
     super.key,
     required this.selected,
     required this.onSelected,
+    this.unreadMessages = 0,
   });
   final int selected;
   final ValueChanged<int> onSelected;
+  final int unreadMessages;
+  static const messages = 2, account = 3;
   static List<String> get labels => [
     tr("Confirmaciones"),
     tr("Regalos"),
+    tr("Mensajes"),
     tr("Cuenta"),
   ];
-  static const icons = [Symbol.people, Symbol.gift, Symbol.user];
+  static const icons = [
+    Symbol.people,
+    Symbol.gift,
+    Symbol.messages,
+    Symbol.user,
+  ];
 
   @override
   Widget build(BuildContext context) => Material(
@@ -37,18 +46,29 @@ class BottomTabs extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        AppIcon(
-                          icons[index],
-                          color: selected == index
-                              ? Theme.of(context).colorScheme.primary
-                              : Theme.of(context).colorScheme.onSurfaceVariant,
+                        Badge.count(
+                          count: unreadMessages,
+                          isLabelVisible:
+                              index == messages && unreadMessages > 0,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
+                          textColor: Theme.of(context).colorScheme.onPrimary,
+                          child: AppIcon(
+                            icons[index],
+                            color: selected == index
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(
+                                    context,
+                                  ).colorScheme.onSurfaceVariant,
+                          ),
                         ),
                         const SizedBox(height: 5),
                         Text(
                           labels[index],
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 11,
                             color: selected == index
                                 ? Theme.of(context).colorScheme.primary
                                 : Theme.of(

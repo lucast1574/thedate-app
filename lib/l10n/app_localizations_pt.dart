@@ -526,4 +526,243 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get m157 =>
       'Vocês tiveram acesso como casal? Entre com o e-mail para o qual você foi convidado. Sua comemoração aparecerá aqui automaticamente.';
+
+  @override
+  String get m158 => 'Atualizar presença';
+
+  @override
+  String get m159 => 'Anexo';
+
+  @override
+  String get m160 => 'Anexo indisponível';
+
+  @override
+  String get m161 => 'Anexo para revisar';
+
+  @override
+  String get m162 => 'Anexo recebido';
+
+  @override
+  String get m163 => 'Sobrenome';
+
+  @override
+  String get m164 => 'Atendidas';
+
+  @override
+  String get m165 => 'Atendido';
+
+  @override
+  String get m166 => 'Automático';
+
+  @override
+  String get m167 => 'Adicionar complementar';
+
+  @override
+  String get m168 => 'Ainda não há conversas';
+
+  @override
+  String get m169 => 'Ainda não há mensagens';
+
+  @override
+  String get m170 => 'Ainda não há pagamentos registrados.';
+
+  @override
+  String get m171 => 'Carteira digital';
+
+  @override
+  String get m172 => 'Buscar convidado ou telefone';
+
+  @override
+  String get m173 => 'Cancelar';
+
+  @override
+  String get m174 => 'Fechar anexo';
+
+  @override
+  String get m175 => 'Conversas';
+
+  @override
+  String get m176 => 'Dinheiro';
+
+  @override
+  String get m177 =>
+      'O comprovante já foi registrado ou houve alterações. Confira os pagamentos antes de continuar.';
+
+  @override
+  String get m178 =>
+      'O envio precisa ser verificado no WhatsApp. Não o repita para evitar duplicatas.';
+
+  @override
+  String get m179 => 'Escolha um convidado';
+
+  @override
+  String get m180 => 'Escolha uma resposta';
+
+  @override
+  String get m181 => 'Enviado';
+
+  @override
+  String get m182 => 'Enviar resposta';
+
+  @override
+  String get m183 => 'Envio a verificar';
+
+  @override
+  String get m184 => 'Informe um motivo para Talvez.';
+
+  @override
+  String get m185 => 'Excedente';
+
+  @override
+  String get m186 => 'Data do pagamento';
+
+  @override
+  String get m187 => 'Salvar presença';
+
+  @override
+  String get m188 => 'Salvar pagamento';
+
+  @override
+  String get m189 => 'Valor recebido';
+
+  @override
+  String get m190 => 'Recebimentos registrados';
+
+  @override
+  String get m191 => 'Informe um valor válido.';
+
+  @override
+  String get m192 => 'As mensagens desta conversa aparecerão aqui.';
+
+  @override
+  String get m193 =>
+      'As mensagens dos convidados pelo WhatsApp aparecerão aqui.';
+
+  @override
+  String get m194 => 'Marcar como atendido';
+
+  @override
+  String get m195 => 'Marcar como pendente';
+
+  @override
+  String get m196 => 'Forma de pagamento';
+
+  @override
+  String get m197 => 'Mensagens';
+
+  @override
+  String get m198 => 'Motivo da espera';
+
+  @override
+  String get m199 => 'Movimentações registradas';
+
+  @override
+  String get m200 => 'Não enviado';
+
+  @override
+  String get m201 => 'Nenhuma conversa corresponde a esses filtros.';
+
+  @override
+  String get m202 => 'Não foi possível abrir o anexo.';
+
+  @override
+  String get m203 => 'Não foi possível carregar as mensagens.';
+
+  @override
+  String get m204 => 'Não foi possível carregar os pagamentos.';
+
+  @override
+  String get m205 => 'Não foi possível salvar o pagamento.';
+
+  @override
+  String get m206 => 'Não foi possível salvar a confirmação.';
+
+  @override
+  String get m207 =>
+      'Não foi possível salvar a confirmação. Confira a lotação e o status do convite.';
+
+  @override
+  String get m208 => 'Nome do acompanhante';
+
+  @override
+  String get m209 => 'Ocultar teclado';
+
+  @override
+  String get m210 => 'Pagamento registrado';
+
+  @override
+  String get m211 => 'Pagamentos';
+
+  @override
+  String get m212 => 'Pausar reprodução';
+
+  @override
+  String get m213 => 'Possível comprovante';
+
+  @override
+  String get m214 => 'Tente outra busca ou mude o filtro.';
+
+  @override
+  String get m215 => 'Remover complementar';
+
+  @override
+  String get m216 => 'Referência ou observação (opcional)';
+
+  @override
+  String get m217 => 'Cadastrar acompanhantes agora';
+
+  @override
+  String get m218 => 'Registrar pagamento';
+
+  @override
+  String get m219 => 'Reproduzir anexo';
+
+  @override
+  String get m220 => 'Responder';
+
+  @override
+  String get m221 => 'Responder pelo WhatsApp';
+
+  @override
+  String get m222 => 'Confira o nome de cada acompanhante.';
+
+  @override
+  String get m223 => 'Saldo do convite';
+
+  @override
+  String get m224 => 'Saldo pendente';
+
+  @override
+  String get m225 =>
+      'Deixe a lista vazia para registrar que o convidado irá sem acompanhantes.';
+
+  @override
+  String get m226 => 'Não lida';
+
+  @override
+  String get m227 => 'Sim, participarei';
+
+  @override
+  String get m228 => 'talvez';
+
+  @override
+  String get m229 => 'Todos';
+
+  @override
+  String get m230 => 'Total esperado';
+
+  @override
+  String get m231 => 'Transferência';
+
+  @override
+  String get m232 => 'Ver anexo';
+
+  @override
+  String get m233 => 'Ver mensagens anteriores';
+
+  @override
+  String get m234 => 'Ver mais pagamentos';
+
+  @override
+  String get m235 => 'Verifiquei que recebi este valor.';
 }
