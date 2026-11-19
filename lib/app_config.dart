@@ -6,7 +6,7 @@ abstract final class AppConfig {
   static const product = 'general';
   static const api = 'https://api.thedate.now/products/general';
   static const website = 'https://thedate.now';
-  static const version = '2.1.0';
+  static const version = '2.2.0';
   static const supportUrl = '$website/soporte';
   static const deletionUrl = 'https://crea.thedate.now/delete-account';
   static const support = 'lucasraulsantillanarevalo@gmail.com';
